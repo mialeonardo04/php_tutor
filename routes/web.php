@@ -38,6 +38,9 @@ Route::group(['middleware' => ['web']],function(){
             'as' => 'siswa.dashboard'
         ]);
 
+        Route::get('/siswa/pretest',function (){
+            return view('siswa.pretest');
+        });
 
         Route::group(['middleware' => ['roles'],'roles' => ['pengajar']],function (){
             Route::get('/pengajar/dashboard',[

@@ -14,7 +14,7 @@
     </div>
 </div>
 @include('include.script')
-{{--@if(Auth::user()->roles[0]['name']=="siswa")--}}
+@if(Auth::user()->roles[0]['name']=="siswa")
     <script>
         var aaa = document.getElementById("aaa").value;
         var bbb = document.getElementById("bbb").value;
@@ -226,7 +226,7 @@
         });
 
     </script>
-{{--@endif--}}
+@endif
 
 </body>
 </html>
