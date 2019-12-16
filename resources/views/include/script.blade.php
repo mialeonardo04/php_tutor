@@ -8,6 +8,11 @@
     <script src="{{ asset('theme/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/sweetalert2/sweetalert2.css') }}">
     <script src="{{ asset('theme/src/plugins/sweetalert2/sweet-alert.init.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/jQuery-Knob-master/js/jquery.knob.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/highcharts-6.0.7/code/highcharts.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/highcharts-6.0.7/code/highcharts-more.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script>
         // Switchery
         var elems = Array.prototype.slice.call(document.querySelectorAll('.switch-btn'));
@@ -46,3 +51,4 @@
             postfix: "post"
         });
     </script>
+

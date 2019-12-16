@@ -19,7 +19,6 @@
 						<span class="user-name">{{Auth::user()->name}}</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="#"><i class="fa fa-user-md" aria-hidden="true"></i> Profile</a>
 						<a class="dropdown-item" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
 					</div>
 				</div>
