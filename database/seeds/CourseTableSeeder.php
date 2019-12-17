@@ -14,17 +14,14 @@ class CourseTableSeeder extends Seeder
     public function run()
     {
         $units =[
-            ['name'=>'PHP Introduction'],
             ['name'=>'PHP Syntax'],
             ['name'=>'PHP Variables'],
-            ['name'=>'PHP Echo (Print)'],
             ['name'=>'PHP Data Types'],
-            ['name'=>'PHP Strings and Constants'],
-            ['name'=>'PHP Date and Time'],
             ['name'=>'PHP Operators'],
             ['name'=>'PHP Conditionals'],
             ['name'=>'PHP Looping'],
             ['name'=>'PHP Arrays'],
+            ['name'=>'PHP Superglobals'],
         ];
         foreach ($units as $unit){
             Unit::create($unit);
