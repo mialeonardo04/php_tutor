@@ -22,6 +22,7 @@ class CreateStudentsTable extends Migration
             //progress
             //0=blm pretest, 1 blm unit 1 sudah pretest, 2 blm unit 2 sudah pretest
             $table->integer('progress')->default(0);
+            $table->integer('progress_pretest_unit')->default(1);
 //            $table->integer('nilai_pretest')->nullable();
             $table->integer('unit_start')->default(1);
             $table->string('nilai_siswa')->nullable();

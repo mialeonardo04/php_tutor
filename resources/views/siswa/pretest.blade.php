@@ -1,6 +1,6 @@
 @extends('layout.masterdashboard')
 @section('content')
-    @if($statuspretest >= 1)
+    @if($statusprogress >= 1)
         <script>window.location = "/siswa/dashboard";</script>
     @else
 
@@ -19,7 +19,9 @@
             <div id="surveyElement"></div>
             <div id="surveyResult"></div>
 
+            @if($statuspretest == 1)
             <script type="text/javascript" src="{{asset("theme/quiz.js")}}"></script>
+            @endif
             <input type="hidden" name="uid" id="uid" value="{{$uid}}">
             <input type="hidden" name="statuspretest" id="statuspretest" value="{{$statuspretest}}">
             <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">

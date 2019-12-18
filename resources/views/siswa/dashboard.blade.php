@@ -15,12 +15,12 @@
             </div>
         </div>
     </div>
-    @if($statuspretest == 0)
+    @if($statusprogress == 0)
         <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
             <p>Dear, {{Auth::user()->name}}. it seems like you haven't done the Pre-Test yet. Let us know your competences with using PHP Script Programming Language through this Pre-Test Below</p>
             <p>Good Luck!</p>
             <div class="btn-list">
-                <a href="/siswa/pretest/{{base64_encode(Auth::user()->id)}}/{{base64_encode($statuspretest)}}" class="btn-info btn-lg btn-block" style="text-align: center">Take Pre-Test Now!</a>
+                <a href="/siswa/pretest/{{base64_encode(Auth::user()->id)}}/{{base64_encode($statuspretest)}}/{{base64_encode($statusprogress)}}" class="btn-info btn-lg btn-block" style="text-align: center">Take Pre-Test Now!</a>
             </div>
         </div>
     @else

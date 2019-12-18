@@ -38,10 +38,11 @@ Route::group(['middleware' => ['web']],function(){
             'as' => 'siswa.dashboard'
         ]);
 
-        Route::get('/siswa/pretest/{uid}/{statuspretest}',function ($uid,$statuspretest){
+        Route::get('/siswa/pretest/{uid}/{statuspretest}/{statusprogress}',function ($uid,$statuspretest,$statusprogress){
             return view('siswa.pretest',[
                 'uid'=>base64_decode($uid),
-                'statuspretest'=>base64_decode($statuspretest)
+                'statuspretest'=>base64_decode($statuspretest),
+                'statusprogress'=>base64_decode($statusprogress)
             ]);
         });
 
