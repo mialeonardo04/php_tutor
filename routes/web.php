@@ -38,9 +38,17 @@ Route::group(['middleware' => ['web']],function(){
             'as' => 'siswa.dashboard'
         ]);
 
-        Route::get('/siswa/pretest',function (){
-            return view('siswa.pretest');
+        Route::get('/siswa/pretest/{uid}/{statuspretest}',function ($uid,$statuspretest){
+            return view('siswa.pretest',[
+                'uid'=>base64_decode($uid),
+                'statuspretest'=>base64_decode($statuspretest)
+            ]);
         });
+
+        Route::post('/submitpretest',[
+            'uses' =>'StudentController@submitPretest',
+            'as' => 'submitpretest'
+        ]);
 
         Route::group(['middleware' => ['roles'],'roles' => ['pengajar']],function (){
             Route::get('/pengajar/dashboard',[

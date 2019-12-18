@@ -181,10 +181,6 @@ survey
         document.getElementById('scorepretest').value = result.getCorrectedAnswerCount();
         document.getElementById('uidnew').value = uid;
 
-        // .querySelector('#surveyResult')
-        // document
-        //     .querySelector('#surveyResult')
-        //     .textContent = "Result JSON:\n" + JSON.stringify(result.data, null,3);
     });
 
 $("#surveyElement").Survey({model: survey});

@@ -20,16 +20,18 @@ class UserController extends Controller
 
         $status_pretest = 0;
         $nilaipretest = 0;
+//        $id_student = 0;
         foreach ($siswa as $murid){
             if ($murid->id_user == Auth::user()->id){
                 $status_pretest = $murid->progress;
-                $nilaipretest = $murid->nilai_pretest;
+                $nilaipretest = $murid->nilai_siswa;
+//                $id_student = $murid->id;
             }
         }
 
         $unit_siswa = Student::select('unit_start')->where('id_user',Auth::user()->id)->first()->unit_start;
         return view('siswa.dashboard',[
-            'students'=>$siswa,
+//            'id_student'=>$id_student,
             'statuspretest'=>$status_pretest,
             'unit'=>$unit_siswa,
             'nilaipretest'=>$nilaipretest
