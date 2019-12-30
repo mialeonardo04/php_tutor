@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Course;
 use App\Unit;
+use App\StudentPretestAnswer;
+
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -16,39 +19,63 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function getPretestView(){
+        $siswa = Student::all();
+
+        $status_progress = 0;
+        $status_pretest = 0;
+        foreach ($siswa as $murid) {
+            if ($murid->id_user == Auth::user()->id) {
+                $status_progress = $murid->progress;
+                $status_pretest = $murid->progress_pretest_unit;
+            }
+        }
+        return view('siswa.pretest',[
+            'uid'=> Auth::user()->id,
+            'statuspretest'=>$status_pretest,
+            'statusprogress'=>$status_progress
+        ]);
+    }
+
     public function submitPretest(){
-        $courses = Course::all();
+//        $courses = Course::all();
         $nilaipretest = request('scorepretest');
         $uid = request('uid');
         $submit = request('submit');
+        $unit_id = request('unitID');
+        $id_student = Student::where('id_user',$uid)->first()->id;
+      echo $id_student;
 
         $scorepretest = $nilaipretest * 10;
-        if ($scorepretest >= 30 && $scorepretest <= 40){
-            $unit = 4;
-        } elseif ($scorepretest > 40 && $scorepretest <= 60){
-            $unit = 5;
-        } elseif ($scorepretest > 60 && $scorepretest < 90){
-            $unit = 6;
-        } elseif ($scorepretest >= 90){
-            $unit = 7;
-        } else {
-            $unit = 1;
-        }
+//        if ($scorepretest >= 30 && $scorepretest <= 40){
+//            $unit = 4;
+//        } elseif ($scorepretest > 40 && $scorepretest <= 60){
+//            $unit = 5;
+//        } elseif ($scorepretest > 60 && $scorepretest < 90){
+//            $unit = 6;
+//        } elseif ($scorepretest >= 90){
+//            $unit = 7;
+//        } else {
+//            $unit = 1;
+//        }
 //        $progress =
-
+//
         if (isset($submit)){
+            $student_answer = new StudentPretestAnswer();
+            $student_answer->id_student = $id_student;
+            $student_answer->id_unit = $unit_id;
+            $student_answer->jumlah_benar = $nilaipretest;
+            $student_answer->save();
             Student::where('id_user', '=',$uid)
                 ->limit(1)
                 ->update([
-                    'progress' => $unit,
-                    'nilai_siswa' => $scorepretest,
-                    'unit_start' => $unit
+                    'progress_pretest_unit' => $unit_id+1,
                 ]);
         }
-
-        return redirect()->route('siswa.dashboard')->with([
-            'courses'=>$courses,
-            'statuspretest'=>1,
+//
+        return redirect()->route('siswa.pretest')->with([
+//            'courses'=>$courses,
+//            'statuspretest'=>1,
             'scorepretest' =>$scorepretest
         ]);
     }

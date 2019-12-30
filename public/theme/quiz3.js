@@ -4,7 +4,7 @@ Survey
     .applyTheme("default");
 
 var json = {
-    title: "Pre-Test Unit 1",
+    title: "Pre-Test Unit 3",
     showProgressBar: "bottom",
     showTimerPanel: "top",
     firstPageIsStarted: true,
@@ -14,23 +14,23 @@ var json = {
             questions: [
                 {
                     type: "html",
-                    html: "Welcome! <br/>This Pre-Test will use Indonesian.<br/>" +
+                    html: "Congratulation! <br/>You've passed the second unit of this Pre-Test<br/>" +
                         "You have 30 - 120 seconds for every question. <br/>" +
                         "Please, click 'Start' button below when you are ready."
                 }
             ]
         }, {
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 60,
             questions: [
                 {
                     type: "radiogroup",
                     name: "one",
-                    title: "Sintaks dalam bahasa PHP menggunakan awalan ... dan akhiran ...",
+                    title: "Berikut merupakan tipe data yang tidak support dalam bahasa PHP v5 adalah",
                     choicesOrder: "random",
                     choices: [
-                        "{ dan }", "<?? dan ??>", "<?php dan ?>", "<? dan ?php>"
+                        "String", "Integer", "Real", "NULL"
                     ],
-                    correctAnswer: "<?php dan ?>"
+                    correctAnswer: "Real"
                 }
             ]
         },{
@@ -39,12 +39,12 @@ var json = {
                 {
                     type: "radiogroup",
                     name: "two",
-                    title: "Ekstensi untuk file PHP adalah..",
+                    title: "Tipe data yang tepat untuk menyimpan konstanta Π (phi) dalam bahasa PHP adalah",
                     choicesOrder: "random",
                     choices: [
-                        ".p", ".phar", ".php", ".aspx"
+                        "Integer", "Real", "Float", "Array"
                     ],
-                    correctAnswer: ".php"
+                    correctAnswer: "Float"
                 }
             ]
         },{
@@ -53,40 +53,40 @@ var json = {
                 {
                     type: "radiogroup",
                     name: "three",
-                    title: "Bentuk manakah yang memiliki sifat case-sensitive dalam PHP?",
+                    title: "Tipe data yang hanya memiliki kemungkinan 2 nilai untuk disimpan, merupakan tipe data..",
                     choicesOrder: "random",
                     choices: [
-                        "$txt", "if", "switch", "echo"
+                        "Integer", "Boolean", "Character", "Float"
                     ],
-                    correctAnswer: "$txt"
+                    correctAnswer: "Boolean"
                 }
             ]
         },{
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 60,
             questions: [
                 {
                     type: "radiogroup",
                     name: "four",
-                    title: "Manakah yang bukan merupakan cara untuk memberi comment dalam bahasa PHP?",
+                    title: "Fungsi dalam PHP yang digunakan untuk menghitung jumlah karakter pada sebuah String dalam PHP adalah",
                     choicesOrder: "random",
                     choices: [
-                        "\'\'", "/*...*/", "//", "///"
+                        "strlen()", "str_word_count()", "strrev()" ,"str_rev()"
                     ],
-                    correctAnswer: "\'\'"
+                    correctAnswer: "strlen()"
                 }
             ]
         },{
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 60,
             questions: [
                 {
                     type: "radiogroup",
                     name: "five",
-                    title: "Apakah Kepanjangan dari PHP?",
+                    title: "Untuk menghitung jumlah kata yang ada pada kalimat, digunakan fungsi?",
                     choicesOrder: "random",
                     choices: [
-                        "Programming Hypertext Preprocessor", "PHP: Hypertext Preprocessor", "Preprocessor Hypertext Programming", "PHP: Hypertext Programming"
+                        "strlen()", "str_word_count()", "strrev()" ,"str_rev()"
                     ],
-                    correctAnswer: "PHP: Hypertext Preprocessor"
+                    correctAnswer: "str_word_count()"
                 }
             ]
         }
@@ -99,7 +99,7 @@ survey
     .onComplete
     .add(function (result) {
         var uid = document.getElementById('uid').getAttribute('value');
-        var unitID = 1;
+        var unitID = 3;
         // var statuspretest = document.getElementById('statuspretest').getAttribute('value');
 
         document.getElementById('form').style.display = "block";

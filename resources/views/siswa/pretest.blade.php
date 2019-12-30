@@ -20,7 +20,21 @@
             <div id="surveyResult"></div>
 
             @if($statuspretest == 1)
-            <script type="text/javascript" src="{{asset("theme/quiz.js")}}"></script>
+                <script type="text/javascript" src="{{asset("theme/quiz.js")}}"></script>
+            @elseif($statuspretest == 2)
+                <script type="text/javascript" src="{{asset("theme/quiz2.js")}}"></script>
+            @elseif($statuspretest == 3)
+                <script type="text/javascript" src="{{asset("theme/quiz3.js")}}"></script>
+            @elseif($statuspretest == 4)
+                <script type="text/javascript" src="{{asset("theme/quiz4.js")}}"></script>
+            @elseif($statuspretest == 5)
+                <script type="text/javascript" src="{{asset("theme/quiz5.js")}}"></script>
+            @elseif($statuspretest == 6)
+                <script type="text/javascript" src="{{asset("theme/quiz6.js")}}"></script>
+            @elseif($statuspretest == 7)
+                <script type="text/javascript" src="{{asset("theme/quiz7.js")}}"></script>
+            @elseif($statuspretest == 8)
+                <script type="text/javascript" src="{{asset("theme/quiz8.js")}}"></script>
             @endif
             <input type="hidden" name="uid" id="uid" value="{{$uid}}">
             <input type="hidden" name="statuspretest" id="statuspretest" value="{{$statuspretest}}">
@@ -29,6 +43,7 @@
                     @csrf
                     <input id="scorepretest" type="hidden" name="scorepretest" value="">
                     <input id="uidnew" type="hidden" name="uid" value="">
+                    <input id="unitID" type="hidden" name="unitID" value="">
                     <input type='submit' class='btn btn-primary pull-right' name='submit' value='Submit' >
                 </form>
             </div>

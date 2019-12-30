@@ -4,7 +4,7 @@ Survey
     .applyTheme("default");
 
 var json = {
-    title: "Pre-Test Unit 1",
+    title: "Pre-Test Unit 2",
     showProgressBar: "bottom",
     showTimerPanel: "top",
     firstPageIsStarted: true,
@@ -14,23 +14,23 @@ var json = {
             questions: [
                 {
                     type: "html",
-                    html: "Welcome! <br/>This Pre-Test will use Indonesian.<br/>" +
+                    html: "Congratulation! <br/>You've passed the first unit of this Pre-Test<br/>" +
                         "You have 30 - 120 seconds for every question. <br/>" +
                         "Please, click 'Start' button below when you are ready."
                 }
             ]
         }, {
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 60,
             questions: [
                 {
                     type: "radiogroup",
                     name: "one",
-                    title: "Sintaks dalam bahasa PHP menggunakan awalan ... dan akhiran ...",
+                    title: "Penulisan nama variabel dalam PHP diawali dengan tanda baca apa?",
                     choicesOrder: "random",
                     choices: [
-                        "{ dan }", "<?? dan ??>", "<?php dan ?>", "<? dan ?php>"
+                        "$", "%", "^", "@"
                     ],
-                    correctAnswer: "<?php dan ?>"
+                    correctAnswer: "$"
                 }
             ]
         },{
@@ -39,12 +39,12 @@ var json = {
                 {
                     type: "radiogroup",
                     name: "two",
-                    title: "Ekstensi untuk file PHP adalah..",
+                    title: "Manakah penulisan nama variabel dalam PHP yang kurang tepat?",
                     choicesOrder: "random",
                     choices: [
-                        ".p", ".phar", ".php", ".aspx"
+                        "$_variable", "$v4riable", "$var^able", "$v412iabl3"
                     ],
-                    correctAnswer: ".php"
+                    correctAnswer: "$var^able"
                 }
             ]
         },{
@@ -53,40 +53,40 @@ var json = {
                 {
                     type: "radiogroup",
                     name: "three",
-                    title: "Bentuk manakah yang memiliki sifat case-sensitive dalam PHP?",
+                    title: "Manakah penulisan nama variabel dalam PHP yang benar?",
                     choicesOrder: "random",
                     choices: [
-                        "$txt", "if", "switch", "echo"
+                        "$@_txt", "$^txt", "$&txt", "$_txt"
                     ],
-                    correctAnswer: "$txt"
+                    correctAnswer: "$_txt"
                 }
             ]
         },{
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 60,
             questions: [
                 {
                     type: "radiogroup",
                     name: "four",
-                    title: "Manakah yang bukan merupakan cara untuk memberi comment dalam bahasa PHP?",
+                    title: "Diantara contoh berikut, manakah contoh cara mencetak variabel yang kurang tepat dalam PHP?",
                     choicesOrder: "random",
                     choices: [
-                        "\'\'", "/*...*/", "//", "///"
+                        "echo $variable", "echo \"$txt\"", "echo \"\".$txt.\"\"" ,"echo '$txt'"
                     ],
-                    correctAnswer: "\'\'"
+                    correctAnswer: "echo '$txt'"
                 }
             ]
         },{
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 60,
             questions: [
                 {
                     type: "radiogroup",
                     name: "five",
-                    title: "Apakah Kepanjangan dari PHP?",
+                    title: "Dalam membuat variabel pada PHP, tidak perlu mendeklarasikan..",
                     choicesOrder: "random",
                     choices: [
-                        "Programming Hypertext Preprocessor", "PHP: Hypertext Preprocessor", "Preprocessor Hypertext Programming", "PHP: Hypertext Programming"
+                        "nama variable", "data variable", "tipe data", "tipe variable"
                     ],
-                    correctAnswer: "PHP: Hypertext Preprocessor"
+                    correctAnswer: "tipe data"
                 }
             ]
         }
@@ -99,7 +99,7 @@ survey
     .onComplete
     .add(function (result) {
         var uid = document.getElementById('uid').getAttribute('value');
-        var unitID = 1;
+        var unitID = 2;
         // var statuspretest = document.getElementById('statuspretest').getAttribute('value');
 
         document.getElementById('form').style.display = "block";

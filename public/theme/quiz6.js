@@ -4,7 +4,7 @@ Survey
     .applyTheme("default");
 
 var json = {
-    title: "Pre-Test Unit 1",
+    title: "Pre-Test Unit 6",
     showProgressBar: "bottom",
     showTimerPanel: "top",
     firstPageIsStarted: true,
@@ -14,7 +14,7 @@ var json = {
             questions: [
                 {
                     type: "html",
-                    html: "Welcome! <br/>This Pre-Test will use Indonesian.<br/>" +
+                    html: "Congratulation! <br/>You've passed the fifth unit before<br/>" +
                         "You have 30 - 120 seconds for every question. <br/>" +
                         "Please, click 'Start' button below when you are ready."
                 }
@@ -25,54 +25,66 @@ var json = {
                 {
                     type: "radiogroup",
                     name: "one",
-                    title: "Sintaks dalam bahasa PHP menggunakan awalan ... dan akhiran ...",
+                    title: "Yang bukan merupakan tipe perulangan dalam PHP adalah..",
                     choicesOrder: "random",
                     choices: [
-                        "{ dan }", "<?? dan ??>", "<?php dan ?>", "<? dan ?php>"
+                        "while", "do", "for", "foreach"
                     ],
-                    correctAnswer: "<?php dan ?>"
+                    correctAnswer: "do"
                 }
             ]
         },{
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 120,
             questions: [
                 {
                     type: "radiogroup",
                     name: "two",
-                    title: "Ekstensi untuk file PHP adalah..",
+                    title: "Diberikan kode <?php  \n" +
+                        "$x = 1; \n" +
+                        "while($x <= 5) {\n" +
+                        "  echo \"$x\";\n" +
+                        "}\n" +
+                        "?> kode tidak berjalan, apakah yang terjadi?",
                     choicesOrder: "random",
                     choices: [
-                        ".p", ".phar", ".php", ".aspx"
+                        "variabel $x lebih kecil dari 5 sehingga program tidak berjalan", "variabel $x lebih besar dari 5 sehingga kode program tidak berjalan", "variabel $x tidak mengalami penambahan nilai sehingga program berjalan namun tak berhenti", "variabel $x tidak mengalami pengurangan nilai sehingga program berjalan namun tak berhenti"
                     ],
-                    correctAnswer: ".php"
+                    correctAnswer: "variabel $x tidak mengalami penambahan nilai sehingga program berjalan namun tak berhenti"
                 }
             ]
         },{
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 120,
             questions: [
                 {
                     type: "radiogroup",
                     name: "three",
-                    title: "Bentuk manakah yang memiliki sifat case-sensitive dalam PHP?",
+                    title: "<?php \n" +
+                        "$x = 7;\n" +
+                        "\n" +
+                        "do {\n" +
+                        "    echo \"$x\";\n" +
+                        "    $x++;\n" +
+                        "} while ($x <= 5);\n" +
+                        "?> Apa output kodenya?",
                     choicesOrder: "random",
                     choices: [
-                        "$txt", "if", "switch", "echo"
+                        "7", "6", "5", "765"
                     ],
-                    correctAnswer: "$txt"
+                    correctAnswer: "7"
                 }
             ]
         },{
-            maxTimeToFinish: 30,
+            maxTimeToFinish: 60,
             questions: [
                 {
                     type: "radiogroup",
                     name: "four",
-                    title: "Manakah yang bukan merupakan cara untuk memberi comment dalam bahasa PHP?",
+                    title: "<?php for(<a>;<b>;<c>){ <d> } ?> Bagian manakah yang disebut sebagai test counter dalam loop for?",
                     choicesOrder: "random",
                     choices: [
-                        "\'\'", "/*...*/", "//", "///"
+                        "<a>", "<b>", "<c>" ,"<d>"
                     ],
-                    correctAnswer: "\'\'"
+                    correctAnswer: "<b>"
                 }
             ]
         },{
@@ -81,12 +93,12 @@ var json = {
                 {
                     type: "radiogroup",
                     name: "five",
-                    title: "Apakah Kepanjangan dari PHP?",
+                    title: "Diberikan array $colors = array(\"red\", \"green\", \"blue\", \"yellow\");  . Manakah fungsi yang tidak tepat untuk menampilkan seluruh element $colors ?",
                     choicesOrder: "random",
                     choices: [
-                        "Programming Hypertext Preprocessor", "PHP: Hypertext Preprocessor", "Preprocessor Hypertext Programming", "PHP: Hypertext Programming"
+                        "foreach ($colors as $value) { echo \"$value <br>\"; }", "for ($x = 0; $x < count($colors); $x++) { echo \"$colors[$x] <br>\"; }", "for ($x = 0; $x <= count($colors); $x++) { echo \"$colors[$x] <br>\"; }" ,"for ($x = 0; $x <= $colors.length; $x++) { echo \"$colors[$x] <br>\"; }"
                     ],
-                    correctAnswer: "PHP: Hypertext Preprocessor"
+                    correctAnswer: "for ($x = 0; $x <= $colors.length; $x++) { echo \"$colors[$x] <br>\"; }"
                 }
             ]
         }
@@ -99,7 +111,7 @@ survey
     .onComplete
     .add(function (result) {
         var uid = document.getElementById('uid').getAttribute('value');
-        var unitID = 1;
+        var unitID = 6;
         // var statuspretest = document.getElementById('statuspretest').getAttribute('value');
 
         document.getElementById('form').style.display = "block";
