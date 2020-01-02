@@ -76,6 +76,7 @@ class StudentController extends Controller
                 Student::where('id_user','=',$uid)
                     ->limit(1)
                     ->update([
+                        'avg_nilai_pretest' => $nilaipretest*20,
                         'progress' => $progress,
                     ]);
             }

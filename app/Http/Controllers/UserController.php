@@ -21,13 +21,13 @@ class UserController extends Controller
 
         $status_progress = 0;
         $status_pretest = 0;
-        $nilaipretest = 0;
+        $nilaifinal = 0;
         $id_student = 0;
         foreach ($siswa as $murid){
             if ($murid->id_user == Auth::user()->id){
                 $status_progress = $murid->progress;
                 $status_pretest = $murid->progress_pretest_unit;
-                $nilaipretest = $murid->nilai_siswa;
+                $nilaifinal = $murid->avg_nilai_final;
                 $id_student = $murid->id;
             }
         }
@@ -43,7 +43,8 @@ class UserController extends Controller
             'unit'=>$unit_siswa,
             'nilaipretest'=>$nilairata2pretest*20,
             'nilaipretestmax' => $nilaitertinggipretest*20,
-            'nilaipretestmin' => $nilaiterendahpretest*20
+            'nilaipretestmin' => $nilaiterendahpretest*20,
+            'nilaifinal' => $nilaifinal
         ]);
     }
 

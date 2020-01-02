@@ -24,12 +24,13 @@
             </div>
         </div>
     @else
+
         <div class="row clearfix progress-box">
             <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
                 <div class="bg-white pd-30 box-shadow border-radius-5 height-100-p">
                     <div class="progress-box text-center">
                         <input id="aaa" type="text" class="knob dial1" value="{{$nilaipretest}}" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#0099ff" readonly>
-                        <h5 class="text-blue padding-top-10 weight-500">My Pretest Score</h5>
+                        <h5 class="text-blue padding-top-10 weight-500">My Pre-test Average Score</h5>
                         <span class="font-14">{{$nilaipretest}}% <i class="fa fa-line-chart"></i></span>
                     </div>
                 </div>
@@ -55,9 +56,15 @@
             <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
                 <div class="bg-white pd-30 box-shadow border-radius-5 height-100-p">
                     <div class="progress-box text-center">
-                        <input id="ddd" type="text" class="knob dial4" value="35" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#a683eb" readonly>
-                        <h5 class="text-light-purple padding-top-10 weight-500">Final Test Score</h5>
-                        <span class="font-14">35% <i class="fa fa-line-chart"></i></span>
+                     @if(!empty($nilaifinal)> 0)
+                            <input id="ddd" type="text" class="knob dial4" value="{{$nilaifinal}}" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#a683eb" readonly>
+                            <h5 class="text-light-purple padding-top-10 weight-500">Final Test Score</h5>
+                            <span class="font-14">{{$nilaifinal}}% <i class="fa fa-line-chart"></i></span>
+                     @else
+                            <input id="ddd" type="text" class="knob dial4" value="0" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#a683eb" readonly>
+                            <h5 class="text-light-purple padding-top-10 weight-500">Final Test Score</h5>
+                            <span class="font-14">0% (haven't tested) <i class="fa fa-line-chart"></i></span>
+                     @endif
                     </div>
                 </div>
             </div>

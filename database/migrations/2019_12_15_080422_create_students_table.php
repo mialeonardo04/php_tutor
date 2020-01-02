@@ -25,8 +25,8 @@ class CreateStudentsTable extends Migration
             $table->integer('progress_pretest_unit')->default(1);
 //            $table->integer('nilai_pretest')->nullable();
             $table->integer('unit_start')->default(1);
-            $table->string('nilai_siswa')->nullable();
-            $table->string('update_nilai_siswa')->nullable();
+            $table->string('avg_nilai_pretest')->nullable();
+            $table->string('avg_nilai_final')->nullable();
             $table->rememberToken();
         });
     }
