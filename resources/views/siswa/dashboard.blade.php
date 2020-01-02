@@ -28,27 +28,27 @@
             <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
                 <div class="bg-white pd-30 box-shadow border-radius-5 height-100-p">
                     <div class="progress-box text-center">
-                        <input id="aaa" type="text" class="knob dial1" value="66" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#0099ff" readonly>
+                        <input id="aaa" type="text" class="knob dial1" value="{{$nilaipretest}}" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#0099ff" readonly>
                         <h5 class="text-blue padding-top-10 weight-500">My Pretest Score</h5>
-                        <span class="font-14">66% <i class="fa fa-line-chart"></i></span>
+                        <span class="font-14">{{$nilaipretest}}% <i class="fa fa-line-chart"></i></span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
                 <div class="bg-white pd-30 box-shadow border-radius-5 height-100-p">
                     <div class="progress-box text-center">
-                        <input id="bbb" type="text" class="knob dial2" value="75" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#41ccba" readonly>
-                        <h5 class="text-light-green padding-top-10 weight-500">My Courses Progress</h5>
-                        <span class="font-14">75% <i class="fa fa-line-chart"></i></span>
+                        <input id="bbb" type="text" class="knob dial2" value="{{$nilaipretestmax}}" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#41ccba" readonly>
+                        <h5 class="text-light-green padding-top-10 weight-500">My Pre-Test High Score</h5>
+                        <span class="font-14">{{$nilaipretestmax}}% <i class="fa fa-line-chart"></i></span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
                 <div class="bg-white pd-30 box-shadow border-radius-5 height-100-p">
                     <div class="progress-box text-center">
-                        <input id="ccc" type="text" class="knob dial3" value="90" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#f56767" readonly>
-                        <h5 class="text-light-orange padding-top-10 weight-500">My Exercise Scores</h5>
-                        <span class="font-14">90% <i class="fa fa-line-chart"></i></span>
+                        <input id="ccc" type="text" class="knob dial3" value="{{$nilaipretestmin}}" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#f56767" readonly>
+                        <h5 class="text-light-orange padding-top-10 weight-500">My Pre-Test Lowest Score</h5>
+                        <span class="font-14">{{$nilaipretestmin}}% <i class="fa fa-line-chart"></i></span>
                     </div>
                 </div>
             </div>

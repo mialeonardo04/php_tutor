@@ -44,9 +44,9 @@ class StudentController extends Controller
         $submit = request('submit');
         $unit_id = request('unitID');
         $id_student = Student::where('id_user',$uid)->first()->id;
-      echo $id_student;
+//      echo $id_student;
 
-        $scorepretest = $nilaipretest * 10;
+//        $scorepretest = $nilaipretest * 10;
 //        if ($scorepretest >= 30 && $scorepretest <= 40){
 //            $unit = 4;
 //        } elseif ($scorepretest > 40 && $scorepretest <= 60){
@@ -71,13 +71,17 @@ class StudentController extends Controller
                 ->update([
                     'progress_pretest_unit' => $unit_id+1,
                 ]);
+            $progress = request('progress');
+            if (isset($progress)){
+                Student::where('id_user','=',$uid)
+                    ->limit(1)
+                    ->update([
+                        'progress' => $progress,
+                    ]);
+            }
         }
 //
-        return redirect()->route('siswa.pretest')->with([
-//            'courses'=>$courses,
-//            'statuspretest'=>1,
-            'scorepretest' =>$scorepretest
-        ]);
+        return redirect()->route('siswa.pretest');
     }
     public function index()
     {

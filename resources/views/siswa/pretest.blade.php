@@ -44,6 +44,9 @@
                     <input id="scorepretest" type="hidden" name="scorepretest" value="">
                     <input id="uidnew" type="hidden" name="uid" value="">
                     <input id="unitID" type="hidden" name="unitID" value="">
+                    @if($statuspretest >= 8)
+                        <input type="hidden" id="progress" name="progress" value="1">
+                    @endif
                     <input type='submit' class='btn btn-primary pull-right' name='submit' value='Submit' >
                 </form>
             </div>

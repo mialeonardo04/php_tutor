@@ -8,6 +8,7 @@ use App\Role;
 use App\Student;
 use App\Course;
 use App\Student_course;
+use App\StudentPretestAnswer;
 
 use Illuminate\Support\Facades\DB;
 
@@ -21,22 +22,28 @@ class UserController extends Controller
         $status_progress = 0;
         $status_pretest = 0;
         $nilaipretest = 0;
-//        $id_student = 0;
+        $id_student = 0;
         foreach ($siswa as $murid){
             if ($murid->id_user == Auth::user()->id){
                 $status_progress = $murid->progress;
                 $status_pretest = $murid->progress_pretest_unit;
                 $nilaipretest = $murid->nilai_siswa;
-//                $id_student = $murid->id;
+                $id_student = $murid->id;
             }
         }
+
+        $nilairata2pretest = StudentPretestAnswer::where('id_student',$id_student)->avg('jumlah_benar');
+        $nilaitertinggipretest = StudentPretestAnswer::where('id_student',$id_student)->max('jumlah_benar');
+        $nilaiterendahpretest = StudentPretestAnswer::where('id_student',$id_student)->min('jumlah_benar');
 
         $unit_siswa = Student::select('unit_start')->where('id_user',Auth::user()->id)->first()->unit_start;
         return view('siswa.dashboard',[
             'statusprogress'=>$status_progress,
             'statuspretest'=>$status_pretest,
             'unit'=>$unit_siswa,
-            'nilaipretest'=>$nilaipretest
+            'nilaipretest'=>$nilairata2pretest*20,
+            'nilaipretestmax' => $nilaitertinggipretest*20,
+            'nilaipretestmin' => $nilaiterendahpretest*20
         ]);
     }
 
