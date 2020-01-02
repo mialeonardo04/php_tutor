@@ -28,16 +28,30 @@
 						    </ul>
 					    </li>
                     @else
-                        <li>
-                            <a href="" class="dropdown-toggle no-arrow">
-                                <span class="fa fa-list-alt"></span><span class="mtext">Courses </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="dropdown-toggle no-arrow">
-                                <span class="fa fi-crown"></span><span class="mtext">Achievment(s) </span>
-                            </a>
-                        </li>
+                        @if($statusprogress > 0)
+                            <li>
+                                <a href="/siswa/course" class="dropdown-toggle no-arrow">
+                                    <span class="fa fa-list-alt"></span><span class="mtext">Courses </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/siswa/achievments" class="dropdown-toggle no-arrow">
+                                    <span class="fa fi-crown"></span><span class="mtext">Achievment(s) </span>
+                                </a>
+                            </li>
+                        @else
+                            <li>
+                                <a href="" class="dropdown-toggle no-arrow">
+                                    <span class="fa fa-list-alt"></span><span class="mtext">Courses </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="dropdown-toggle no-arrow">
+                                    <span class="fa fi-crown"></span><span class="mtext">Achievment(s) </span>
+                                </a>
+                            </li>
+                        @endif
+
                     @endif
 				</ul>
 			</div>
