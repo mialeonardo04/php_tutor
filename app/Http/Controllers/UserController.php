@@ -9,10 +9,11 @@ use App\Student;
 use App\Course;
 use App\Student_course;
 use App\StudentPretestAnswer;
-
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Auth;
+
+use Unicodeveloper\EmailValidator\EmailValidator;
+use LaravelVideoEmbed;
 
 class UserController extends Controller
 {
@@ -68,6 +69,10 @@ class UserController extends Controller
         return view('auth.login');
     }
 
+    public function getRegister(){
+        return view('auth.register');
+    }
+
     public function postSignIn(Request $request){
         $this->validate($request,[
             'username' => 'required',
@@ -103,6 +108,59 @@ class UserController extends Controller
             }
         }
         return redirect()->back()->with('messageLogin','Incorrect username or password');
+    }
+
+    public function postSignUp(Request $request){
+        $role_user = Role::where('name','siswa')->first();
+        $role_admin = Role::where('name','pengajar')->first();
+        $this->validate($request,[
+            'name' => 'required|max:120',
+            'email' => 'email|unique:users',
+            'username' => 'required|unique:users',
+            'password' => 'required|min:6',
+            'role' => 'required|max:1'
+        ]);
+
+        echo $request['name']."</br>";
+        echo $request['email']."</br>";
+        echo $request['username']."</br>";
+        echo $request['password']."</br>";
+        echo $request['role']."</br>";
+
+        $name = $request['name'];
+        $email = $request['email'];
+        $username = $request['username'];
+        $password = bcrypt($request['password']);
+        $user = new User();
+        $user->name = $name;
+        $user->email = $email;
+        $user->username = $username;
+        $user->password = $password;
+
+        $mail = new EmailValidator();
+        $emailvalidator = $mail->verify($email)->isValid()[0];
+        if ($emailvalidator){
+            Auth::login($user);
+            if ($request['role'] == "1"){
+                $user->verified = 0;
+                $user->save();
+                $user->roles()->attach($role_admin);
+                return redirect()->route('pengajar.dashboard');
+            } else {
+                $user->verified = 1;
+                $user->save();
+                $user->roles()->attach($role_user);
+                $lastid = $user->id;
+                $student = new Student();
+                $student->id_user = $lastid;
+                $student->email = $email;
+                $student->name = $name;
+                $student->save();
+                return redirect()->route('siswa.dashboard');
+            }
+        } else {
+            return redirect()->back()->with('messageLogin','Whoops! The Email you entered is unverifiable');
+        }
     }
 
     public function logout(Request $request){

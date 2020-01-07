@@ -6,9 +6,12 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "cohensive/embed": "^5.5",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "merujan99/laravel-video-embed": "dev-master",
+        "unicodeveloper/laravel-email-validator": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

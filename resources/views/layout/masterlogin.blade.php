@@ -22,7 +22,7 @@
 </div>
 @include('include.script')
 @if(Session::has('messageLogin'))
-    <script type="text/javascript"> sweetAlert("Failed to login", "{{ Session::get('messageLogin') }}", "error"); </script>
+    <script type="text/javascript"> sweetAlert("Failed", "{{ Session::get('messageLogin') }}", "error"); </script>
 @endif
 </body>
 </html>

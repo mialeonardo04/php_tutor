@@ -6,7 +6,7 @@
     @endif
 <form method="POST" action="{{ route('login') }}">
     @csrf
-    <div class="input-group custom input-group-lg {{ $errors->has('username') ? 'has-error' : ''  }}">
+    <div class="input-group custom input-group-lg">
         <input type="text" class="form-control" placeholder="Username" name="username" value="@if(isset($_COOKIE['remember_login'])){{base64_decode($_COOKIE['remember_login'])}}@endif" autofocus>
         @if ($errors->has('username'))
             <span class="invalid-feedback">
@@ -17,7 +17,7 @@
             <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
         </div>
     </div>
-    <div class="input-group custom input-group-lg {{ $errors->has('password') ? 'has-error' : ''  }}">
+    <div class="input-group custom input-group-lg">
         <input type="password" class="form-control" placeholder="**********" name="password" id="inputPassword" value="@if(isset($_COOKIE['remember_pass'])){{base64_decode($_COOKIE['remember_pass'])}}@endif">
         @if ($errors->has('password'))
             <span class="invalid-feedback">
@@ -53,7 +53,7 @@
                                 <h2 class="text-center mb-30">Find Account</h2>
                                 <form>
                                     <div class="input-group custom input-group-lg">
-                                        <input type="text" class="form-control" placeholder="Enter your email" name="email">
+                                        <input type="text" class="form-control" placeholder="Enter your email" name="mailForgot">
                                         <div class="input-group-append custom">
                                             <span class="input-group-text"><i class="fa fi-mail" aria-hidden="true"></i></span>
                                         </div>

@@ -20,10 +20,17 @@ Route::group(['middleware' => ['web']],function(){
         'uses' => 'UserController@getLogin',
         'as' => 'login'
     ]);
-
+    Route::get('/register',[
+        'uses' => 'UserController@getRegister',
+        'as' => 'register'
+    ]);
     Route::post('/login',[
         'uses' => 'UserController@postSignIn',
         'as' => 'login'
+    ]);
+    Route::post('/register',[
+        'uses' => 'UserController@postSignUp',
+        'as' => 'register'
     ]);
 
     Route::get('/logout',[
