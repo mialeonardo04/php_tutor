@@ -14,7 +14,7 @@ What things you need to install the software and how to install this software
 Composer
 ```
 ```
-PHP versi >= 7
+PHP version >= 7
 ```
 ### Installing
 
