@@ -47,5 +47,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="input-group">
+                <a href="/login" class="btn btn-outline-success btn-lg btn-block">
+                    Already have an account?
+                </a>
+            </div>
+        </div>
+    </div>
 </form>
 @endsection

@@ -76,5 +76,14 @@
             {{--<div class="forgot-password padding-top-10"><a href="">Forgot Password</a></div>--}}
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="input-group">
+                <a href="/register" class="btn btn-outline-success btn-lg btn-block">
+                    Register here
+                </a>
+            </div>
+        </div>
+    </div>
 </form>
 @endsection
