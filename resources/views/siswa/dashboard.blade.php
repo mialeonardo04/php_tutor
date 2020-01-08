@@ -69,19 +69,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-30">
-            <div class="pd-20 bg-white border-radius-4 box-shadow">
-                <h5 class="mb-20">Latest Course Scores</h5>
-                <div class="progress mb-20">
-                    <p>Materi 1: </p><div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div class="progress mb-20">
-                    <p>Materi 2: </p><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div class="progress">
-                    <p>Materi 3: </p><div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        </div>
+        {{--<div class="col-lg-4 col-md-6 col-sm-12 mb-30">--}}
+            {{--<div class="pd-20 bg-white border-radius-4 box-shadow">--}}
+                {{--<h5 class="mb-20">Latest Course Scores</h5>--}}
+                {{--<div class="progress mb-20">--}}
+                    {{--<p>Materi 1: </p><div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>--}}
+                {{--</div>--}}
+                {{--<div class="progress mb-20">--}}
+                    {{--<p>Materi 2: </p><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>--}}
+                {{--</div>--}}
+                {{--<div class="progress">--}}
+                    {{--<p>Materi 3: </p><div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
     @endif
 @endsection
