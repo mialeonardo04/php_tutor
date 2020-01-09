@@ -7,6 +7,7 @@ use App\User;
 use App\Role;
 use App\Student;
 use App\Course;
+use App\Report;
 use App\Student_course;
 use App\StudentPretestAnswer;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,8 @@ class UserController extends Controller
 
         $nilairata2pretest = StudentPretestAnswer::where('id_student',$id_student)->avg('jumlah_benar');
         $nilaitertinggipretest = StudentPretestAnswer::where('id_student',$id_student)->max('jumlah_benar');
-        $nilaiterendahpretest = StudentPretestAnswer::where('id_student',$id_student)->min('jumlah_benar');
+//        $nilaiterendahpretest = StudentPretestAnswer::where('id_student',$id_student)->min('jumlah_benar');
+        $avgcourses = Report::where('id_student',$id_student)->avg('score');
 
         setcookie("id_student",$id_student,time()+(10*365*24*60*60));
 
@@ -46,7 +48,7 @@ class UserController extends Controller
             'unit'=>$unit_siswa,
             'nilaipretest'=>$nilairata2pretest*20,
             'nilaipretestmax' => $nilaitertinggipretest*20,
-            'nilaipretestmin' => $nilaiterendahpretest*20,
+            'nilaicoursesavgmin' => $avgcourses*20,
             'nilaifinal' => $nilaifinal
         ]);
     }
