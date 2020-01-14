@@ -22,7 +22,7 @@ class CreateCoursesTable extends Migration
             $table->string('answer')->nullable();
             $table->integer('answer_errorstatus')->nullable();
             $table->integer('answer_outputstatus')->nullable();
-            $table->string('embed_url');
+            $table->string('embed_url')->nullable();
             $table->timestamps();
         });
     }

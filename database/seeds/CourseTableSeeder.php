@@ -43,12 +43,11 @@ class CourseTableSeeder extends Seeder
                 'embed_url'=>'https://youtu.be/cOJ8fwR-BSA?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
             ], [
                 'id_unit'=>1,
-                'description'=>'Pengenalan 3',
+                'description'=>'Pengenalan 3 (membuat Hello World)',
                 'tipe_soal'=>'2',
                 'question'=>'Buatlah program sesuai dengan instruksi',
                 'answer_errorstatus'=>'0',
-                'answer_outputstatus'=>'1',
-                'embed_url'=>'https://youtu.be/QebnGe5-PUo?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+                'answer_outputstatus'=>'1'
             ], [
                 'id_unit'=>2,
                 'description'=>'Variable 1',
@@ -59,11 +58,59 @@ class CourseTableSeeder extends Seeder
             ], [
                 'id_unit'=>2,
                 'description'=>'Variable 2',
+                'tipe_soal'=>'1',
+                'question'=>'Berdasarkan video yang diputar, nama variable tidak boleh diawali dengan ..',
+                'answer'=>'angka',
+                'embed_url'=>'https://youtu.be/m8viqR-PuI4?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ], [
+                'id_unit'=>2,
+                'description'=>'Variable 3 (Membuat dan Mencetak Variable)',
                 'tipe_soal'=>'2',
                 'question'=>'Buatlah program sesuai dengan instruksi',
                 'answer_errorstatus'=>'0',
-                'answer_outputstatus'=>'1',
-                'embed_url'=>'https://youtu.be/m8viqR-PuI4?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+                'answer_outputstatus'=>'1'
+            ], [
+                'id_unit'=>3,
+                'description'=>'Data Types 1',
+                'tipe_soal'=>'1',
+                'question'=>'Berdasarkan video yang diputar, untuk membuat variable String, dapat langsung ditulis isinya menggunakan tanda baca ..',
+                'answer'=>'quotes petik',
+                'embed_url'=>'https://youtu.be/PBiQd6aVa74?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ], [
+                'id_unit'=>3,
+                'description'=>'Data Types 2(Mencetak Variable String)',
+                'tipe_soal'=>'2',
+                'question'=>'Buatlah program sesuai dengan instruksi',
+                'answer_errorstatus'=>'0',
+                'answer_outputstatus'=>'1'
+            ],[
+                'id_unit'=>3,
+                'description'=>'Data Types 3',
+                'tipe_soal'=>'1',
+                'question'=>'Berdasarkan video yang diputar, untuk membuat variable Integer, dapat ditulis langsung ... sebagai isinya',
+                'answer'=>'angka',
+                'embed_url'=>'https://youtu.be/_Al0A4IXTpQ?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ], [
+                'id_unit'=>3,
+                'description'=>'Data Types 4(Mencetak Variable Numbering)',
+                'tipe_soal'=>'2',
+                'question'=>'Buatlah program sesuai dengan instruksi',
+                'answer_errorstatus'=>'0',
+                'answer_outputstatus'=>'1'
+            ],[
+                'id_unit'=>4,
+                'description'=>'Opertators 1',
+                'tipe_soal'=>'1',
+                'question'=>'Berdasarkan video yang diputar, operator yang digunakan untuk increment bertambah suatu variable adalah...',
+                'answer'=>'++',
+                'embed_url'=>'https://youtu.be/ljz90HYEPyM?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ], [
+                'id_unit'=>4,
+                'description'=>'Operators 2(Operasi Variable pada PHP)',
+                'tipe_soal'=>'2',
+                'question'=>'Buatlah program sesuai dengan instruksi',
+                'answer_errorstatus'=>'0',
+                'answer_outputstatus'=>'1'
             ]
         ];
         foreach ($courses as $course){
