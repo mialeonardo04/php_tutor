@@ -14,7 +14,7 @@ class CourseTableSeeder extends Seeder
     public function run()
     {
         $units =[
-            ['name'=>'PHP Syntax'],
+            ['name'=>'PHP Introductions'],
             ['name'=>'PHP Variables'],
             ['name'=>'PHP Data Types'],
             ['name'=>'PHP Operators'],
@@ -27,16 +27,44 @@ class CourseTableSeeder extends Seeder
             Unit::create($unit);
         }
         $courses =[
-            ['id_unit'=>1,
-                'description'=>'Pengenalan',
-                'question'=>'Apa yang dimaksud dengan PHP?',
-                'answer'=>'bahasa script',
-                'embed_url'=>'https://youtu.be/JEvlT5du2Ec?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'],
-            ['id_unit'=>4,
-                'description'=>'Print: Echo',
-                'question'=>'Apaah output yang dihasilkan?',
-                'answer'=>'Hello World',
-                'embed_url'=>'https://youtu.be/cOJ8fwR-BSA?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS']
+            [
+                'id_unit'=>1,
+                'description'=>'Pengenalan 1',
+                'tipe_soal'=>'1',
+                'question'=>'Berdasarkan video sebelumnya, PHP adalah bahasa program yang digunakan pada sisi ...?',
+                'answer'=>'server',
+                'embed_url'=>'https://youtu.be/JEvlT5du2Ec?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ], [
+                'id_unit'=>1,
+                'description'=>'Pengenalan 2',
+                'tipe_soal'=>'1',
+                'question'=>'Apakah nama root folder yang digunakan untuk menyimpan folder atau file yang akan dijalankan pada server lokal?',
+                'answer'=>'htdocs',
+                'embed_url'=>'https://youtu.be/cOJ8fwR-BSA?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ], [
+                'id_unit'=>1,
+                'description'=>'Pengenalan 3',
+                'tipe_soal'=>'2',
+                'question'=>'Buatlah program sesuai dengan instruksi',
+                'answer_errorstatus'=>'0',
+                'answer_outputstatus'=>'1',
+                'embed_url'=>'https://youtu.be/QebnGe5-PUo?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ], [
+                'id_unit'=>2,
+                'description'=>'Variable 1',
+                'tipe_soal'=>'1',
+                'question'=>'Cara prgrammer memberikan informasi pribadi tentang kode program yang ditulis adalah dengan menggunakan ...',
+                'answer'=>'komentar',
+                'embed_url'=>'https://youtu.be/m8viqR-PuI4?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ], [
+                'id_unit'=>2,
+                'description'=>'Variable 2',
+                'tipe_soal'=>'2',
+                'question'=>'Buatlah program sesuai dengan instruksi',
+                'answer_errorstatus'=>'0',
+                'answer_outputstatus'=>'1',
+                'embed_url'=>'https://youtu.be/m8viqR-PuI4?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
+            ]
         ];
         foreach ($courses as $course){
             Course::create($course);

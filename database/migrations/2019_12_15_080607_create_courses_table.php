@@ -17,8 +17,11 @@ class CreateCoursesTable extends Migration
             $table->increments('id_course');
             $table->integer('id_unit');
             $table->string('description');
+            $table->integer('tipe_soal');
             $table->string('question')->nullable();
             $table->string('answer')->nullable();
+            $table->integer('answer_errorstatus')->nullable();
+            $table->integer('answer_outputstatus')->nullable();
             $table->string('embed_url');
             $table->timestamps();
         });
