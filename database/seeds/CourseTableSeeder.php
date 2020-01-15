@@ -18,9 +18,9 @@ class CourseTableSeeder extends Seeder
             ['name'=>'PHP Variables'],
             ['name'=>'PHP Data Types'],
             ['name'=>'PHP Operators'],
+            ['name'=>'PHP Arrays'],
             ['name'=>'PHP Conditionals'],
             ['name'=>'PHP Looping'],
-            ['name'=>'PHP Arrays'],
             ['name'=>'PHP Superglobals'],
         ];
         foreach ($units as $unit){
