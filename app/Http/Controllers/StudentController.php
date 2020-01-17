@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Course;
 use App\Unit;
+use App\Report;
 use App\StudentPretestAnswer;
 
 use Illuminate\Support\Facades\Auth;

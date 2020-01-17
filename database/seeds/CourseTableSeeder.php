@@ -29,21 +29,21 @@ class CourseTableSeeder extends Seeder
         $courses =[
             [
                 'id_unit'=>1,
-                'description'=>'Pengenalan 1',
+                'description'=>'Introduction 1',
                 'tipe_soal'=>'1',
                 'question'=>'Berdasarkan video sebelumnya, PHP adalah bahasa program yang digunakan pada sisi ...?',
                 'answer'=>'server',
                 'embed_url'=>'https://youtu.be/JEvlT5du2Ec?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
             ], [
                 'id_unit'=>1,
-                'description'=>'Pengenalan 2',
+                'description'=>'Introduction 2',
                 'tipe_soal'=>'1',
                 'question'=>'Apakah nama root folder yang digunakan untuk menyimpan folder atau file yang akan dijalankan pada server lokal?',
                 'answer'=>'htdocs',
                 'embed_url'=>'https://youtu.be/cOJ8fwR-BSA?list=PLCZlgfAG0GXADD_i0xL_Dkv4zT_vFmdnS'
             ], [
                 'id_unit'=>1,
-                'description'=>'Pengenalan 3 (membuat Hello World)',
+                'description'=>'Introduction 3 (membuat Hello World)',
                 'tipe_soal'=>'2',
                 'question'=>'Buatlah program sesuai dengan instruksi',
                 'answer_errorstatus'=>'0',

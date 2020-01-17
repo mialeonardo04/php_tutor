@@ -12,12 +12,15 @@ use App\Student_course;
 use App\StudentPretestAnswer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+//use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Unicodeveloper\EmailValidator\EmailValidator;
 use LaravelVideoEmbed;
 
 class UserController extends Controller
 {
+
     public function getDashboardSiswa(){
         $siswa = Student::all();
 
@@ -42,6 +45,8 @@ class UserController extends Controller
 //        setcookie("id_student",$id_student,time()+(10*365*24*60*60));
 
         $unit_siswa = Student::select('unit_start')->where('id_user',Auth::user()->id)->first()->unit_start;
+        $updateReportSiswa = Report::where('id_student', $id_student)->get()->last();
+
         return view('siswa.dashboard',[
             'statusprogress'=>$status_progress,
             'statuspretest'=>$status_pretest,
@@ -49,7 +54,8 @@ class UserController extends Controller
             'nilaipretest'=>$nilairata2pretest*20,
             'nilaipretestmax' => $nilaitertinggipretest*20,
             'nilaicoursesavgmin' => $avgcourses*20,
-            'nilaifinal' => $nilaifinal
+            'nilaifinal' => $nilaifinal,
+            'lastreportupdate' => $updateReportSiswa
         ]);
     }
 
@@ -77,6 +83,24 @@ class UserController extends Controller
         return view('auth.register');
     }
 
+    function get_client_ip() {
+        $ipaddress = "";
+        if (isset($_SERVER['HTTP_CLIENT_IP']))
+            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if(isset($_SERVER['HTTP_X_FORWARDED']))
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        else if(isset($_SERVER['HTTP_FORWARDED']))
+            $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        else if(isset($_SERVER['REMOTE_ADDR']))
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
     public function postSignIn(Request $request){
         $this->validate($request,[
             'username' => 'required',
@@ -102,10 +126,16 @@ class UserController extends Controller
             }
 //            echo Auth::user()->verified;
             if (Auth::user()->verified == 1){
+                User::where('id','=',Auth::user()->id)
+                    ->update([
+                        'last_login_at' => Carbon::now()->toDateTimeString(),
+                        'last_login_ip' => $this->get_client_ip()
+                    ]);
                 if (Auth::user()->roles[0]['name'] == "siswa"){
                     return redirect()->route('siswa.dashboard');
+                } else {
+                    return redirect()->route('pengajar.dashboard');
                 }
-                return redirect()->route('pengajar.dashboard');
             } else {
                 Auth::logout();
                 return redirect('/login')->with('messageLogin','User is unverifiable! Please check your email to verifying your account!');

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model implements Authenticatable
 {
+//    protected $fillable =[
+//        'name','username','email','password','verified','last_login_at','last_login_ip'
+//    ];
     use \Illuminate\Auth\Authenticatable;
 
     public function roles(){

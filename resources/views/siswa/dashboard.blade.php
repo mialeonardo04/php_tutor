@@ -78,8 +78,17 @@
             </div>
         </div>
         <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
-            <div class="btn-list">
-                <a href="#" class="btn-info btn-lg btn-block" style="text-align: center">Take your courses now</a>
+            <div class="card box-shadow">
+                <h5 class="card-header weight-500">Last Activity</h5>
+                @if(!empty($lastreportupdate))
+                    <div class="card-body">
+                        <p class="card-text">Let's finish your lessons</p>
+                    </div>
+                @else
+                    <div class="card-body">
+                        <p class="card-text">Let's start the course</p>
+                    </div>
+                @endif
             </div>
         </div>
     @endif
