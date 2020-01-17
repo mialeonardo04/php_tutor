@@ -153,4 +153,40 @@ class StudentController extends Controller
     {
         //
     }
+
+    public function achievementsHome(){
+        $siswa = Student::all();
+        $status_progress = 0;
+        $id_student = 0;
+
+        foreach ($siswa as $murid){
+            if ($murid->id_user == Auth::user()->id){
+                $status_progress = $murid->progress;
+                $id_student = $murid->id;
+            }
+        }
+
+        return view('siswa.achievements',[
+            'statusprogress'=>$status_progress,
+            'idstudent' => $id_student
+        ]);
+    }
+
+    public function coursesHome(){
+        $siswa = Student::all();
+        $status_progress = 0;
+        $id_student = 0;
+
+        foreach ($siswa as $murid){
+            if ($murid->id_user == Auth::user()->id){
+                $status_progress = $murid->progress;
+                $id_student = $murid->id;
+            }
+        }
+
+        return view('siswa.courses',[
+            'statusprogress'=>$status_progress,
+            'idstudent' => $id_student
+        ]);
+    }
 }

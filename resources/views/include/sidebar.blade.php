@@ -30,13 +30,13 @@
                     @else
                         @if($statusprogress > 0)
                             <li>
-                                <a href="/siswa/course" class="dropdown-toggle no-arrow">
+                                <a href="/siswa/courses" class="dropdown-toggle no-arrow">
                                     <span class="fa fa-list-alt"></span><span class="mtext">Courses </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/siswa/achievments" class="dropdown-toggle no-arrow">
-                                    <span class="fa fi-crown"></span><span class="mtext">Achievment(s) </span>
+                                <a href="/siswa/achievements" class="dropdown-toggle no-arrow">
+                                    <span class="fa fi-crown"></span><span class="mtext">Achievement(s) </span>
                                 </a>
                             </li>
                         @else
@@ -47,7 +47,7 @@
                             </li>
                             <li>
                                 <a href="" class="dropdown-toggle no-arrow">
-                                    <span class="fa fi-crown"></span><span class="mtext">Achievment(s) </span>
+                                    <span class="fa fi-crown"></span><span class="mtext">Achievement(s) </span>
                                 </a>
                             </li>
                         @endif

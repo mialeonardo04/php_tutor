@@ -39,7 +39,7 @@ class UserController extends Controller
 //        $nilaiterendahpretest = StudentPretestAnswer::where('id_student',$id_student)->min('jumlah_benar');
         $avgcourses = Report::where('id_student',$id_student)->avg('score');
 
-        setcookie("id_student",$id_student,time()+(10*365*24*60*60));
+//        setcookie("id_student",$id_student,time()+(10*365*24*60*60));
 
         $unit_siswa = Student::select('unit_start')->where('id_user',Auth::user()->id)->first()->unit_start;
         return view('siswa.dashboard',[
@@ -169,9 +169,9 @@ class UserController extends Controller
 
     public function logout(Request $request){
         Auth::logout();
-        if (isset($_COOKIE['id_student'])) {
-            setcookie("id_student", "");
-        }
+//        if (isset($_COOKIE['id_student'])) {
+//            setcookie("id_student", "");
+//        }
         return redirect('/login');
     }
 }

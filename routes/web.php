@@ -45,9 +45,15 @@ Route::group(['middleware' => ['web']],function(){
             'as' => 'siswa.dashboard'
         ]);
 
-        Route::get('/siswa/achievments',function (){
-            echo $_COOKIE['id_student'];
-        });
+        Route::get('/siswa/achievements',[
+            'uses' => 'StudentController@achievementsHome',
+            'as' => 'siswa.achievements'
+        ]);
+
+        Route::get('/siswa/courses',[
+            'uses' => 'StudentController@coursesHome',
+            'as' => 'siswa.courses'
+        ]);
 
         Route::get('/siswa/pretest',[
             'uses' => 'StudentController@getPretestView',
