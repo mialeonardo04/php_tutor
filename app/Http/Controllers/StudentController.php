@@ -185,6 +185,9 @@ class StudentController extends Controller
             }
         }
 
+        $nilaiPretest = StudentPretestAnswer::where('id_student',$id_student);
+        $courses = Course::all();
+
         return view('siswa.courses',[
             'statusprogress'=>$status_progress,
             'idstudent' => $id_student

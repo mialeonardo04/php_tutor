@@ -91,10 +91,10 @@
         @endif
         <div class="col-sm-12 col-md-6 mb-30">
             <div class="card box-shadow">
-                <h5 class="card-header weight-500">Start All over</h5>
+                <h5 class="card-header weight-500">Select Course</h5>
                 <div class="card-body">
-                    <p class="card-text">Let's begin the course</p>
-                    <a href="#" class="btn btn-primary">Start Now</a>
+                    <p class="card-text">Let's choose your course</p>
+                    <a href="/siswa/courses" class="btn btn-primary">Go!</a>
                 </div>
             </div>
         </div>
