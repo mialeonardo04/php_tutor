@@ -77,19 +77,27 @@
                 </div>
             </div>
         </div>
-        <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
-            <div class="card box-shadow">
-                <h5 class="card-header weight-500">Last Activity</h5>
-                @if(!empty($lastreportupdate))
+    <div class="row clearfix">
+        @if(!empty($lastreportupdate))
+            <div class="col-sm-12 col-md-6 mb-30">
+                <div class="card box-shadow">
+                    <h5 class="card-header weight-500">{{$lastreportupdate->units()->first()->name}}: {{$lastreportupdate->courses()->first()->description}}</h5>
                     <div class="card-body">
                         <p class="card-text">Let's finish your lessons</p>
+                        <a href="#" class="btn btn-primary">Continue</a>
                     </div>
-                @else
-                    <div class="card-body">
-                        <p class="card-text">Let's start the course</p>
-                    </div>
-                @endif
+                </div>
+            </div>
+        @endif
+        <div class="col-sm-12 col-md-6 mb-30">
+            <div class="card box-shadow">
+                <h5 class="card-header weight-500">Start All over</h5>
+                <div class="card-body">
+                    <p class="card-text">Let's begin the course</p>
+                    <a href="#" class="btn btn-primary">Start Now</a>
+                </div>
             </div>
         </div>
+    </div>
     @endif
 @endsection

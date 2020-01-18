@@ -13,4 +13,7 @@ class Unit extends Model
     public function courses(){
         return $this->hasMany('App\Course');
     }
+    public function reports(){
+        return $this->hasMany('App\Report');
+    }
 }

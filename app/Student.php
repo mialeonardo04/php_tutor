@@ -14,4 +14,8 @@ class Student extends Model
         return $this->belongsToMany('App\Course','student_courses',
             'id_student','id_course');
     }
+
+    public function reports(){
+        return $this->hasMany('App\Report');
+    }
 }

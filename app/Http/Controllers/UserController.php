@@ -53,7 +53,7 @@ class UserController extends Controller
             'unit'=>$unit_siswa,
             'nilaipretest'=>$nilairata2pretest*20,
             'nilaipretestmax' => $nilaitertinggipretest*20,
-            'nilaicoursesavgmin' => $avgcourses*20,
+            'nilaicoursesavgmin' => $avgcourses,
             'nilaifinal' => $nilaifinal,
             'lastreportupdate' => $updateReportSiswa
         ]);
@@ -126,11 +126,11 @@ class UserController extends Controller
             }
 //            echo Auth::user()->verified;
             if (Auth::user()->verified == 1){
-                User::where('id','=',Auth::user()->id)
-                    ->update([
-                        'last_login_at' => date("Y-m-d H:i:s"),
-                        'last_login_ip' => $this->get_client_ip()
-                    ]);
+//                User::where('id','=',Auth::user()->id)
+//                    ->update([
+//                        'last_login_at' => date("Y-m-d H:i:s"),
+//                        'last_login_ip' => $this->get_client_ip()
+//                    ]);
                 if (Auth::user()->roles[0]['name'] == "siswa"){
                     return redirect()->route('siswa.dashboard');
                 } else {

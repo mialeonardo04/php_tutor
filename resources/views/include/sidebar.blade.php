@@ -8,7 +8,7 @@
 			<div class="sidebar-menu">
 				<ul id="accordion-menu">
                     <li>
-                        <a href="" class="dropdown-toggle no-arrow">
+                        <a href="/" class="dropdown-toggle no-arrow">
                             <span class="fa fa-home"></span><span class="mtext">Home</span>
                         </a>
                     </li>

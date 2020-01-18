@@ -26,6 +26,8 @@ class CreateStudentsTable extends Migration
 //            $table->integer('nilai_pretest')->nullable();
             $table->integer('unit_start')->default(1);
             $table->string('avg_nilai_final')->nullable();
+            $table->datetime('last_gocourse_at')->nullable();
+            $table->string('last_login_ip')->nullable();
             $table->rememberToken();
         });
     }
