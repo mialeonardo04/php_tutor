@@ -155,11 +155,11 @@ class UserController extends Controller
             'role' => 'required|max:1'
         ]);
 
-        echo $request['name']."</br>";
-        echo $request['email']."</br>";
-        echo $request['username']."</br>";
-        echo $request['password']."</br>";
-        echo $request['role']."</br>";
+//        echo $request['name']."</br>";
+//        echo $request['email']."</br>";
+//        echo $request['username']."</br>";
+//        echo $request['password']."</br>";
+//        echo $request['role']."</br>";
 
         $name = $request['name'];
         $email = $request['email'];

@@ -9,9 +9,7 @@
     <div class="input-group custom input-group-lg">
         <input type="text" class="form-control" placeholder="Username" name="username" value="@if(isset($_COOKIE['remember_login'])){{base64_decode($_COOKIE['remember_login'])}}@endif" autofocus>
         @if ($errors->has('username'))
-            <span class="invalid-feedback">
-                <strong>{{ $errors->first('username') }}</strong>
-            </span>
+            <strong style="color: red">{{ $errors->first('username') }}</strong>
         @endif
         <div class="input-group-append custom">
             <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
@@ -20,9 +18,7 @@
     <div class="input-group custom input-group-lg">
         <input type="password" class="form-control" placeholder="**********" name="password" id="inputPassword" value="@if(isset($_COOKIE['remember_pass'])){{base64_decode($_COOKIE['remember_pass'])}}@endif">
         @if ($errors->has('password'))
-            <span class="invalid-feedback">
-                <strong>{{ $errors->first('password') }}</strong>
-            </span>
+            <strong style="color: red">{{ $errors->first('password') }}</strong>
         @endif
         <div class="input-group-append custom">
             <span class="input-group-text"><i class="fa fa-lock" aria-hidden="true"></i></span>
