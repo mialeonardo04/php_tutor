@@ -173,7 +173,7 @@ class StudentController extends Controller
             }
         }
 
-        $nilaiPretest = StudentPretestAnswer::where('id_student',$id_student);
+        $nilaiPretest = StudentPretestAnswer::select('jumlah_benar','id_unit')->where('id_student',$id_student)->get();
         $courses = Course::all();
 
         $course1 = count(Course::where('id_unit',1)->get());
@@ -200,6 +200,7 @@ class StudentController extends Controller
             'course6' =>$course6,
             'course7' =>$course7,
             'course8' =>$course8,
+            'nilaiPretest' =>$nilaiPretest,
         ]);
     }
 }

@@ -73,7 +73,7 @@
                     targets: "datatable-nosort",
                     orderable: false,
                 }],
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "lengthMenu": [[4, 8, 12, -1], [4, 8, 12, "All"]],
                 "language": {
                     "info": "_START_-_END_ of _TOTAL_ entries",
                     searchPlaceholder: "Search"
@@ -87,7 +87,7 @@
                     targets: "datatable-nosort",
                     orderable: false,
                 }],
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "lengthMenu": [[4, 8, 12, -1], [4, 8, 12, "All"]],
                 "language": {
                     "info": "_START_-_END_ of _TOTAL_ entries",
                     searchPlaceholder: "Search"
