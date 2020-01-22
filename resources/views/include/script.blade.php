@@ -13,6 +13,18 @@
     <script src="{{ asset('theme/src/plugins/highcharts-6.0.7/code/highcharts-more.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/dataTables.responsive.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/responsive.bootstrap4.js') }}"></script>
+    <!-- buttons for Export datatable -->
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/button/dataTables.buttons.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/button/buttons.bootstrap4.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/button/buttons.print.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/button/buttons.html5.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/button/buttons.flash.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/button/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/media/js/button/vfs_fonts.js') }}"></script>
     <script>
         // Switchery
         var elems = Array.prototype.slice.call(document.querySelectorAll('.switch-btn'));
@@ -49,6 +61,56 @@
         $("input[name='demo5']").TouchSpin({
             prefix: "pre",
             postfix: "post"
+        });
+    </script>
+    <script>
+        $('document').ready(function(){
+            $('.data-table').DataTable({
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_-_END_ of _TOTAL_ entries",
+                    searchPlaceholder: "Search"
+                },
+            });
+            $('.data-table-export').DataTable({
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_-_END_ of _TOTAL_ entries",
+                    searchPlaceholder: "Search"
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'pdf', 'print'
+                ]
+            });
+            var table = $('.select-row').DataTable();
+            $('.select-row tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+            var multipletable = $('.multiple-select-row').DataTable();
+            $('.multiple-select-row tbody').on('click', 'tr', function () {
+                $(this).toggleClass('selected');
+            });
         });
     </script>
 

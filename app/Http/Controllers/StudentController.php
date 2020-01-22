@@ -39,28 +39,12 @@ class StudentController extends Controller
     }
 
     public function submitPretest(){
-//        $courses = Course::all();
         $nilaipretest = request('scorepretest');
         $uid = request('uid');
         $submit = request('submit');
         $unit_id = request('unitID');
         $id_student = Student::where('id_user',$uid)->first()->id;
-//      echo $id_student;
 
-//        $scorepretest = $nilaipretest * 10;
-//        if ($scorepretest >= 30 && $scorepretest <= 40){
-//            $unit = 4;
-//        } elseif ($scorepretest > 40 && $scorepretest <= 60){
-//            $unit = 5;
-//        } elseif ($scorepretest > 60 && $scorepretest < 90){
-//            $unit = 6;
-//        } elseif ($scorepretest >= 90){
-//            $unit = 7;
-//        } else {
-//            $unit = 1;
-//        }
-//        $progress =
-//
         if (isset($submit)){
             $student_answer = new StudentPretestAnswer();
             $student_answer->id_student = $id_student;
@@ -74,16 +58,20 @@ class StudentController extends Controller
                 ]);
             $progress = request('progress');
             if (isset($progress)){
+                $avg_pretest = $student_answer::where('id_student',$id_student)->avg('jumlah_benar');
                 Student::where('id_user','=',$uid)
                     ->limit(1)
                     ->update([
                         'progress' => $progress,
+                        'avg_pretest' => $avg_pretest*20
                     ]);
+
             }
         }
 //
         return redirect()->route('siswa.pretest');
     }
+
     public function index()
     {
         //
@@ -188,9 +176,30 @@ class StudentController extends Controller
         $nilaiPretest = StudentPretestAnswer::where('id_student',$id_student);
         $courses = Course::all();
 
+        $course1 = count(Course::where('id_unit',1)->get());
+        $course2 = count(Course::where('id_unit',2)->get());
+        $course3 = count(Course::where('id_unit',3)->get());
+        $course4 = count(Course::where('id_unit',4)->get());
+        $course5 = count(Course::where('id_unit',5)->get());
+        $course6 = count(Course::where('id_unit',6)->get());
+        $course7 = count(Course::where('id_unit',7)->get());
+        $course8 = count(Course::where('id_unit',8)->get());
+
+        $units = Unit::all();
+
         return view('siswa.courses',[
             'statusprogress'=>$status_progress,
-            'idstudent' => $id_student
+            'idstudent' => $id_student,
+            'units' => $units,
+            'courses' => $courses,
+            'course1' =>$course1,
+            'course2' =>$course2,
+            'course3' =>$course3,
+            'course4' =>$course4,
+            'course5' =>$course5,
+            'course6' =>$course6,
+            'course7' =>$course7,
+            'course8' =>$course8,
         ]);
     }
 }

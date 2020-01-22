@@ -28,3 +28,6 @@
 
 	  gtag('config', 'UA-119386393-1');
 	</script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/media/css/jquery.dataTables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/media/css/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/media/css/responsive.dataTables.css')}}">

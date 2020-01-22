@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="input-group custom input-group-lg">
-        <select class="custom-select col-12" name="role">
+        <select class="selectpicker form-control col-12" data-style="btn-outline-secondary" name="role">
             <option selected="">Choose Role</option>
             <option value="1">Pengajar</option>
             <option value="2">Peserta Didik</option>
