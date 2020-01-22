@@ -48,7 +48,17 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td><a href="" class="btn btn-success"> Take Course</a></td>
+                        <td>
+                            @foreach($nilaiPretest as $score)
+                                @if($score->id_unit == $unit->id)
+                                    @if($score->jumlah_benar*20 >= 75)
+                                        <a href="" class="btn btn-success btn-block">Take Course</a>
+                                    @else
+                                        <a href="" class="btn btn-danger btn-block">Not yet Available</a>
+                                    @endif
+                                @endif
+                            @endforeach
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
