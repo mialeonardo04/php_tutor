@@ -203,4 +203,24 @@ class StudentController extends Controller
             'nilaiPretest' =>$nilaiPretest,
         ]);
     }
+
+    public function selectUnit($id_unit){
+        $siswa = Student::all();
+        $status_progress = 0;
+        $id_student = 0;
+
+        foreach ($siswa as $murid){
+            if ($murid->id_user == Auth::user()->id){
+                $status_progress = $murid->progress;
+                $id_student = $murid->id;
+            }
+        }
+//        echo $id_unit;
+        $courses = Course::where('id_unit',$id_unit)->get();
+        return view('siswa.courseByUnit',[
+            'statusprogress'=>$status_progress,
+            'idstudent' => $id_student,
+            'courses' => $courses,
+        ]);
+    }
 }

@@ -52,9 +52,13 @@
                             @foreach($nilaiPretest as $score)
                                 @if($score->id_unit == $unit->id)
                                     @if($score->jumlah_benar*20 >= 75)
-                                        <a href="" class="btn btn-success btn-block">Take Course</a>
+                                        <form action="/siswa/courses/{{$unit->id}}">
+                                            <button type="submit" class="btn btn-success btn-block">Take Course</button>
+                                        </form>
                                     @else
-                                        <a href="" class="btn btn-danger btn-block">Not yet Available</a>
+                                        <form action="/siswa/courses/{{$unit->id}}/">
+                                            <button type="submit" class="btn btn-secondary btn-block" disabled>Not yet Available</button>
+                                        </form>
                                     @endif
                                 @endif
                             @endforeach

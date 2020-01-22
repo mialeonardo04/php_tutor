@@ -50,6 +50,10 @@ Route::group(['middleware' => ['web']],function(){
             'as' => 'siswa.achievements'
         ]);
 
+        Route::get('/siswa/courses/{id_unit}/',[
+            'uses' => 'StudentController@selectUnit',
+            'as' => 'siswa.course.select'
+        ]);
         Route::get('/siswa/courses',[
             'uses' => 'StudentController@coursesHome',
             'as' => 'siswa.courses'
