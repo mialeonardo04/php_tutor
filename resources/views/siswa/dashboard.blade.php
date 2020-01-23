@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="title">
-                    <h4>Welcome to <img src="{{asset('theme/vendors/images/phpitutor_logo_txt.png')}}" alt="PHP Intelligent Tutor"> {{Auth::user()->username}}</h4>
+                    <h4>Welcome to <img src="{{asset('theme/vendors/images/phpitutor_logo_txt.png')}}" alt="PHP Intelligent Tutor"></h4>
                 </div>
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                    </ol>
-                </nav>
+                {{--<nav aria-label="breadcrumb" role="navigation">--}}
+                    {{--<ol class="breadcrumb">--}}
+                        {{--<li class="breadcrumb-item"><a href="/">Home</a></li>--}}
+                        {{--<li class="breadcrumb-item active" aria-current="page">Dashboard</li>--}}
+                    {{--</ol>--}}
+                {{--</nav>--}}
             </div>
         </div>
     </div>
