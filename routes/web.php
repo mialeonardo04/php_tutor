@@ -40,34 +40,37 @@ Route::group(['middleware' => ['web']],function(){
 
 
     Route::group(['middleware' => ['auth']],function (){
-        Route::get('/siswa/dashboard',[
-            'uses' => 'UserController@getDashboardSiswa',
-            'as' => 'siswa.dashboard'
-        ]);
+        Route::group(['middleware' => ['roles'],'roles' => ['siswa']],function (){
+            Route::get('/siswa/dashboard',[
+                'uses' => 'UserController@getDashboardSiswa',
+                'as' => 'siswa.dashboard'
+            ]);
 
-        Route::get('/siswa/achievements',[
-            'uses' => 'StudentController@achievementsHome',
-            'as' => 'siswa.achievements'
-        ]);
+            Route::get('/siswa/achievements',[
+                'uses' => 'StudentController@achievementsHome',
+                'as' => 'siswa.achievements'
+            ]);
 
-        Route::get('/siswa/courses/{id_unit}/',[
-            'uses' => 'StudentController@selectUnit',
-            'as' => 'siswa.course.select'
-        ]);
-        Route::get('/siswa/courses',[
-            'uses' => 'StudentController@coursesHome',
-            'as' => 'siswa.courses'
-        ]);
+            Route::get('/siswa/courses/{id_unit}/',[
+                'uses' => 'StudentController@selectUnit',
+                'as' => 'siswa.course.select'
+            ]);
+            Route::get('/siswa/courses',[
+                'uses' => 'StudentController@coursesHome',
+                'as' => 'siswa.courses'
+            ]);
 
-        Route::get('/siswa/pretest',[
-            'uses' => 'StudentController@getPretestView',
-            'as' => 'siswa.pretest'
-        ]);
+            Route::get('/siswa/pretest',[
+                'uses' => 'StudentController@getPretestView',
+                'as' => 'siswa.pretest'
+            ]);
 
-        Route::post('/submitpretest',[
-            'uses' =>'StudentController@submitPretest',
-            'as' => 'submitpretest'
-        ]);
+            Route::post('/submitpretest',[
+                'uses' =>'StudentController@submitPretest',
+                'as' => 'submitpretest'
+            ]);
+        });
+
 
         Route::group(['middleware' => ['roles'],'roles' => ['pengajar']],function (){
             Route::get('/pengajar/dashboard',[
