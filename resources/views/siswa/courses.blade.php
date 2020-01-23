@@ -53,11 +53,11 @@
                                 @if($score->id_unit == $unit->id)
                                     @if($score->jumlah_benar*20 >= 75)
                                         <form action="/siswa/courses/{{$unit->id}}">
-                                            <button type="submit" class="btn btn-success btn-block">Take Course</button>
+                                            <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
                                         </form>
                                     @else
                                         <form action="/siswa/courses/{{$unit->id}}/">
-                                            <button type="submit" class="btn btn-secondary btn-block" disabled>Not yet Available</button>
+                                            <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not yet Available</button>
                                         </form>
                                     @endif
                                 @endif
