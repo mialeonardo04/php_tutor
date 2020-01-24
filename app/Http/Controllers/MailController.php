@@ -49,7 +49,7 @@ class MailController extends Controller
         $email_pass     = 'AdminPhpITutor';
         $email_to       = $request['email'];
         $user = User::where('email','=',$email_to)->first();
-        if ($user >0){
+        if (!empty($user)){
             $user_id = $user->id;
             $username = $user->username;
 
