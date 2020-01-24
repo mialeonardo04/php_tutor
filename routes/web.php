@@ -50,6 +50,11 @@ Route::group(['middleware' => ['web']],function(){
         ]);
     });
 
+    Route::post('/resetPassword',[
+        'uses' => 'MailController@resetPassword',
+        'as' => 'resetPassword'
+    ]);
+
     Route::group(['middleware' => ['auth']],function (){
         Route::group(['middleware' => ['roles'],'roles' => ['siswa']],function (){
             Route::get('/siswa/dashboard',[

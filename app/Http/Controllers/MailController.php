@@ -42,61 +42,82 @@ class MailController extends Controller
     {
 
         $data_toview = array();
+        $user_id = 0;
+        $username ="";
+
         $email_sender   = 'phpitutor@gmail.com';
         $email_pass     = 'AdminPhpITutor';
         $email_to       = $request['email'];
         $user = User::where('email','=',$email_to)->first();
-        $user_id = $user->id;
-        $username = $user->username;
+        if ($user >0){
+            $user_id = $user->id;
+            $username = $user->username;
 
-        $data_toview['username'] = $username;
-        $data_toview['email'] = $email_to;
-        $data_toview['bodymessage'] = URL::to('/reset/'.base64_encode($email_to).'/'.base64_encode($user_id));
-        // Backup your default mailer
-        $backup = \Mail::getSwiftMailer();
+            $data_toview['username'] = $username;
+            $data_toview['email'] = $email_to;
+            $data_toview['bodymessage'] = URL::to('/reset/'.base64_encode($email_to).'/'.base64_encode($user_id));
+            // Backup your default mailer
+            $backup = \Mail::getSwiftMailer();
 
-        if (User::where('email','=',$email_to)->count() >0){
-            try{
+            if (User::where('email','=',$email_to)->count() >0){
+                try{
 
-                //https://accounts.google.com/DisplayUnlockCaptcha
-                // Setup your gmail mailer
-                $transport = new \Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
-                $transport->setUsername($email_sender);
-                $transport->setPassword($email_pass);
+                    //https://accounts.google.com/DisplayUnlockCaptcha
+                    // Setup your gmail mailer
+                    $transport = new \Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
+                    $transport->setUsername($email_sender);
+                    $transport->setPassword($email_pass);
 
-                // Any other mailer configuration stuff needed
-                $gmail = new Swift_Mailer($transport);
+                    // Any other mailer configuration stuff needed
+                    $gmail = new Swift_Mailer($transport);
 
-                // Set the mailer as gmail
-                \Mail::setSwiftMailer($gmail);
+                    // Set the mailer as gmail
+                    \Mail::setSwiftMailer($gmail);
 
-                $data['emailto'] = $email_to;
-                $data['sender'] = $email_sender;
+                    $data['emailto'] = $email_to;
+                    $data['sender'] = $email_sender;
 
-                Mail::send('emails.html', $data_toview, function($message) use ($data)
-                {
+                    Mail::send('emails.html', $data_toview, function($message) use ($data)
+                    {
 
-                    $message->from($data['sender'], 'no-reply@admin.phpitutor.io');
-                    $message->to($data['emailto'])
-                        ->replyTo($data['sender'], 'no-reply@admin.phpitutor.io')
-                        ->subject('Reset Password Notification');
+                        $message->from($data['sender'], 'no-reply@admin.phpitutor.io');
+                        $message->to($data['emailto'])
+                            ->replyTo($data['sender'], 'no-reply@admin.phpitutor.io')
+                            ->subject('Reset Password Notification');
 
-                });
+                    });
 
-            }catch(\Exception $e){
-                $response = $e->getMessage() ;
-                echo $response;
+                }catch(\Exception $e){
+                    $response = $e->getMessage() ;
+                    echo $response;
+                }
+
+                Mail::setSwiftMailer($backup);
+
+                return redirect()->back()->with('messageSendMailSuccess','Check email at '.$email_to.' to reset your password');
+            } else {
+                return redirect()->back()->with('messageSendMailFailed',$email_to.' does not exist. Please use a verified email');
             }
-
-            Mail::setSwiftMailer($backup);
-
-            return redirect()->back()->with('messageSendMail','Check email at '.$email_to.' to reset your password');
         } else {
-            return redirect()->back()->with('messageSendMail',$email_to.' does not exist. Please sign up first');
+            return redirect()->back()->with('messageSendMailFailed',$email_to.' does not exist in our database. Please sign up first');
         }
+
+
     }
 
-    public function resetPassword(){
+    public function resetPassword(Request $request){
+        $this->validate($request,[
+            'password' => 'required|min:6'
+        ]);
 
+        $email = $request['email'];
+        $id = $request['id'];
+        $password = bcrypt($request['password']);
+
+        User::where("id", '=',  $id)
+            ->limit(1)
+            ->update(['password'=>$password]);
+
+        return redirect()->route('login')->with('messageResetSuccess',"Reset Password Successful");
     }
 }

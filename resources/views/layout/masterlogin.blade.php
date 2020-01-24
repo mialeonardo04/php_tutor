@@ -30,5 +30,9 @@
 @if(Session::has('messageSendMailFailed'))
     <script type="text/javascript"> sweetAlert("Failed", "{{ Session::get('messageSendMailFailed') }}", "error"); </script>
 @endif
+@if(Session::has('messageResetSuccess'))
+    <script type="text/javascript"> sweetAlert("Succeed", "{{ Session::get('messageResetSuccess') }}", "success"); </script>
+@endif
+
 </body>
 </html>
