@@ -24,5 +24,11 @@
 @if(Session::has('messageLogin'))
     <script type="text/javascript"> sweetAlert("Failed", "{{ Session::get('messageLogin') }}", "error"); </script>
 @endif
+@if(Session::has('messageSendMailSuccess'))
+    <script type="text/javascript"> sweetAlert("Verified", "{{ Session::get('messageSendMailSuccess') }}", "success"); </script>
+@endif
+@if(Session::has('messageSendMailFailed'))
+    <script type="text/javascript"> sweetAlert("Failed", "{{ Session::get('messageSendMailFailed') }}", "error"); </script>
+@endif
 </body>
 </html>

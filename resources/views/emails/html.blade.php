@@ -102,7 +102,7 @@
                 <!-- COPY -->
                 <tr>
                     <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
-{{--                        <p style="margin: 0;">username: {{$username}} <br>email: {{$email}} <br>Just press the button below and follow the instructions. We'll have you up and running in no time. </p>--}}
+                        <p style="margin: 0;">username: {{$username}} <br>email: {{$email}} <br>Just press the button below and follow the instructions. We'll have you up and running in no time. </p>
                     </td>
                 </tr>
                 <!-- BULLETPROOF BUTTON -->
@@ -113,7 +113,7 @@
                                 <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                                     <table border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-{{--                                            <td align="center" style="border-radius: 3px;" bgcolor="#7c72dc"><a href="{{ $bodymessage }}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">Reset Password</a></td>--}}
+                                            <td align="center" style="border-radius: 3px;" bgcolor="#7c72dc"><a href="{{ $bodymessage }}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">Reset Password</a></td>
                                         </tr>
                                     </table>
                                 </td>

@@ -13,6 +13,12 @@ use App\StudentPretestAnswer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
+use Mail;
+use Swift_Mailer;
+use Illuminate\Support\Facades\URL;
+use Swift_Transport;
+use Swift_Message;
 //use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Unicodeveloper\EmailValidator\EmailValidator;
@@ -203,4 +209,5 @@ class UserController extends Controller
 //        }
         return redirect('/login');
     }
+
 }

@@ -38,6 +38,17 @@ Route::group(['middleware' => ['web']],function(){
         'as' => 'logout'
     ]);
 
+    Route::post('/sendemail',[
+        'uses' => 'MailController@sendemail',
+        'as' => 'sendemail'
+    ]);
+
+    Route::get('reset/{email}/{id}', function ($email,$id) {
+        return view('emails.resetpass',[
+            'dataEmail' => base64_decode($email),
+            'id'=>base64_decode($id)
+        ]);
+    });
 
     Route::group(['middleware' => ['auth']],function (){
         Route::group(['middleware' => ['roles'],'roles' => ['siswa']],function (){

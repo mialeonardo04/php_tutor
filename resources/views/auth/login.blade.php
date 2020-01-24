@@ -40,32 +40,6 @@
                 <a href="#" class="btn-block" data-backdrop="static" data-toggle="modal" data-target="#login-modal">
                     Forgot Password
                 </a>
-                <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="login-box bg-white box-shadow pd-ltr-20 border-radius-5">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <img src="{{asset('theme/vendors/images/phpitutor_logo_10.png')}}" alt="login" class="login-img">
-                                <h2 class="text-center mb-30">Find Account</h2>
-                                <form>
-                                    <div class="input-group custom input-group-lg">
-                                        <input type="text" class="form-control" placeholder="Enter your email" name="mailForgot">
-                                        <div class="input-group-append custom">
-                                            <span class="input-group-text"><i class="fa fi-mail" aria-hidden="true"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="input-group">
-                                                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Check Now">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
 
@@ -82,4 +56,35 @@
         </div>
     </div>
 </form>
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="login-box bg-white box-shadow pd-ltr-20 border-radius-5">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <img src="{{asset('theme/vendors/images/phpitutor_logo_10.png')}}" alt="login" class="login-img">
+                    <h2 class="text-center mb-30">Find Account</h2>
+
+                    <form method="POST" action="{{ route('sendemail') }}">
+                        @csrf
+                        <div class="input-group custom input-group-lg">
+                            <input type="email" class="form-control" placeholder="Enter your email" name="email">
+                            @if ($errors->has('email'))
+                                <script type="text/javascript"> sweetAlert("Failed", "{{ $errors->first('email') }}", "error"); </script>
+                            @endif
+                            <div class="input-group-append custom">
+                                <span class="input-group-text"><i class="fa fi-mail" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Check Now"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
