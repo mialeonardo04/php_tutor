@@ -33,6 +33,9 @@
 @if(Session::has('messageResetSuccess'))
     <script type="text/javascript"> sweetAlert("Succeed", "{{ Session::get('messageResetSuccess') }}", "success"); </script>
 @endif
+@if(Session::has('messageResetFailed'))
+    <script type="text/javascript"> sweetAlert("Failed", "{{ Session::get('messageResetFailed') }}", "error"); </script>
+@endif
 
 </body>
 </html>

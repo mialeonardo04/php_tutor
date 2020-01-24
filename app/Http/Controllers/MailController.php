@@ -110,14 +110,26 @@ class MailController extends Controller
             'password' => 'required|min:6'
         ]);
 
+
         $email = $request['email'];
         $id = $request['id'];
         $password = bcrypt($request['password']);
 
-        User::where("id", '=',  $id)
-            ->limit(1)
-            ->update(['password'=>$password]);
+        $credential = array(
+            'id' => $id,
+            'email' => $email
+        );
 
-        return redirect()->route('login')->with('messageResetSuccess',"Reset Password Successful");
+        try{
+            User::where($credential)
+                ->limit(1)
+                ->update(['password'=>$password]);
+
+            return redirect()->route('login')->with('messageResetSuccess',"Reset Password Successful");
+        }catch (\Exception $e){
+            return redirect()->route('login')->with('messageResetFailed',"Reset Password Unsuccessful");
+        }
+
+
     }
 }
