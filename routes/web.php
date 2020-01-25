@@ -93,6 +93,10 @@ Route::group(['middleware' => ['web']],function(){
                 'uses' => 'UserController@getDashboardPengajar',
                 'as' => 'pengajar.dashboard'
             ]);
+            Route::post('/admin/assign-verify',[
+                'uses' => 'UserController@updateVerifyUser',
+                'as' => 'admin.assign'
+            ]);
         });
     });
 });

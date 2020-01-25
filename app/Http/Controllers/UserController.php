@@ -67,18 +67,42 @@ class UserController extends Controller
     public function getDashboardPengajar(){
         $courses = Course::all();
         $siswa = Student::all();
+        $whereclause = array(
+            'users.verified' => 1,
+            'user_role.role_id' => 1,
+        );
+        $users = DB::table('users')
+                    ->join('user_role','users.id','=','user_role.user_id')
+                    ->select('users.*')
+                    ->where($whereclause)
+                    ->get();
         $adminnotverified = User::where('verified',0)->get();
-        $adminnotverifiedcount = $adminnotverified->count();
+        $adminnotverfiedcount = $adminnotverified->count();
 
         $lastuser = DB::table('students')->orderBy('created_at','desc')->first();
 
         return view('pengajar.dashboard',[
+            'users' => $users,
             'students'=>$siswa,
             'lateststudent'=>$lastuser,
             'courses'=>$courses,
-            'admincountnorver' => $adminnotverifiedcount,
-            'adminnotverfied' =>$adminnotverified
+            'adminnotverfied' =>$adminnotverified,
+            'adminnotverfiedcount' => $adminnotverfiedcount,
         ]);
+    }
+
+    public function updateVerifyUser(Request $request){
+        if (isset($request['accepted'])){
+            User::where("id", '=',  $request['iduser'])
+                ->limit(1)
+                ->update(['verified'=>1]);
+        }
+
+        if (isset($request['denied'])){
+            User::where("id", '=',  $request['iduser'])->delete();
+            DB::table('user_role')->where('user_id','=',$request['iduser'])->delete();
+        }
+        return redirect()->back();
     }
     public function getLogin(){
         return view('auth.login');
@@ -143,7 +167,7 @@ class UserController extends Controller
                 }
             } else {
                 Auth::logout();
-                return redirect('/login')->with('messageLogin','User is unverifiable! Please check your email to verifying your account!');
+                return redirect('/login')->with('messageLogin','User is unverifiable! Please ask another teacher to verifying your account!');
             }
         }
         return redirect()->back()->with('messageLogin','Incorrect username or password');
