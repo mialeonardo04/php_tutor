@@ -39,13 +39,14 @@ class StudentController extends Controller
     }
 
     public function submitPretest(){
-        $nilaipretest = request('scorepretest');
-        $uid = request('uid');
+        $nilaipretest = base64_decode(request('scorepretest'));
+        $uid = base64_decode(request('uid'));
         $submit = request('submit');
         $unit_id = request('unitID');
         $id_student = Student::where('id_user',$uid)->first()->id;
 
         if (isset($submit)){
+//            echo $nilaipretest;
             $student_answer = new StudentPretestAnswer();
             $student_answer->id_student = $id_student;
             $student_answer->id_unit = $unit_id;
@@ -68,7 +69,6 @@ class StudentController extends Controller
 
             }
         }
-//
         return redirect()->route('siswa.pretest');
     }
 

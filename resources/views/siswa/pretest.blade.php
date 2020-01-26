@@ -12,6 +12,8 @@
             <script src="{{asset("theme/surveyjquery.js")}}"></script>
             <link rel="stylesheet" type="text/css" href="{{asset("theme/style.css")}}">
 
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/pbkdf2.js"></script>
 
         </head>
         <body>
@@ -50,6 +52,7 @@
                     <input type='submit' class='btn btn-primary pull-right' name='submit' value='Submit' >
                 </form>
             </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
         </div>
         </body>
         </html>
