@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="row">
-            <table class="stripe hover multiple-select-row data-table-export nowrap">
+            <table class="data-table stripe hover nowrap">
                 <thead>
                 <tr>
                     <th>No</th>
