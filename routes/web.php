@@ -56,6 +56,10 @@ Route::group(['middleware' => ['web']],function(){
     ]);
 
     Route::group(['middleware' => ['auth']],function (){
+        Route::get('/profile/{id}',[
+            'uses' => 'UserController@getProfile',
+        ]);
+
         Route::group(['middleware' => ['roles'],'roles' => ['siswa']],function (){
             Route::get('/siswa/dashboard',[
                 'uses' => 'UserController@getDashboardSiswa',

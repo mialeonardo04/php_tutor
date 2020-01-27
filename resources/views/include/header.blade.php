@@ -15,11 +15,12 @@
 			<div class="user-info-dropdown">
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-						<span class="user-icon"><i class="fa fa-user-o"></i></span>
+						<span class="user-icon"><img src="{{asset('theme/vendors/images/default_avatar.jpg')}}"></span>
 						<span class="user-name">{{Auth::user()->name}}</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+                        <a class="dropdown-item" href="/profile/{{Auth::user()->id}}"><i class="fa fa-user-md" aria-hidden="true"></i> My Profile</a>
+                        <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
 					</div>
 				</div>
 			</div>

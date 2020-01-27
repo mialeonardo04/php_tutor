@@ -76,6 +76,18 @@ class UserController extends Controller
                     ->select('users.*')
                     ->where($whereclause)
                     ->get();
+
+        $whereclause2 = array(
+            'users.verified' => 1,
+            'user_role.role_id' => 2,
+        );
+        $latestuser = DB::table('users')
+            ->join('user_role','users.id','=','user_role.user_id')
+            ->select('users.*')
+            ->where($whereclause2)
+            ->orderBy('created_at','desc')
+            ->first();
+
         $adminnotverified = User::where('verified',0)->get();
         $adminnotverfiedcount = $adminnotverified->count();
 
@@ -83,6 +95,7 @@ class UserController extends Controller
 
         return view('pengajar.dashboard',[
             'users' => $users,
+            'latestuser' => $latestuser,
             'students'=>$siswa,
             'lateststudent'=>$lastuser,
             'courses'=>$courses,
@@ -110,6 +123,21 @@ class UserController extends Controller
 
     public function getRegister(){
         return view('auth.register');
+    }
+
+    public function getProfile($id){
+
+        $siswa = Student::all();
+        $status_progress = 0;
+        foreach ($siswa as $murid) {
+            if ($murid->id_user == $id) {
+                $status_progress = $murid->progress;
+            }
+        }
+
+        return view('userprofile',[
+            'statusprogress' => $status_progress,
+        ]);
     }
 
     function get_client_ip() {
