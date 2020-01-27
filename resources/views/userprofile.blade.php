@@ -44,6 +44,18 @@
                     <img src="@if(Auth::user()->photo_name === NULL) {{asset('theme/vendors/images/default_avatar.jpg')}} @endif" id="create" alt="" width="200" height="250">
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"></label>
+                <div class="col-sm-12 col-md-10 text-right">
+                    <button class="btn btn-primary btn-lg" type="submit">
+                        Update
+                    </button>
+                    <a href="/" class="btn btn-danger btn-lg">
+                        Cancel
+                    </a>
+                </div>
+
+            </div>
         </form>
         <script type="text/javascript">
             function readURL(input) {
