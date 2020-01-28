@@ -35,7 +35,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
                             <div class="da-card box-shadow">
                                 <div class="da-card-photo">
-                                    <img src="@if($latestuser->photo_name === NULL){{asset('theme/vendors/images/default_avatar.jpg')}} @endif" alt="">
+                                    <img src="@if($latestuser->photo_name === NULL){{asset('theme/vendors/images/default_avatar.jpg')}} @else {{ URL::to('/') }}/images/{{$latestuser->photo_name}} @endif" alt="">
                                     <div class="da-overlay da-slide-top">
                                         <div class="da-social">
                                             <ul class="clearfix">

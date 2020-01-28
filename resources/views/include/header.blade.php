@@ -15,7 +15,7 @@
 			<div class="user-info-dropdown">
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-						<span class="user-icon"><img src="{{asset('theme/vendors/images/default_avatar.jpg')}}"></span>
+						<span class="user-icon"><img src="@if(Auth::user()->photo_name === NULL){{asset('theme/vendors/images/default_avatar.jpg')}} @else {{ URL::to('/') }}/images/{{Auth::user()->photo_name}} @endif"></span>
 						<span class="user-name">{{Auth::user()->name}}</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">

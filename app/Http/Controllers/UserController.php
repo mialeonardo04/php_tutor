@@ -165,6 +165,33 @@ class UserController extends Controller
         }
     }
 
+    public function updateProfile(Request $request , $id){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            if (isset($request['submit'])){
+                $name = $request['name'];
+//                 var_dump($request->file('fileku'));
+                if ($request->hasFile('fileku')) {
+                    $file = $request->file('fileku');
+
+                    $file_name =$file->getClientOriginalName();
+                    $destination = base_path() . '/public/images';
+
+                    $request->file('fileku')->move($destination, $file_name);
+
+                    User::where('id','=',$id)
+                        ->update([
+                            'name' => $name,
+                            'photo_name' => $file_name,
+                        ]);
+                }
+                return redirect('/');
+            }
+        }
+    }
+
     function get_client_ip() {
         $ipaddress = "";
         if (isset($_SERVER['HTTP_CLIENT_IP']))
