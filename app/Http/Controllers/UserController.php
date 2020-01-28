@@ -176,7 +176,7 @@ class UserController extends Controller
                 if ($request->hasFile('fileku')) {
                     $file = $request->file('fileku');
 
-                    $file_ext =$file->getClientOriginalExtension();;
+                    $file_ext =$file->getClientOriginalExtension();
                     $destination = base_path() . '/public/images';
 
                     $request->file('fileku')->move($destination, $id.'_'.$name.'.'.$file_ext);
