@@ -176,15 +176,15 @@ class UserController extends Controller
                 if ($request->hasFile('fileku')) {
                     $file = $request->file('fileku');
 
-                    $file_name =$file->getClientOriginalName();
+                    $file_ext =$file->getClientOriginalExtension();;
                     $destination = base_path() . '/public/images';
 
-                    $request->file('fileku')->move($destination, $id.'_'.$name);
+                    $request->file('fileku')->move($destination, $id.'_'.$name.'.'.$file_ext);
 
                     User::where('id','=',$id)
                         ->update([
                             'name' => $name,
-                            'photo_name' => $file_name,
+                            'photo_name' => $id.'_'.$name.'.'.$file_ext,
                         ]);
                 }
                 return redirect('/');
