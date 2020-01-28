@@ -179,7 +179,7 @@ class UserController extends Controller
                     $file_name =$file->getClientOriginalName();
                     $destination = base_path() . '/public/images';
 
-                    $request->file('fileku')->move($destination, $file_name);
+                    $request->file('fileku')->move($destination, $id.'_'.$name);
 
                     User::where('id','=',$id)
                         ->update([
