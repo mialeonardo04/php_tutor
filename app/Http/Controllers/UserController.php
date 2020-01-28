@@ -27,95 +27,116 @@ use LaravelVideoEmbed;
 class UserController extends Controller
 {
 
-    public function getDashboardSiswa(){
-        $siswa = Student::all();
-
-        $status_progress = 0;
-        $status_pretest = 0;
-        $nilaifinal = 0;
-        $id_student = 0;
-        $nilairata2pretest = 0;
-        foreach ($siswa as $murid){
-            if ($murid->id_user == Auth::user()->id){
-                $status_progress = $murid->progress;
-                $status_pretest = $murid->progress_pretest_unit;
-                $nilaifinal = $murid->nilai_final;
-                $id_student = $murid->id;
-                $nilairata2pretest = $murid->avg_pretest;
-            }
+    public function cekSessionCred(){
+        if (session()->getId() != Auth::user()->last_session){
+            $this->logout();
+            return true;
         }
+    }
+    public function getDashboardSiswa(){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $siswa = Student::all();
 
-        $nilaitertinggipretest = StudentPretestAnswer::where('id_student',$id_student)->max('jumlah_benar');
+            $status_progress = 0;
+            $status_pretest = 0;
+            $nilaifinal = 0;
+            $id_student = 0;
+            $nilairata2pretest = 0;
+            foreach ($siswa as $murid){
+                if ($murid->id_user == Auth::user()->id){
+                    $status_progress = $murid->progress;
+                    $status_pretest = $murid->progress_pretest_unit;
+                    $nilaifinal = $murid->nilai_final;
+                    $id_student = $murid->id;
+                    $nilairata2pretest = $murid->avg_pretest;
+                }
+            }
 
-        $avgcourses = Report::where('id_student',$id_student)->avg('score');
+            $nilaitertinggipretest = StudentPretestAnswer::where('id_student',$id_student)->max('jumlah_benar');
 
-        $unit_siswa = Student::select('unit_start')->where('id_user',Auth::user()->id)->first()->unit_start;
-        $updateReportSiswa = Report::where('id_student', $id_student)->get()->last();
+            $avgcourses = Report::where('id_student',$id_student)->avg('score');
 
-        return view('siswa.dashboard',[
-            'statusprogress'=>$status_progress,
-            'statuspretest'=>$status_pretest,
-            'unit'=>$unit_siswa,
-            'nilaipretest'=>$nilairata2pretest,
-            'nilaipretestmax' => $nilaitertinggipretest*20,
-            'nilaicoursesavgmin' => $avgcourses,
-            'nilaifinal' => $nilaifinal,
-            'lastreportupdate' => $updateReportSiswa
-        ]);
+            $unit_siswa = Student::select('unit_start')->where('id_user',Auth::user()->id)->first()->unit_start;
+            $updateReportSiswa = Report::where('id_student', $id_student)->get()->last();
+
+            return view('siswa.dashboard',[
+                'statusprogress'=>$status_progress,
+                'statuspretest'=>$status_pretest,
+                'unit'=>$unit_siswa,
+                'nilaipretest'=>$nilairata2pretest,
+                'nilaipretestmax' => $nilaitertinggipretest*20,
+                'nilaicoursesavgmin' => $avgcourses,
+                'nilaifinal' => $nilaifinal,
+                'lastreportupdate' => $updateReportSiswa
+            ]);
+        }
     }
 
     public function getDashboardPengajar(){
-        $courses = Course::all();
-        $siswa = Student::all();
-        $whereclause = array(
-            'users.verified' => 1,
-            'user_role.role_id' => 1,
-        );
-        $users = DB::table('users')
-                    ->join('user_role','users.id','=','user_role.user_id')
-                    ->select('users.*')
-                    ->where($whereclause)
-                    ->get();
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $courses = Course::all();
+            $siswa = Student::all();
+            $whereclause = array(
+                'users.verified' => 1,
+                'user_role.role_id' => 1,
+            );
+            $users = DB::table('users')
+                ->join('user_role','users.id','=','user_role.user_id')
+                ->select('users.*')
+                ->where($whereclause)
+                ->get();
 
-        $whereclause2 = array(
-            'users.verified' => 1,
-            'user_role.role_id' => 2,
-        );
-        $latestuser = DB::table('users')
-            ->join('user_role','users.id','=','user_role.user_id')
-            ->select('users.*')
-            ->where($whereclause2)
-            ->orderBy('created_at','desc')
-            ->first();
+            $whereclause2 = array(
+                'users.verified' => 1,
+                'user_role.role_id' => 2,
+            );
+            $latestuser = DB::table('users')
+                ->join('user_role','users.id','=','user_role.user_id')
+                ->select('users.*')
+                ->where($whereclause2)
+                ->orderBy('created_at','desc')
+                ->first();
 
-        $adminnotverified = User::where('verified',0)->get();
-        $adminnotverfiedcount = $adminnotverified->count();
+            $adminnotverified = User::where('verified',0)->get();
+            $adminnotverfiedcount = $adminnotverified->count();
 
-        $lastuser = DB::table('students')->orderBy('created_at','desc')->first();
+            $lastuser = DB::table('students')->orderBy('created_at','desc')->first();
 
-        return view('pengajar.dashboard',[
-            'users' => $users,
-            'latestuser' => $latestuser,
-            'students'=>$siswa,
-            'lateststudent'=>$lastuser,
-            'courses'=>$courses,
-            'adminnotverfied' =>$adminnotverified,
-            'adminnotverfiedcount' => $adminnotverfiedcount,
-        ]);
+            return view('pengajar.dashboard',[
+                'users' => $users,
+                'latestuser' => $latestuser,
+                'students'=>$siswa,
+                'lateststudent'=>$lastuser,
+                'courses'=>$courses,
+                'adminnotverfied' =>$adminnotverified,
+                'adminnotverfiedcount' => $adminnotverfiedcount,
+            ]);
+        }
     }
 
     public function updateVerifyUser(Request $request){
-        if (isset($request['accepted'])){
-            User::where("id", '=',  $request['iduser'])
-                ->limit(1)
-                ->update(['verified'=>1]);
-        }
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            if (isset($request['accepted'])){
+                User::where("id", '=',  $request['iduser'])
+                    ->limit(1)
+                    ->update(['verified'=>1]);
+            }
 
-        if (isset($request['denied'])){
-            User::where("id", '=',  $request['iduser'])->delete();
-            DB::table('user_role')->where('user_id','=',$request['iduser'])->delete();
+            if (isset($request['denied'])){
+                User::where("id", '=',  $request['iduser'])->delete();
+                DB::table('user_role')->where('user_id','=',$request['iduser'])->delete();
+            }
+            return redirect()->back();
         }
-        return redirect()->back();
     }
     public function getLogin(){
         return view('auth.login');
@@ -126,18 +147,22 @@ class UserController extends Controller
     }
 
     public function getProfile($id){
-
-        $siswa = Student::all();
-        $status_progress = 0;
-        foreach ($siswa as $murid) {
-            if ($murid->id_user == $id) {
-                $status_progress = $murid->progress;
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $siswa = Student::all();
+            $status_progress = 0;
+            foreach ($siswa as $murid) {
+                if ($murid->id_user == $id) {
+                    $status_progress = $murid->progress;
+                }
             }
-        }
 
-        return view('userprofile',[
-            'statusprogress' => $status_progress,
-        ]);
+            return view('userprofile',[
+                'statusprogress' => $status_progress,
+            ]);
+        }
     }
 
     function get_client_ip() {
@@ -188,6 +213,10 @@ class UserController extends Controller
 //                        'last_login_at' => date("Y-m-d H:i:s"),
 //                        'last_login_ip' => $this->get_client_ip()
 //                    ]);
+                User::where('id','=',Auth::user()->id)
+                    ->update([
+                        'last_session' => session()->getId(),
+                    ]);
                 if (Auth::user()->roles[0]['name'] == "siswa"){
                     return redirect()->route('siswa.dashboard');
                 } else {
@@ -254,11 +283,8 @@ class UserController extends Controller
         }
     }
 
-    public function logout(Request $request){
+    public function logout(){
         Auth::logout();
-//        if (isset($_COOKIE['id_student'])) {
-//            setcookie("id_student", "");
-//        }
         return redirect('/login');
     }
 

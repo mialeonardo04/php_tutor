@@ -21,55 +21,69 @@ class StudentController extends Controller
      */
 
     public function getPretestView(){
-        $siswa = Student::all();
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $siswa = Student::all();
 
-        $status_progress = 0;
-        $status_pretest = 0;
-        foreach ($siswa as $murid) {
-            if ($murid->id_user == Auth::user()->id) {
-                $status_progress = $murid->progress;
-                $status_pretest = $murid->progress_pretest_unit;
+            $status_progress = 0;
+            $status_pretest = 0;
+            foreach ($siswa as $murid) {
+                if ($murid->id_user == Auth::user()->id) {
+                    $status_progress = $murid->progress;
+                    $status_pretest = $murid->progress_pretest_unit;
+                }
             }
+            return view('siswa.pretest',[
+                'uid'=> Auth::user()->id,
+                'statuspretest'=>$status_pretest,
+                'statusprogress'=>$status_progress
+            ]);
         }
-        return view('siswa.pretest',[
-            'uid'=> Auth::user()->id,
-            'statuspretest'=>$status_pretest,
-            'statusprogress'=>$status_progress
-        ]);
     }
 
     public function submitPretest(){
-        $nilaipretest = base64_decode(request('scorepretest'));
-        $uid = base64_decode(request('uid'));
-        $submit = request('submit');
-        $unit_id = request('unitID');
-        $id_student = Student::where('id_user',$uid)->first()->id;
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $nilaipretest = base64_decode(request('scorepretest'));
+            $uid = base64_decode(request('uid'));
+            $submit = request('submit');
+            $unit_id = request('unitID');
+            $id_student = Student::where('id_user',$uid)->first()->id;
 
-        if (isset($submit)){
+            if (isset($submit)){
 //            echo $nilaipretest;
-            $student_answer = new StudentPretestAnswer();
-            $student_answer->id_student = $id_student;
-            $student_answer->id_unit = $unit_id;
-            $student_answer->jumlah_benar = $nilaipretest;
-            $student_answer->save();
-            Student::where('id_user', '=',$uid)
-                ->limit(1)
-                ->update([
-                    'progress_pretest_unit' => $unit_id+1,
-                ]);
-            $progress = request('progress');
-            if (isset($progress)){
-                $avg_pretest = $student_answer::where('id_student',$id_student)->avg('jumlah_benar');
-                Student::where('id_user','=',$uid)
+                if (StudentPretestAnswer::where(['id_student' => $id_student, 'id_unit' =>$unit_id])->count() > 0){
+                    StudentPretestAnswer::where(['id_student' => $id_student, 'id_unit' =>$unit_id])->delete();
+                }
+
+                $student_answer = new StudentPretestAnswer();
+                $student_answer->id_student = $id_student;
+                $student_answer->id_unit = $unit_id;
+                $student_answer->jumlah_benar = $nilaipretest;
+                $student_answer->save();
+                Student::where('id_user', '=',$uid)
                     ->limit(1)
                     ->update([
-                        'progress' => $progress,
-                        'avg_pretest' => $avg_pretest*20
+                        'progress_pretest_unit' => $unit_id+1,
                     ]);
+                $progress = request('progress');
+                if (isset($progress)){
+                    $avg_pretest = $student_answer::where('id_student',$id_student)->avg('jumlah_benar');
+                    Student::where('id_user','=',$uid)
+                        ->limit(1)
+                        ->update([
+                            'progress' => $progress,
+                            'avg_pretest' => $avg_pretest*20
+                        ]);
 
+                }
             }
+            return redirect()->route('siswa.pretest');
         }
-        return redirect()->route('siswa.pretest');
     }
 
     public function index()
@@ -144,83 +158,98 @@ class StudentController extends Controller
     }
 
     public function achievementsHome(){
-        $siswa = Student::all();
-        $status_progress = 0;
-        $id_student = 0;
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $siswa = Student::all();
+            $status_progress = 0;
+            $id_student = 0;
 
-        foreach ($siswa as $murid){
-            if ($murid->id_user == Auth::user()->id){
-                $status_progress = $murid->progress;
-                $id_student = $murid->id;
+            foreach ($siswa as $murid){
+                if ($murid->id_user == Auth::user()->id){
+                    $status_progress = $murid->progress;
+                    $id_student = $murid->id;
+                }
             }
-        }
 
-        return view('siswa.achievements',[
-            'statusprogress'=>$status_progress,
-            'idstudent' => $id_student
-        ]);
+            return view('siswa.achievements',[
+                'statusprogress'=>$status_progress,
+                'idstudent' => $id_student
+            ]);
+        }
     }
 
     public function coursesHome(){
-        $siswa = Student::all();
-        $status_progress = 0;
-        $id_student = 0;
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $siswa = Student::all();
+            $status_progress = 0;
+            $id_student = 0;
 
-        foreach ($siswa as $murid){
-            if ($murid->id_user == Auth::user()->id){
-                $status_progress = $murid->progress;
-                $id_student = $murid->id;
+            foreach ($siswa as $murid){
+                if ($murid->id_user == Auth::user()->id){
+                    $status_progress = $murid->progress;
+                    $id_student = $murid->id;
+                }
             }
+
+            $nilaiPretest = StudentPretestAnswer::select('jumlah_benar','id_unit')->where('id_student',$id_student)->get();
+            $courses = Course::all();
+
+            $course1 = count(Course::where('id_unit',1)->get());
+            $course2 = count(Course::where('id_unit',2)->get());
+            $course3 = count(Course::where('id_unit',3)->get());
+            $course4 = count(Course::where('id_unit',4)->get());
+            $course5 = count(Course::where('id_unit',5)->get());
+            $course6 = count(Course::where('id_unit',6)->get());
+            $course7 = count(Course::where('id_unit',7)->get());
+            $course8 = count(Course::where('id_unit',8)->get());
+
+            $units = Unit::all();
+
+            return view('siswa.courses',[
+                'statusprogress'=>$status_progress,
+                'idstudent' => $id_student,
+                'units' => $units,
+                'courses' => $courses,
+                'course1' =>$course1,
+                'course2' =>$course2,
+                'course3' =>$course3,
+                'course4' =>$course4,
+                'course5' =>$course5,
+                'course6' =>$course6,
+                'course7' =>$course7,
+                'course8' =>$course8,
+                'nilaiPretest' =>$nilaiPretest,
+            ]);
         }
-
-        $nilaiPretest = StudentPretestAnswer::select('jumlah_benar','id_unit')->where('id_student',$id_student)->get();
-        $courses = Course::all();
-
-        $course1 = count(Course::where('id_unit',1)->get());
-        $course2 = count(Course::where('id_unit',2)->get());
-        $course3 = count(Course::where('id_unit',3)->get());
-        $course4 = count(Course::where('id_unit',4)->get());
-        $course5 = count(Course::where('id_unit',5)->get());
-        $course6 = count(Course::where('id_unit',6)->get());
-        $course7 = count(Course::where('id_unit',7)->get());
-        $course8 = count(Course::where('id_unit',8)->get());
-
-        $units = Unit::all();
-
-        return view('siswa.courses',[
-            'statusprogress'=>$status_progress,
-            'idstudent' => $id_student,
-            'units' => $units,
-            'courses' => $courses,
-            'course1' =>$course1,
-            'course2' =>$course2,
-            'course3' =>$course3,
-            'course4' =>$course4,
-            'course5' =>$course5,
-            'course6' =>$course6,
-            'course7' =>$course7,
-            'course8' =>$course8,
-            'nilaiPretest' =>$nilaiPretest,
-        ]);
     }
 
     public function selectUnit($id_unit){
-        $siswa = Student::all();
-        $status_progress = 0;
-        $id_student = 0;
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $siswa = Student::all();
+            $status_progress = 0;
+            $id_student = 0;
 
-        foreach ($siswa as $murid){
-            if ($murid->id_user == Auth::user()->id){
-                $status_progress = $murid->progress;
-                $id_student = $murid->id;
+            foreach ($siswa as $murid){
+                if ($murid->id_user == Auth::user()->id){
+                    $status_progress = $murid->progress;
+                    $id_student = $murid->id;
+                }
             }
-        }
 //        echo $id_unit;
-        $courses = Course::where('id_unit',$id_unit)->get();
-        return view('siswa.courseByUnit',[
-            'statusprogress'=>$status_progress,
-            'idstudent' => $id_student,
-            'courses' => $courses,
-        ]);
+            $courses = Course::where('id_unit',$id_unit)->get();
+            return view('siswa.courseByUnit',[
+                'statusprogress'=>$status_progress,
+                'idstudent' => $id_student,
+                'courses' => $courses,
+            ]);
+        }
     }
 }
