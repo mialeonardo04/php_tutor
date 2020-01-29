@@ -42,7 +42,7 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label"></label>
                 <div class="col-sm-12 col-md-10">
-                    <img src="@if(Auth::user()->photo_name === NULL) {{asset('theme/vendors/images/default_avatar.jpg')}} @endif" id="create" alt="" width="200" height="250">
+                    <img src="@if(Auth::user()->photo_name === NULL) {{asset('theme/vendors/images/default_avatar.jpg')}} @else {{ URL::to('/') }}/images/{{Auth::user()->photo_name}} @endif" id="create" alt="" width="200" height="250">
                 </div>
             </div>
             <div class="form-group row">
