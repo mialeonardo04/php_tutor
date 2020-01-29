@@ -175,23 +175,23 @@ class UserController extends Controller
 //                 var_dump($request->file('fileku'));
 
 
-                if ($request->hasFile('fileku')) {
-                    $file = $request->file('fileku');
+//                if ($request->hasFile('fileku')) {
+                $file = $request->file('fileku');
 
-                    $file_ext =$file->getClientOriginalExtension();
+                $file_ext =$file->getClientOriginalExtension();
 
-                    if(file_exists(public_path().'/images/'.$id.'_'.$name.'.'.$file_ext)){
-                        unlink(public_path().'/images/'.$id.'_'.$name.'.'.$file_ext);
-                    }
-
-                    $destination = base_path() . '/public/images';
-                    $request->file('fileku')->move($destination, $id.'_'.$name.'.'.$file_ext);
-                    User::where('id','=',$id)
-                        ->update([
-                            'name' => $name,
-                            'photo_name' => $id.'_'.$name.'.'.$file_ext,
-                        ]);
+                if(file_exists(public_path().'/images/'.$id.'_'.$name.'.'.$file_ext)){
+                    unlink(public_path().'/images/'.$id.'_'.$name.'.'.$file_ext);
                 }
+
+                $destination = base_path() . '/public/images';
+                $request->file('fileku')->move($destination, $id.'_'.$name.'.'.$file_ext);
+                User::where('id','=',$id)
+                    ->update([
+                        'name' => $name,
+                        'photo_name' => $id.'_'.$name.'.'.$file_ext,
+                    ]);
+//                }
                 return redirect('/');
             }
         }
