@@ -47,17 +47,17 @@
                                 <div class="da-card-content">
                                     <h5 class="weight-500 mb-10">{{$lateststudent->name}}</h5>
                                     @if(!empty($lateststudent->avg_pretest))
-                                        <p class="mb-0">Avg. Pretest: {{$lateststudent->avg_pretest}}</p>
+                                        <p class="mb-0">Avg. Pretest: {{$lateststudent->avg_pretest}}%</p>
                                     @else
                                         <p class="mb-0">Avg. Pretest: -</p>
                                     @endif
                                     @if(!empty($lateststudent->avg_exercise))
-                                        <p class="mb-0">Avg. Exercises: {{$lateststudent->avg_pretest}}</p>
+                                        <p class="mb-0">Avg. Exercises: {{$lateststudent->avg_pretest}}%</p>
                                     @else
                                         <p class="mb-0">Avg. Exercises: -</p>
                                     @endif
                                     @if(!empty($lateststudent->nilai_final))
-                                        <p class="mb-0">Final Test: {{$lateststudent->avg_pretest}}</p>
+                                        <p class="mb-0">Final Test: {{$lateststudent->avg_pretest}}%</p>
                                     @else
                                         <p class="mb-0">Final Test: -</p>
                                     @endif

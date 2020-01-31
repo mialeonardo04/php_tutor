@@ -44,19 +44,28 @@
                         <td>
                             @foreach($nilaiPretest as $score)
                                 @if($score->id_unit == $unit->id)
-                                    {{$score->jumlah_benar*20}}
+                                    @if($score->jumlah_benar*20 < 60)
+                                        <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                    @else
+                                        @if($score->jumlah_benar*20 == 100)
+                                            <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                        @else
+                                            <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                        @endif
+                                    @endif
                                 @endif
                             @endforeach
                         </td>
                         <td>
                             @foreach($nilaiPretest as $score)
                                 @if($score->id_unit == $unit->id)
-                                    @if($score->jumlah_benar*20 >= 75)
-                                        <form action="/siswa/courses/{{$unit->id}}">
+                                    @if($score->jumlah_benar*20 < 60)
+                                        <form method="post" action="/siswa/courses/{{$unit->id}}">
+                                            @csrf
                                             <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
                                         </form>
                                     @else
-                                        <form action="/siswa/courses/{{$unit->id}}/">
+                                        <form>
                                             <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not yet Available</button>
                                         </form>
                                     @endif
