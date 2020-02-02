@@ -180,7 +180,7 @@ class StudentController extends Controller
         }
     }
 
-    public function coursesHome(){
+    public function coursesUnitHome(){
         if (session()->getId() != Auth::user()->last_session){
             Auth::logout();
             return redirect('/login');
@@ -243,13 +243,19 @@ class StudentController extends Controller
                     $id_student = $murid->id;
                 }
             }
-//        echo $id_unit;
+
             $courses = Course::where('id_unit',$id_unit)->get();
+            $unit_name = Unit::select('name')->where('id','=',$id_unit)->first();
             return view('siswa.courseByUnit',[
                 'statusprogress'=>$status_progress,
                 'idstudent' => $id_student,
                 'courses' => $courses,
+                'unit' => $unit_name,
             ]);
         }
+    }
+
+    public function getCourse($id_course){
+        echo $id_course;
     }
 }

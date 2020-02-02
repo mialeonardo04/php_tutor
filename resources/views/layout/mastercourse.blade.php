@@ -6,7 +6,7 @@
 </head>
 <body>
 @include('include.header')
-@include('include.sidebar')
+@include('include.sidebarCourse')
 <div class="main-container">
     @if(Session::has('messageErrorFile'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">

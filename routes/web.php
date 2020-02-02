@@ -74,12 +74,16 @@ Route::group(['middleware' => ['web']],function(){
                 'as' => 'siswa.achievements'
             ]);
 
-            Route::post('/siswa/courses/{id_unit}/',[
+            Route::post('/siswa/units/{id_unit}/',[
                 'uses' => 'StudentController@selectUnit',
             ]);
-            Route::get('/siswa/courses',[
-                'uses' => 'StudentController@coursesHome',
-                'as' => 'siswa.courses'
+            Route::get('/siswa/units',[
+                'uses' => 'StudentController@coursesUnitHome',
+                'as' => 'siswa.units'
+            ]);
+
+            Route::get('/siswa/courses/{id_course}/',[
+                'uses' => 'StudentController@getCourse'
             ]);
 
             Route::get('/siswa/pretest',[

@@ -28,10 +28,10 @@
 						    </ul>
 					    </li>
                     @else
-                        @if($statusprogress > 0)
+                        @if($statusprogress == 1)
                             <li>
-                                <a href="/siswa/courses" class="dropdown-toggle no-arrow">
-                                    <span class="fa fa-list-alt"></span><span class="mtext">Courses </span>
+                                <a href="/siswa/units" class="dropdown-toggle no-arrow">
+                                    <span class="fa fa-list-alt"></span><span class="mtext">Take Course </span>
                                 </a>
                             </li>
                             <li>
@@ -42,7 +42,7 @@
                         @else
                             <li>
                                 <a href="" class="dropdown-toggle no-arrow">
-                                    <span class="fa fa-list-alt"></span><span class="mtext">Courses </span>
+                                    <span class="fa fa-list-alt"></span><span class="mtext">Take Course </span>
                                 </a>
                             </li>
                             <li>

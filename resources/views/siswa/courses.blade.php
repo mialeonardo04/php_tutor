@@ -60,7 +60,7 @@
                             @foreach($nilaiPretest as $score)
                                 @if($score->id_unit == $unit->id)
                                     @if($score->jumlah_benar*20 < 60)
-                                        <form method="post" action="/siswa/courses/{{$unit->id}}">
+                                        <form method="post" action="/siswa/units/{{$unit->id}}">
                                             @csrf
                                             <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
                                         </form>
