@@ -149,6 +149,7 @@ return [
         Unicodeveloper\EmailValidator\EmailValidatorServiceProvider::class,
         Merujan99\LaravelVideoEmbed\Providers\LaravelVideoEmbedServiceProvider::class,
         Cohensive\Embed\EmbedServiceProvider::class,
+//        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -214,6 +215,7 @@ return [
         'EmailValidator' => Unicodeveloper\EmailValidator\EmailValidatorFacade::class,
         'LaravelVideoEmbed' => Merujan99\LaravelVideoEmbed\Facades\LaravelVideoEmbed::class,
         'Embed' => \Cohensive\Embed\Facades\Embed::class,
+//        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

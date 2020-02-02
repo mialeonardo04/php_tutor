@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->integer('verified');
             $table->string('photo_name')->nullable();
             $table->text('last_session')->nullable();
+            $table->string('last_logout_at')->nullable();
+            $table->string('last_login_ip')->nullable();
             $table->timestamps();
             $table->rememberToken();
         });

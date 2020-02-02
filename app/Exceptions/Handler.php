@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class Handler extends ExceptionHandler
 {
@@ -58,6 +59,9 @@ class Handler extends ExceptionHandler
             if ($exception->getStatusCode() == 403) {
                 return response()->view('errors.' . '403', [], 403);
             }
+        }
+        if ($exception instanceof FileException){
+            return redirect()->back()->with('messageErrorFile','You have reach our maximum image size');
         }
         return parent::render($request, $exception);
     }

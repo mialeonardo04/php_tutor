@@ -8,9 +8,18 @@
 @include('include.header')
 @include('include.sidebar')
 <div class="main-container">
+    @if(Session::has('messageErrorFile'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> {{ Session::get('messageErrorFile') }}.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="pd-ltr-20 customscroll customscroll-10-p height-100-p xs-pd-20-10">
         @yield('content')
         @include('include.footer')
+        @if((Auth::user()->last_login_ip !== NULL) || (Auth::user()->last_logout_at !== NULL)) Your address now: {{Auth::user()->last_login_ip}} || Last active: {{Auth::user()->last_logout_at}}@endif<br>
     </div>
 </div>
 @include('include.script')

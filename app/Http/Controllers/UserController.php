@@ -19,7 +19,7 @@ use Swift_Mailer;
 use Illuminate\Support\Facades\URL;
 use Swift_Transport;
 use Swift_Message;
-//use Illuminate\Foundation\Auth\AuthenticatesUsers;
+//use Intervention\Image\ImageManagerStatic as Image;
 
 use Unicodeveloper\EmailValidator\EmailValidator;
 use LaravelVideoEmbed;
@@ -186,6 +186,9 @@ class UserController extends Controller
 
                 $destination = base_path() . '/public/images';
                 $request->file('fileku')->move($destination, $id.'_'.$name.'.'.$file_ext);
+//                Image::configure(array('driver' => 'gd'));
+//                $img =Image::make($destination.'/'.$id.'_'.$name.'.'.$file_ext);
+//                $img->resize(300,200);
                 User::where('id','=',$id)
                     ->update([
                         'name' => $name,
@@ -240,11 +243,10 @@ class UserController extends Controller
             }
 //            echo Auth::user()->verified;
             if (Auth::user()->verified == 1){
-//                User::where('id','=',Auth::user()->id)
-//                    ->update([
-//                        'last_login_at' => date("Y-m-d H:i:s"),
-//                        'last_login_ip' => $this->get_client_ip()
-//                    ]);
+                User::where('id','=',Auth::user()->id)
+                    ->update([
+                        'last_login_ip' => $this->get_client_ip()
+                    ]);
                 User::where('id','=',Auth::user()->id)
                     ->update([
                         'last_session' => session()->getId(),
@@ -316,6 +318,10 @@ class UserController extends Controller
     }
 
     public function logout(){
+        User::where('id','=',Auth::user()->id)
+            ->update([
+                'last_logout_at' => date("Y-m-d H:i:s"),
+            ]);
         Auth::logout();
         return redirect('/login');
     }
