@@ -94,7 +94,7 @@
                 <h5 class="card-header weight-500">Select Course</h5>
                 <div class="card-body">
                     <p class="card-text">Let's choose your course</p>
-                    <a href="/siswa/courses" class="btn btn-primary">Go!</a>
+                    <a href="/siswa/units" class="btn btn-primary">Go!</a>
                 </div>
             </div>
         </div>

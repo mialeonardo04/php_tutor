@@ -74,7 +74,7 @@ Route::group(['middleware' => ['web']],function(){
                 'as' => 'siswa.achievements'
             ]);
 
-            Route::post('/siswa/units/{id_unit}/',[
+            Route::post('/siswa/units/{id_unit}/{total_course}',[
                 'uses' => 'StudentController@selectUnit',
             ]);
             Route::get('/siswa/units',[

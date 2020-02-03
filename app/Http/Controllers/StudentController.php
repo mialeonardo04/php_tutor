@@ -11,6 +11,7 @@ use App\Report;
 use App\StudentPretestAnswer;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -72,12 +73,21 @@ class StudentController extends Controller
                     ]);
                 $progress = request('progress');
                 if (isset($progress)){
+                    $unit_start = 0;
                     $avg_pretest = $student_answer::where('id_student',$id_student)->avg('jumlah_benar');
+                    $std_ptest = StudentPretestAnswer::all();
+                    foreach ($std_ptest as $pt){
+                        if ($pt->jumlah_benar<3){
+                            $unit_start ++;
+                        }
+                    }
+
                     Student::where('id_user','=',$uid)
                         ->limit(1)
                         ->update([
                             'progress' => $progress,
-                            'avg_pretest' => $avg_pretest*20
+                            'avg_pretest' => $avg_pretest*20,
+                            'unit_start' => $unit_start,
                         ]);
 
                 }
@@ -188,17 +198,21 @@ class StudentController extends Controller
             $siswa = Student::all();
             $status_progress = 0;
             $id_student = 0;
-
+            $unit_start = 0;
             foreach ($siswa as $murid){
                 if ($murid->id_user == Auth::user()->id){
                     $status_progress = $murid->progress;
                     $id_student = $murid->id;
+                    $unit_start = $murid->unit_start;
                 }
             }
 
             $nilaiPretest = StudentPretestAnswer::select('jumlah_benar','id_unit')->where('id_student',$id_student)->get();
             $courses = Course::all();
-
+            $arrReport = [
+                'id_student' => $id_student,
+            ];
+            $report = Report::where($arrReport)->get();
             $course1 = count(Course::where('id_unit',1)->get());
             $course2 = count(Course::where('id_unit',2)->get());
             $course3 = count(Course::where('id_unit',3)->get());
@@ -224,11 +238,13 @@ class StudentController extends Controller
                 'course7' =>$course7,
                 'course8' =>$course8,
                 'nilaiPretest' =>$nilaiPretest,
+                'reports' => $report,
+                'unit_taken' => $unit_start,
             ]);
         }
     }
 
-    public function selectUnit($id_unit){
+    public function selectUnit($id_unit,$total_course){
         if (session()->getId() != Auth::user()->last_session){
             Auth::logout();
             return redirect('/login');
@@ -246,11 +262,26 @@ class StudentController extends Controller
 
             $courses = Course::where('id_unit',$id_unit)->get();
             $unit_name = Unit::select('name')->where('id','=',$id_unit)->first();
+            $arrReport = [
+                'id_student' => $id_student,
+                'id_unit' => $id_unit,
+            ];
+
+            $report = Report::where($arrReport)->get();
+            $last_report_perunit = DB::table('reports')
+                                ->join('courses','reports.id_course','=','courses.id_course')
+                                ->select('reports.*','courses.*')
+                                ->where('reports.id_unit','=',$id_unit)
+                                ->get()->last();
+
             return view('siswa.courseByUnit',[
                 'statusprogress'=>$status_progress,
                 'idstudent' => $id_student,
                 'courses' => $courses,
                 'unit' => $unit_name,
+                'reports' => $report,
+                'lastreport' =>$last_report_perunit,
+                'total_course_perunit' => $total_course,
             ]);
         }
     }
