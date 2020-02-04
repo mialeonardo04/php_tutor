@@ -286,7 +286,63 @@ class StudentController extends Controller
         }
     }
 
-    public function getCourse($id_course){
-        echo $id_course;
+    public function getCourse($id_unit,$id_course){
+//        echo $id_course;
+//        echo $id_unit;
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+//            echo $_GET['total_course'];
+            $siswa = Student::all();
+            $status_progress = 0;
+            $id_student = 0;
+
+            foreach ($siswa as $murid){
+                if ($murid->id_user == Auth::user()->id){
+                    $status_progress = $murid->progress;
+                    $id_student = $murid->id;
+                }
+            }
+
+            $coursesByIdCourse = Course::select('*')->where('id_course','=',$id_course)->first();
+            $courses = Course::where('id_unit',$id_unit)->get();
+            $unit_name = Unit::select('name')->where('id','=',$id_unit)->first();
+
+
+            return view('siswa.exercisecourse',[
+                'statusprogress'=>$status_progress,
+                'idstudent' => $id_student,
+                'courses' => $courses,
+                'unit' => $unit_name,
+                'coursebyid' => $coursesByIdCourse,
+            ]);
+        }
+    }
+
+    public function submitExerciseCourse(Request $request){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $answer = base64_decode($request['answer']);
+            $submittedans = $request['answerrequest'];
+            if ((strpos($answer,$submittedans) !== false) || ($answer == $submittedans)){
+                echo 'betul';
+            } else {
+                echo 'salah';
+            }
+
+            //        echo $request['answer'] ."<br>";
+//        echo md5($request['answerrequest']);
+//        if ($request['answer'] == md5($request['answerrequest'])){
+//            echo 'betul';
+//        } else {
+//            echo 'salah';
+//        }
+
+//        if (strpos())
+
+        }
     }
 }

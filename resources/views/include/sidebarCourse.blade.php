@@ -14,15 +14,9 @@
                             </a>
                             <ul class="submenu"style="display: block">
                                 @foreach($courses as $course)
-                                    <li><a href="/siswa/courses/{{$course->id_course}}">{{$course->description}}</a></li>
+                                    <li><a href="/siswa/courses/{{$course->id_unit}}/{{$course->id_course}}">{{$course->description}}</a></li>
                                 @endforeach
                             </ul>
-                        </li>
-
-                        <li>
-                            <a href="/" class="dropdown-toggle no-arrow">
-                                <span class="fa fa-home"></span><span class="mtext">Back to Home</span>
-                            </a>
                         </li>
                         <li>
                             <a href="/siswa/units" class="dropdown-toggle no-arrow">

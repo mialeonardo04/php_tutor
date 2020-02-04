@@ -82,7 +82,7 @@ Route::group(['middleware' => ['web']],function(){
                 'as' => 'siswa.units'
             ]);
 
-            Route::get('/siswa/courses/{id_course}/',[
+            Route::get('/siswa/courses/{id_unit}/{id_course}/',[
                 'uses' => 'StudentController@getCourse'
             ]);
 
@@ -94,6 +94,11 @@ Route::group(['middleware' => ['web']],function(){
             Route::post('/submitpretest',[
                 'uses' =>'StudentController@submitPretest',
                 'as' => 'submitpretest'
+            ]);
+
+            Route::post('/submitexercise',[
+                'uses' => 'StudentController@submitExerciseCourse',
+                'as' => 'submitexercise'
             ]);
         });
 

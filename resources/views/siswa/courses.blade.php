@@ -68,12 +68,6 @@
                                  if ($unit6/$course6 == 1){
                                     $countchapter++;
                                  }
-                                 //if ($unit7/$course7 == 1){
-                                 //   $countchapter++;
-                                 //}
-                                 //if ($unit8/$course8 == 1){
-                                 //   $countchapter++;
-                                 //}
                             }
                         }
 
@@ -139,6 +133,7 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
                                             </form>
+                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course1}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form>
                                                 <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
@@ -172,6 +167,7 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
                                             </form>
+                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course2}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form>
                                                 <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
@@ -205,6 +201,7 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
                                             </form>
+                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course3}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form>
                                                 <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
@@ -238,6 +235,7 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
                                             </form>
+                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course4}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form>
                                                 <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
@@ -271,6 +269,7 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
                                             </form>
+                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course5}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form>
                                                 <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
@@ -300,6 +299,7 @@
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
+                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course6}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course6}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
@@ -333,6 +333,7 @@
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
+                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course7}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course7}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
@@ -366,6 +367,7 @@
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
+
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course8}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>

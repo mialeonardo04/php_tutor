@@ -236,7 +236,15 @@
 
     </script>
 @endif
-
+<script src="{{ asset('theme/src/plugins/plyr/dist/plyr.js') }}"></script>
+<script src="{{ asset('theme/src/plugins/plyr/shr.js') }}"></script>
+<script>
+    plyr.setup({
+        tooltips: {
+            controls: !0
+        },
+    });
+</script>
 </body>
 </html>
 
