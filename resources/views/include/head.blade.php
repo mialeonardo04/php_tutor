@@ -32,3 +32,4 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/media/css/dataTables.bootstrap4.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/plyr/dist/plyr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/media/css/responsive.dataTables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/cropperjs/dist/cropper.css')}}">
