@@ -6,89 +6,160 @@
                 <h5 class="text-blue">Course Units</h5>
                 <h6 class="text-black-50">You need to pass <strong class="text-danger">{{$unit_taken}}</strong> course chapter. Progress:
                     @php
-                        $countchapter = 0;
-                        $fromdb = 0;
-                        $unit1 = 0;
-                        $unit2 = 0;
-                        $unit3 = 0;
-                        $unit4 = 0;
-                        $unit5 = 0;
-                        $unit6 = 0;
-                        $unit7 = 0;
-                        $unit8 = 0;
+                        $r1 = [];
+                        $r2 = [];
+                        $r3 = [];
+                        $r4 = [];
+                        $r5 = [];
+                        $r6 = [];
+                        $r7 = [];
+                        $r8 = [];
+                        $hastaken = 0;
 
-                        $try_count = array();
-                        $max_try = 0;
-                        //search maximum trycount
-                        foreach ($reports as $report){
-                            array_push($try_count, $report->try_count);
-                            $max_try = max($try_count);
-
-                            if ($report->try_count == $max_try){
-                                 if ($report->id_unit == 1){
-                                    $unit1 ++;
-                                 }
-                                 if ($report->id_unit == 2){
-                                    $unit2 ++;
-                                 }
-                                 if ($report->id_unit == 3){
-                                    $unit3 ++;
-                                 }
-                                 if ($report->id_unit == 4){
-                                    $unit4 ++;
-                                 }
-                                 if ($report->id_unit == 5){
-                                    $unit5 ++;
-                                 }
-                                 if ($report->id_unit == 6){
-                                    $unit6 ++;
-                                 }
-                                 if ($report->id_unit == 7){
-                                    $unit7 ++;
-                                 }
-                                 if ($report->id_unit == 8){
-                                    $unit8 ++;
-                                 }
-
-                                 if ($unit1/$course1 == 1){
-                                    $countchapter++;
-                                 }
-                                 if ($unit2/$course2 == 1){
-                                    $countchapter++;
-                                 }
-                                 if ($unit3/$course3 == 1){
-                                    $countchapter++;
-                                 }
-                                 if ($unit4/$course4 == 1){
-                                    $countchapter++;
-                                 }
-                                 if ($unit5/$course5 == 1){
-                                    $countchapter++;
-                                 }
-                                 if ($unit6/$course6 == 1){
-                                    $countchapter++;
-                                 }
-                            }
+                        if (!empty($report1)){
+                            array_push($r1,1);
+                        }
+                        if (!empty($report2)){
+                            array_push($r1,1);
+                        }
+                        if (!empty($report3)){
+                            array_push($r1,1);
+                        }
+                        if (!empty($report4)){
+                            array_push($r2,1);
+                        }
+                        if (!empty($report5)){
+                            array_push($r2,1);
+                        }
+                        if (!empty($report6)){
+                            array_push($r2,1);
+                        }
+                        if (!empty($report7)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report8)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report9)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report10)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report11)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report12)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report13)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report14)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report15)){
+                            array_push($r3,1);
+                        }
+                        if (!empty($report16)){
+                            array_push($r4,1);
+                        }
+                        if (!empty($report17)){
+                            array_push($r4,1);
+                        }
+                        if (!empty($report18)){
+                            array_push($r5,1);
+                        }
+                        if (!empty($report19)){
+                            array_push($r5,1);
+                        }
+                        if (!empty($report20)){
+                            array_push($r5,1);
+                        }
+                        if (!empty($report21)){
+                            array_push($r5,1);
+                        }
+                        if (!empty($report22)){
+                            array_push($r5,1);
+                        }
+                        if (!empty($report23)){
+                            array_push($r6,1);
+                        }
+                        if (!empty($report24)){
+                            array_push($r6,1);
+                        }
+                        if (!empty($report25)){
+                            array_push($r6,1);
+                        }
+                        if (!empty($report26)){
+                            array_push($r6,1);
+                        }
+                        if (!empty($report27)){
+                            array_push($r6,1);
+                        }
+                        if (!empty($report28)){
+                            array_push($r6,1);
+                        }
+                        if (!empty($report29)){
+                            array_push($r7,1);
+                        }
+                        if (!empty($report30)){
+                            array_push($r7,1);
+                        }
+                        if (!empty($report31)){
+                            array_push($r7,1);
+                        }
+                        if (!empty($report32)){
+                            array_push($r7,1);
+                        }
+                        if (!empty($report33)){
+                            array_push($r8,1);
+                        }
+                        if (!empty($report34)){
+                            array_push($r8,1);
+                        }
+                        if (!empty($report35)){
+                            array_push($r8,1);
+                        }
+                        if (!empty($report36)){
+                            array_push($r8,1);
                         }
 
-                        //menentukan course yang sudah dikerjakan per-chapter
+                        if (count($r1)/$course1 == 1){
+                            $hastaken+=1;
+                        }
+                        if (count($r2)/$course2 == 1){
+                            $hastaken+=1;
+                        }
+                        if (count($r3)/$course3 == 1){
+                            $hastaken+=1;
+                        }
+                        if (count($r4)/$course4 == 1){
+                            $hastaken+=1;
+                        }
+                        if (count($r5)/$course5 == 1){
+                            $hastaken+=1;
+                        }
+                        if (count($r6)/$course6 == 1){
+                            $hastaken+=1;
+                        }
+                        if (count($r7)/$course7 == 1){
+                            $hastaken+=1;
+                        }
+                        if (count($r8)/$course8 == 1){
+                            $hastaken+=1;
+                        }
 
-
-                        //menentukan progress per siswa
-
-
-                        //echo $unit3;
                     @endphp
-                    @if($countchapter != $unit_taken)
-                        @if($countchapter == 0)
-                            <strong class="text-danger">{{$countchapter}}/{{$unit_taken}}</strong>
+                    @if($hastaken != $unit_taken)
+                        @if($hastaken == 0)
+                            <strong class="text-danger">{{$hastaken}}/{{$unit_taken}}</strong>
                         @else
-                            <strong class="text-warning">{{$countchapter}}/{{$unit_taken}}</strong>
+                            <strong class="text-warning">{{$hastaken}}/{{$unit_taken}}</strong>
                         @endif
                     @else
-                        <strong class="text-success">{{$countchapter}}/{{$unit_taken}}</strong>
+                        <strong class="text-success">{{$hastaken}}/{{$unit_taken}}</strong>
                     @endif
-                    {{--{{$countchapter}}--}}
                 </h6>
             </div>
         </div>
@@ -98,8 +169,9 @@
                 <tr>
                     <th>No</th>
                     <th>Unit Name</th>
-                    <th>Number of courses</th>
+                    <th>Total Course</th>
                     <th>Your Pretest Score</th>
+                    <th>Status</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -125,13 +197,14 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>@if(count($r1) == $course1)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course1}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
+                                                <button type="submit" class="btn btn-outline-success btn-block">@if(count($r1) == $course1) Retake @else Take Course @endif</button>
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course1}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
@@ -159,13 +232,14 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>@if(count($r2) == $course2)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course2}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
+                                                <button type="submit" class="btn btn-outline-success btn-block">@if(count($r2) == $course2) Retake @else Take Course @endif</button>
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course2}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
@@ -193,13 +267,14 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>@if(count($r3) == $course3)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course3}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
+                                                <button type="submit" class="btn btn-outline-success btn-block">@if(count($r3) == $course3) Retake @else Take Course @endif</button>
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course3}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
@@ -227,13 +302,14 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>@if(count($r4) == $course4)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course4}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
+                                                <button type="submit" class="btn btn-outline-success btn-block">@if(count($r4) == $course4) Retake @else Take Course @endif</button>
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course4}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
@@ -261,13 +337,14 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>@if(count($r5) == $course5)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course5}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
+                                                <button type="submit" class="btn btn-outline-success btn-block">@if(count($r5) == $course5) Retake @else Take Course @endif</button>
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course5}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
@@ -295,6 +372,7 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>@if(count($r6) == $course6)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -302,7 +380,7 @@
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course6}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course6}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
+                                                <button type="submit" class="btn btn-outline-success btn-block">@if(count($r6) == $course6) Retake @else Take Course @endif</button>
                                             </form>
                                         @else
                                             <form>
@@ -329,6 +407,7 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>@if(count($r7) == $course7)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -336,7 +415,7 @@
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course7}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course7}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
+                                                <button type="submit" class="btn btn-outline-success btn-block">@if(count($r7) == $course7) Retake @else Take Course @endif</button>
                                             </form>
                                         @else
                                             <form>
@@ -363,6 +442,7 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>@if(count($r8) == $course8)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -370,7 +450,7 @@
 
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course8}}">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-success btn-block">Take Course</button>
+                                                <button type="submit" class="btn btn-outline-success btn-block">@if(count($r8) == $course8) Retake @else Take Course @endif</button>
                                             </form>
                                         @else
                                             <form>

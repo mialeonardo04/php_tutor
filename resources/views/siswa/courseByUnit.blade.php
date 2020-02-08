@@ -9,8 +9,119 @@
                             <i class="fa fa-line-chart" aria-hidden="true"></i>
                         </div>
                     </div>
+                    @php
+                        $countR = [];
+                        if (!empty($reportsC1)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC2)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC3)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC4)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC5)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC6)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC7)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC8)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC9)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC10)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC11)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC12)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC13)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC14)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC15)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC16)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC17)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC18)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC19)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC20)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC21)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC22)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC23)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC24)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC25)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC26)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC27)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC28)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC29)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC30)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC31)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC32)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC33)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC34)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC35)){
+                            array_push($countR,1);
+                        }
+                        if (!empty($reportsC36)){
+                            array_push($countR,1);
+                        }
+                    @endphp
                     <div class="project-info-right">
-                        <span class="no text-blue weight-500 font-24">{{count($reports)}}/{{$total_course_perunit}}</span>
+                        <span class="no text-blue weight-500 font-24">{{count($countR)}}/{{$total_course_perunit}}</span>
                         <p class="weight-400 font-18">My Progress</p>
                     </div>
                 </div>
@@ -21,7 +132,7 @@
                     </div>
                     <div class="progress" style="height: 10px;">
                         @php
-                            $width = (count($reports)/$total_course_perunit)*100;
+                            $width = (count($countR)/$total_course_perunit)*100;
                         @endphp
                         <div class="progress-bar bg-blue progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{$width}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>

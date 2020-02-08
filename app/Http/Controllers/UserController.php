@@ -57,7 +57,9 @@ class UserController extends Controller
 
             $nilaitertinggipretest = StudentPretestAnswer::where('id_student',$id_student)->max('jumlah_benar');
 
-            $avgcourses = Report::where('id_student',$id_student)->avg('score');
+            $avgcourses = Report::where([
+                'id_student'=>$id_student,
+            ])->avg('score');
 
             $unit_siswa = Student::select('unit_start')->where('id_user',Auth::user()->id)->first()->unit_start;
             $updateReportSiswa = Report::where('id_student', $id_student)->get()->last();
@@ -172,10 +174,7 @@ class UserController extends Controller
         } else{
             if (isset($request['submit'])){
                 $name = $request['name'];
-//                 var_dump($request->file('fileku'));
 
-
-//                if ($request->hasFile('fileku')) {
                 $file = $request->file('fileku');
 
                 $file_ext =$file->getClientOriginalExtension();
@@ -186,9 +185,6 @@ class UserController extends Controller
 
                 $destination = base_path() . '/public/images';
                 $request->file('fileku')->move($destination, $id.'_'.$name.'.'.$file_ext);
-//                Image::configure(array('driver' => 'gd'));
-//                $img =Image::make($destination.'/'.$id.'_'.$name.'.'.$file_ext);
-//                $img->resize(300,200);
                 User::where('id','=',$id)
                     ->update([
                         'name' => $name,
@@ -274,12 +270,7 @@ class UserController extends Controller
             'password' => 'required|min:6',
             'role' => 'required|max:1'
         ]);
-
-//        echo $request['name']."</br>";
-//        echo $request['email']."</br>";
-//        echo $request['username']."</br>";
-//        echo $request['password']."</br>";
-//        echo $request['role']."</br>";
+;
 
         $name = $request['name'];
         $email = $request['email'];
