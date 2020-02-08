@@ -83,7 +83,8 @@ Route::group(['middleware' => ['web']],function(){
             ]);
 
             Route::get('/siswa/courses/{id_unit}/{id_course}/',[
-                'uses' => 'StudentController@getCourse'
+                'uses' => 'StudentController@getCourse',
+                'as' => 'siswa.course'
             ]);
 
             Route::get('/siswa/pretest',[

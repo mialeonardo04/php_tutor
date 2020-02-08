@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->integer('tipe_soal');
             $table->text('question')->nullable();
             $table->string('answer')->nullable();
+            $table->integer('correct_count')->default(1);
             $table->integer('answer_errorstatus')->nullable();
             $table->integer('answer_outputstatus')->nullable();
             $table->string('embed_url')->nullable();

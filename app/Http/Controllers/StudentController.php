@@ -325,24 +325,93 @@ class StudentController extends Controller
             Auth::logout();
             return redirect('/login');
         } else{
-            $answer = base64_decode($request['answer']);
-            $submittedans = $request['answerrequest'];
-            if ((strpos($answer,$submittedans) !== false) || ($answer == $submittedans)){
-                echo 'betul';
-            } else {
-                echo 'salah';
+            $this->validate($request,[
+                'answer' => 'required',
+            ]);
+
+            $point = 0;
+
+            if ($request['tipe_soal'] == 1){
+                $answer = strtolower(base64_decode($request['answer']));
+                $submittedans = strtolower($request['answerrequest']);
+                $count_correct = strtolower(base64_decode($request['count_corr']));
+                $id_student = $request['id_std'];
+                $id_course = $request['id_crs'];
+                $id_unit = $request['id_unt'];
+
+                //menentukan point yg didapat
+                if (strpos($answer,'-') !== false){
+                    $arrAns = explode('-',$answer);
+                    if (strpos($submittedans,'-')){
+                        $arrAnsReq = explode('-',$submittedans);
+                        for ($i = 0; $i<count($arrAnsReq); $i++){
+                            if (in_array($arrAnsReq[$i],$arrAns)){
+                                $point+=1;
+                            }
+                        }
+                    } else {
+                        if (in_array($submittedans,$arrAns)){
+                            $point+=1;
+                        }
+                    }
+                } else {
+                    if (strpos($submittedans,'-')){
+                        $arrAnsReq = explode('-',$submittedans);
+                        for ($j=0;$j<count($arrAnsReq);$j++){
+                            if ($answer == $arrAnsReq[$j]){
+                                $point+=1;
+                            }
+                        }
+                    } else {
+                        if ($answer == $submittedans){
+                            $point+=1;
+                        }
+                    }
+
+                }
+
+                $nilai = ($point/$count_correct)*100;
+//                echo $nilai;
+                $checkDBReport = Report::where([
+                    'id_student'=>$id_student,
+                    'id_course'=>$id_course,
+                    'id_unit'=>$id_unit])->first();
+
+                if ($checkDBReport === null){
+                    $report = new Report();
+                    $report->id_student = $id_student;
+                    $report->id_unit = $id_unit;
+                    $report->id_course = $id_course;
+                    $report->score = $nilai;
+                    $report->save();
+                } else {
+                    Report::create([
+                        'id_student'=>$id_student,
+                        'id_course'=>$id_course,
+                        'id_unit'=>$id_unit,
+                        'score' =>$nilai,
+                        'try_count' => $checkDBReport->try_count+1,
+                    ]);
+//                    Report::where([
+//                        'id_student'=>$id_student,
+//                        'id_course'=>$id_course,
+//                        'id_unit'=>$id_unit
+//                    ])->limit(1)->update([
+//                        'score' =>$nilai,
+//                        'try_count' => $checkDBReport->try_count+1,
+//                    ]);
+                }
+
+            } elseif ($request['tipe_soal'] == 2){
+                echo "duh";
             }
 
-            //        echo $request['answer'] ."<br>";
-//        echo md5($request['answerrequest']);
-//        if ($request['answer'] == md5($request['answerrequest'])){
-//            echo 'betul';
-//        } else {
-//            echo 'salah';
-//        }
-
-//        if (strpos())
-
+            return redirect()->route('siswa.course',[
+                'id_unit'=>$id_unit,
+                'id_course'=>$id_course+1
+            ]);
         }
     }
+
+
 }

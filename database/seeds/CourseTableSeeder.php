@@ -74,8 +74,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>3,
                 'description'=>'Data Types Part 1',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, untuk membuat variable String, dapat langsung ditulis isinya dengan awalan dan akhiran tanda baca ..',
-                'answer'=>'quotes-petik-kutip',
+                'question'=>'Berdasarkan video yang diputar, Tipe data apakah yang sedang dijelaskan..?',
+                'answer'=>'String',
                 'embed_url'=>'PBiQd6aVa74'
             ], [
                 'id_unit'=>3,
@@ -88,8 +88,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>3,
                 'description'=>'Data Types Part 3',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, untuk membuat variable Integer, dapat ditulis langsung ... sebagai isinya',
-                'answer'=>'angka',
+                'question'=>'Berdasarkan video yang diputar, Tipe data apakah yang sedang dijelaskan..?(isikan keduanya)',
+                'answer'=>'integer-float',
                 'embed_url'=>'_Al0A4IXTpQ'
             ], [
                 'id_unit'=>3,

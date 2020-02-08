@@ -84,20 +84,21 @@
                     <h5 class="card-header weight-500">{{$lastreportupdate->units()->first()->name}}: {{$lastreportupdate->courses()->first()->description}}</h5>
                     <div class="card-body">
                         <p class="card-text">Let's finish your lessons</p>
-                        <a href="#" class="btn btn-primary">Continue</a>
+                        <a href="/siswa/units" class="btn btn-primary">Continue</a>
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="col-sm-12 col-md-6 mb-30">
+                <div class="card box-shadow">
+                    <h5 class="card-header weight-500">Select Course</h5>
+                    <div class="card-body">
+                        <p class="card-text">Let's choose your course</p>
+                        <a href="/siswa/units" class="btn btn-primary">Go!</a>
                     </div>
                 </div>
             </div>
         @endif
-        <div class="col-sm-12 col-md-6 mb-30">
-            <div class="card box-shadow">
-                <h5 class="card-header weight-500">Select Course</h5>
-                <div class="card-body">
-                    <p class="card-text">Let's choose your course</p>
-                    <a href="/siswa/units" class="btn btn-primary">Go!</a>
-                </div>
-            </div>
-        </div>
     </div>
     @endif
 @endsection
