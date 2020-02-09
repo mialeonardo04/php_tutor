@@ -81,9 +81,25 @@
         @if(!empty($lastreportupdate))
             <div class="col-sm-12 col-md-6 mb-30">
                 <div class="card box-shadow">
-                    <h5 class="card-header weight-500">{{$lastreportupdate->units()->first()->name}}: {{$lastreportupdate->courses()->first()->description}}</h5>
+                    @php
+                        function ordinal($number) {
+                            $ends = array('th','st','nd','rd','th','th','th','th','th','th');
+                            if ((($number % 100) >= 11) && (($number%100) <= 13))
+                                return $number. 'th';
+                            else
+                                return $number. $ends[$number % 10];
+                        }
+                    @endphp
+                    <h5 class="card-header weight-500">{{$lastreportupdate->units()->first()->name}}: {{$lastreportupdate->courses()->first()->description}}
+                        <br><p class="font-14 text-primary">your {{ordinal($lastreportupdate->try_count)}} trial</p>
+                    </h5>
+
                     <div class="card-body">
-                        <p class="card-text">Let's finish your lessons</p>
+                        <p class="card-text">Your recent score:
+                            <span class="@if($lastreportupdate->score >= 60)text-success @else text-danger @endif">
+                                {{$lastreportupdate->score}}
+                            </span>
+                        </p>
                         <a href="/siswa/units" class="btn btn-primary">Continue</a>
                     </div>
                 </div>

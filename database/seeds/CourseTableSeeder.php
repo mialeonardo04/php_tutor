@@ -90,6 +90,7 @@ class CourseTableSeeder extends Seeder
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, Tipe data apakah yang sedang dijelaskan..?(isikan keduanya)',
                 'answer'=>'integer-float',
+                'correct_count'=>2,
                 'embed_url'=>'_Al0A4IXTpQ'
             ], [
                 'id_unit'=>3,

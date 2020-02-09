@@ -875,7 +875,7 @@ class StudentController extends Controller
 
                 }
 
-                $nilai = ($point/$count_correct)*100;
+                    $nilai = ($point/$count_correct)*100;
 //                echo $nilai;
                 $checkDBReport = Report::where([
                     'id_student'=>$id_student,
