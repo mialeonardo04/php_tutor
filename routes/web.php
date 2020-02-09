@@ -113,6 +113,14 @@ Route::group(['middleware' => ['web']],function(){
                 'uses' => 'UserController@updateVerifyUser',
                 'as' => 'admin.assign'
             ]);
+            Route::get('/pengajar/datasiswa',[
+                'uses' => 'UserController@getDataSiswa',
+                'as' => 'pengajar.datasiswa'
+            ]);
+            Route::get('/pengajar/datasiswa/{id_user}/{id_student}',[
+                'uses' => 'UserController@getDetailDataSiswa',
+                'as' => 'pengajar.detail.datasiswa'
+            ]);
         });
     });
 });

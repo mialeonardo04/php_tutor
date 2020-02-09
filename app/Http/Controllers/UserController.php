@@ -308,6 +308,50 @@ class UserController extends Controller
         }
     }
 
+    public function getDataSiswa(){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+
+            $students = DB::table('students')
+                ->join('users','students.id_user','=','users.id')
+                ->select('students.*','users.*')
+                ->get();
+
+            return view('pengajar.datasiswa',[
+                'students' => $students,
+            ]);
+        }
+    }
+
+    public function getDetailDataSiswa($id_user,$id_student){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+            $whereClause = [
+                'students.id' => $id_student,
+                'users.id' => $id_user,
+            ];
+            $studentById = DB::table('students')
+                ->join('users','students.id_user','=','users.id')
+                ->select('students.*','users.*')
+                ->where($whereClause)
+                ->first();
+
+            $recordExercise = DB::table('reports')
+                ->join('courses','reports.id_course','=','courses.id_course')
+                ->join('units','courses.id_unit','=','units.id')
+                ->where('reports.id_student','=',$id_student)
+                ->get();
+
+            return view('pengajar.siswaById',[
+                'student' =>$studentById,
+                'courserecord' => $recordExercise,
+            ]);
+        }
+    }
     public function logout(){
         User::where('id','=',Auth::user()->id)
             ->update([

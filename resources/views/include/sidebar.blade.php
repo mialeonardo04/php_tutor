@@ -14,7 +14,7 @@
                     </li>
                     @if(Auth::user()->roles[0]['name'] == "pengajar")
                         <li>
-                            <a href="" class="dropdown-toggle no-arrow">
+                            <a href="{{route('pengajar.datasiswa')}}" class="dropdown-toggle no-arrow">
                                 <span class="fa fa-calendar-o"></span><span class="mtext">Student Data </span>
                             </a>
                         </li>
