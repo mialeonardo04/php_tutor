@@ -104,7 +104,7 @@ class CourseTableSeeder extends Seeder
                 'description'=>'Data Types Part 5 (Math Method)',
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, method yang digunakan untuk menentukan angka random dari suatu range angka adalah...',
-                'answer'=>'rand()',
+                'answer'=>'rand',
                 'embed_url'=>'wIc3mlUqHQA'
             ], [
                 'id_unit'=>3,
@@ -118,7 +118,7 @@ class CourseTableSeeder extends Seeder
                 'description'=>'Data Types Part 7 (String Method)',
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, method yang digunakan untuk mengganti suatu kata dengan kata lain adalah...',
-                'answer'=>'str_replace()',
+                'answer'=>'str_replace',
                 'embed_url'=>'zE8uCShBZW0'
             ],[
                 'id_unit'=>3,
@@ -126,7 +126,7 @@ class CourseTableSeeder extends Seeder
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, dalam menuliskan nilai variable boolean tidak boleh munggunakan tanda baca ...',
                 'answer'=>'kutip',
-                'embed_url'=>'zE8uCShBZW0'
+                'embed_url'=>'nIbRLSiNRnk'
             ], [
                 'id_unit'=>3,
                 'description'=>'Data Types Part 9 (Operasi method String pada PHP)',
@@ -153,14 +153,14 @@ class CourseTableSeeder extends Seeder
                 'description'=>'Arrays Part 1',
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, method array yang digunakan untuk mencetak keseluruhan body suatu array adalah...',
-                'answer'=>'print_r()',
+                'answer'=>'print_r',
                 'embed_url'=>'vWsO7QbgcOA'
             ],[
                 'id_unit'=>5,
                 'description'=>'Arrays Part 2(Metode Array)',
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, metode array yang digunakan untuk mengurutkan nilai element array dari yang terkecil hingga terbesar adalah...',
-                'answer'=>'sort()',
+                'answer'=>'sort',
                 'embed_url'=>'leog-wPnyZU'
             ],[
                 'id_unit'=>5,

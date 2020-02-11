@@ -39,7 +39,7 @@
                                     <div class="da-overlay da-slide-top">
                                         <div class="da-social">
                                             <ul class="clearfix">
-                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="{{route('pengajar.detail.datasiswa',['id_user' =>$lateststudent->id_user,'id_student'=> $lateststudent->id])}}"><i class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -52,12 +52,12 @@
                                         <p class="mb-0">Avg. Pretest: -</p>
                                     @endif
                                     @if(!empty($lateststudent->avg_exercise))
-                                        <p class="mb-0">Avg. Exercises: {{$lateststudent->avg_pretest}}%</p>
+                                        <p class="mb-0">Avg. Courses: {{$lateststudent->avg_exercise}}%</p>
                                     @else
                                         <p class="mb-0">Avg. Exercises: -</p>
                                     @endif
                                     @if(!empty($lateststudent->nilai_final))
-                                        <p class="mb-0">Final Test: {{$lateststudent->avg_pretest}}%</p>
+                                        <p class="mb-0">Final Test: {{$lateststudent->nilai_final}}%</p>
                                     @else
                                         <p class="mb-0">Final Test: -</p>
                                     @endif

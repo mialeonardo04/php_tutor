@@ -91,7 +91,7 @@
                         }
                     @endphp
                     <h5 class="card-header weight-500">{{$lastreportupdate->units()->first()->name}}: {{$lastreportupdate->courses()->first()->description}}
-                        <br><p class="font-14 text-primary">your {{ordinal($lastreportupdate->try_count)}} trial</p>
+                        <br><p class="font-14 text-primary">this is your {{ordinal($lastreportupdate->try_count)}} trial</p>
                     </h5>
 
                     <div class="card-body">

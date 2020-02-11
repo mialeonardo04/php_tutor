@@ -875,7 +875,7 @@ class StudentController extends Controller
 
                 }
 
-                    $nilai = ($point/$count_correct)*100;
+                $nilai = ($point/$count_correct)*100;
 //                echo $nilai;
                 $checkDBReport = Report::where([
                     'id_student'=>$id_student,
@@ -888,6 +888,7 @@ class StudentController extends Controller
                     $report->id_unit = $id_unit;
                     $report->id_course = $id_course;
                     $report->score = $nilai;
+                    $report->jawaban_siswa = $submittedans;
                     $report->save();
                 } else {
                     Report::create([
@@ -895,6 +896,7 @@ class StudentController extends Controller
                         'id_course'=>$id_course,
                         'id_unit'=>$id_unit,
                         'score' =>$nilai,
+                        'jawaban_siswa' =>$submittedans,
                         'try_count' => $checkDBReport->try_count+1,
                     ]);
 //                    Report::where([
@@ -906,6 +908,15 @@ class StudentController extends Controller
 //                        'try_count' => $checkDBReport->try_count+1,
 //                    ]);
                 }
+                $avgcourses = Report::where([
+                    'id_student'=>$id_student,
+                ])->avg('score');
+
+                Student::where([
+                    'id' => $id_student,
+                ])->limit(1)->update([
+                    'avg_exercise' => $avgcourses,
+                ]);
 
             } elseif ($request['tipe_soal'] == 2){
                 echo "duh";

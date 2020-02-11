@@ -4,7 +4,7 @@
         <div class="clearfix mb-20">
             <div class="pull-left">
                 <h5 class="text-blue">Course Units</h5>
-                <h6 class="text-black-50">You need to pass <strong class="text-danger">{{$unit_taken}}</strong> course chapter. Progress:
+                <h6 class="text-black-50">You need to finish <strong class="text-danger">{{$unit_taken}}</strong> course chapter. Progress:
                     @php
                         $r1 = [];
                         $r2 = [];
@@ -182,22 +182,33 @@
                         <td class="table-plus">{{$unit->name}}</td>
                         @if($unit->id == 1)
                             <td>{{$course1}}</td>
-                            <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
-                                            <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                            <td>
+                                                @if(count($r1) == $course1)
+                                                    <p class="text-success">Finished</p>
+                                                @else
+                                                    <p class="text-danger">Not Finished</p>
+                                                @endif
+                                            </td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p></td>
+                                                <td>
+                                                    <p class="text-success">Finished</p>
+                                                </td>
                                             @else
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p></td>
+                                            <td>
+                                                <p class="text-success">Finished</p>
+                                            </td>
                                             @endif
                                         @endif
                                     @endif
                                 @endforeach
-                            </td>
-                            <td>@if(count($r1) == $course1)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
+
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -217,22 +228,32 @@
                             </td>
                         @elseif($unit->id == 2)
                             <td>{{$course2}}</td>
-                            <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
-                                            <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                            <td>
+                                                @if(count($r2) == $course2)
+                                                    <p class="text-success">Finished</p>
+                                                @else
+                                                    <p class="text-danger">Not Finished</p>
+                                                @endif
+                                            </td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p></td>
+                                                <td>
+                                                    <p class="text-success">Finished</p>
+                                                </td>
                                             @else
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p></td>
+                                                <td>
+                                                    <p class="text-success">Finished</p>
+                                                </td>
                                             @endif
                                         @endif
                                     @endif
                                 @endforeach
-                            </td>
-                            <td>@if(count($r2) == $course2)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -252,22 +273,22 @@
                             </td>
                         @elseif($unit->id == 3)
                             <td>{{$course3}}</td>
-                            <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
-                                            <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                            <td>@if(count($r3) == $course3)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @else
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @endif
                                         @endif
                                     @endif
                                 @endforeach
-                            </td>
-                            <td>@if(count($r3) == $course3)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -287,22 +308,22 @@
                             </td>
                         @elseif($unit->id == 4)
                             <td>{{$course4}}</td>
-                            <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
-                                            <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                            <td>@if(count($r4) == $course4)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @else
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @endif
                                         @endif
                                     @endif
                                 @endforeach
-                            </td>
-                            <td>@if(count($r4) == $course4)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -322,22 +343,22 @@
                             </td>
                         @elseif($unit->id == 5)
                             <td>{{$course5}}</td>
-                            <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
-                                            <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                            <td>@if(count($r5) == $course5)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @else
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @endif
                                         @endif
                                     @endif
                                 @endforeach
-                            </td>
-                            <td>@if(count($r5) == $course5)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -357,22 +378,23 @@
                             </td>
                         @elseif($unit->id == 6)
                             <td>{{$course6}}</td>
-                            <td>
+
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
-                                            <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                            <td>@if(count($r6) == $course6)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @else
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @endif
                                         @endif
                                     @endif
                                 @endforeach
-                            </td>
-                            <td>@if(count($r6) == $course6)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -392,22 +414,22 @@
                             </td>
                         @elseif($unit->id == 7)
                             <td>{{$course7}}</td>
-                            <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
-                                            <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                            <td>@if(count($r7) == $course7)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @else
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @endif
                                         @endif
                                     @endif
                                 @endforeach
-                            </td>
-                            <td>@if(count($r7) == $course7)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
@@ -427,22 +449,23 @@
                             </td>
                         @elseif($unit->id == 8)
                             <td>{{$course8}}</td>
-                            <td>
+
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
                                         @if($score->jumlah_benar*20 < 60)
-                                            <p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p>
+                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                            <td>@if(count($r8) == $course8)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You are Brilliant!</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @else
-                                                <p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p>
+                                                <td><p class="text-success">{{$score->jumlah_benar*20}}% - You have Passed</p></td>
+                                                <td><p class="text-success">Finished</p></td>
                                             @endif
                                         @endif
                                     @endif
                                 @endforeach
-                            </td>
-                            <td>@if(count($r8) == $course8)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
