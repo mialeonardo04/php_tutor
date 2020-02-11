@@ -332,7 +332,6 @@ class UserController extends Controller
         } else {
             $whereClause = [
                 'students.id' => $id_student,
-                'users.id' => $id_user,
             ];
             $studentById = DB::table('students')
                 ->join('users','students.id_user','=','users.id')
@@ -346,9 +345,15 @@ class UserController extends Controller
                 ->where('reports.id_student','=',$id_student)
                 ->get();
 
+            $pretestbyID = DB::table('student_pretest_answers')
+                ->join('units','student_pretest_answers.id_unit','=','units.id')
+                ->where('student_pretest_answers.id_student','=',$id_student)
+                ->get();
+
             return view('pengajar.siswaById',[
                 'student' =>$studentById,
                 'courserecord' => $recordExercise,
+                'pretestrecord' => $pretestbyID,
             ]);
         }
     }
