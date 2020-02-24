@@ -815,13 +815,27 @@ class StudentController extends Controller
             $unit_name = Unit::select('name')->where('id','=',$id_unit)->first();
 
 
+            $checkhavedone = Report::where([
+                'id_student' => $id_student,
+                'id_course' => $id_course,
+                'id_unit' => $id_unit,
+            ])->count();
+            $lastCourseIDUnit = DB::table('courses')
+                ->select('id_unit')
+                ->where('id_unit','=',$id_unit)
+                ->orderBy('id_unit','desc')->get()
+                ->first();
+
             return view('siswa.exercisecourse',[
                 'statusprogress'=>$status_progress,
                 'idstudent' => $id_student,
                 'courses' => $courses,
                 'unit' => $unit_name,
+                'lastidcoursebyunit' => $lastCourseIDUnit,
                 'coursebyid' => $coursesByIdCourse,
-            ]);
+                'id_unit' => $id_unit,
+                'id_course' => $id_course,
+            ])->with(compact('checkhavedone'));
         }
     }
 
@@ -874,13 +888,17 @@ class StudentController extends Controller
                     }
 
                 }
-
+                $nilaicetak = 0;
                 $nilai = ($point/$count_correct)*100;
+//                if ($nilai<100){
+//                    $nilaicetak = $nilai - 10;
+//                }
 //                echo $nilai;
                 $checkDBReport = Report::where([
                     'id_student'=>$id_student,
                     'id_course'=>$id_course,
                     'id_unit'=>$id_unit])->first();
+
 
                 if ($checkDBReport === null){
                     $report = new Report();
@@ -899,14 +917,7 @@ class StudentController extends Controller
                         'jawaban_siswa' =>$submittedans,
                         'try_count' => $checkDBReport->try_count+1,
                     ]);
-//                    Report::where([
-//                        'id_student'=>$id_student,
-//                        'id_course'=>$id_course,
-//                        'id_unit'=>$id_unit
-//                    ])->limit(1)->update([
-//                        'score' =>$nilai,
-//                        'try_count' => $checkDBReport->try_count+1,
-//                    ]);
+
                 }
                 $avgcourses = Report::where([
                     'id_student'=>$id_student,
@@ -920,11 +931,13 @@ class StudentController extends Controller
 
             } elseif ($request['tipe_soal'] == 2){
                 echo "duh";
+            } elseif ($request['tipe_soal'] == 3){
+                echo "3";
             }
 
             return redirect()->route('siswa.course',[
                 'id_unit'=>$id_unit,
-                'id_course'=>$id_course+1
+                'id_course'=>$id_course
             ]);
         }
     }

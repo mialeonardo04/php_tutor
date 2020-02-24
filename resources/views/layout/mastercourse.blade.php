@@ -23,6 +23,9 @@
     </div>
 </div>
 @include('include.script')
+@if(Session::has('messageSubmitExercise'))
+    <script type="text/javascript"> sweetAlert("Succeed", "{{ Session::get('messageSubmitExercise') }}", "success"); </script>
+@endif
 @if(Auth::user()->roles[0]['name']=="siswa")
     <script>
         var aaa = document.getElementById("aaa").value;
