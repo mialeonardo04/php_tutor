@@ -1,4 +1,4 @@
-![](https://drive.google.com/uc?id=11FuHg9IEPozb--OxebYPbNuZJoBJgSc7)
+![](https://raw.githubusercontent.com/leonard04/php_tutor/master/public/theme/vendors/images/phpitutor_logo.png)
 ### COLLEGE FINAL PROJECT
 
 ## Getting Started

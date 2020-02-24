@@ -820,11 +820,11 @@ class StudentController extends Controller
                 'id_course' => $id_course,
                 'id_unit' => $id_unit,
             ])->count();
+
             $lastCourseIDUnit = DB::table('courses')
-                ->select('id_unit')
                 ->where('id_unit','=',$id_unit)
-                ->orderBy('id_unit','desc')->get()
-                ->first();
+                ->orderBy('id_course','desc')->get()
+                ->first()->id_course;
 
             return view('siswa.exercisecourse',[
                 'statusprogress'=>$status_progress,
@@ -888,16 +888,13 @@ class StudentController extends Controller
                     }
 
                 }
-                $nilaicetak = 0;
+
                 $nilai = ($point/$count_correct)*100;
-//                if ($nilai<100){
-//                    $nilaicetak = $nilai - 10;
-//                }
-//                echo $nilai;
+
                 $checkDBReport = Report::where([
                     'id_student'=>$id_student,
                     'id_course'=>$id_course,
-                    'id_unit'=>$id_unit])->first();
+                    'id_unit'=>$id_unit])->orderBy('try_count','desc')->first();
 
 
                 if ($checkDBReport === null){
@@ -909,15 +906,14 @@ class StudentController extends Controller
                     $report->jawaban_siswa = $submittedans;
                     $report->save();
                 } else {
-                    Report::create([
-                        'id_student'=>$id_student,
-                        'id_course'=>$id_course,
-                        'id_unit'=>$id_unit,
-                        'score' =>$nilai,
-                        'jawaban_siswa' =>$submittedans,
-                        'try_count' => $checkDBReport->try_count+1,
-                    ]);
-
+                    $report = new Report();
+                    $report->id_student = $id_student;
+                    $report->id_unit = $id_unit;
+                    $report->id_course = $id_course;
+                    $report->score = $nilai;
+                    $report->jawaban_siswa = $submittedans;
+                    $report->try_count = $checkDBReport->try_count+1;
+                    $report->save();
                 }
                 $avgcourses = Report::where([
                     'id_student'=>$id_student,
@@ -930,15 +926,44 @@ class StudentController extends Controller
                 ]);
 
             } elseif ($request['tipe_soal'] == 2){
-                echo "duh";
+                $code = $request['answerrequest'];
+                $output = $request['expectedOutput'];
+                $input  = $request['input'];
+//                $errorType = $request['errorType'];
+                $callFunction = $request['callFunction'];
+                $apiUser = "rosihanari";
+                $apiAuth = "123456";
+                $url = "http://rosihanari.net/api/php-api.php";
+
+                $curlHandle = curl_init();
+                curl_setopt($curlHandle, CURLOPT_URL, $url);
+                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, "apiuser=".$apiUser."&apiauth=".$apiAuth."&input=".$input."&output=".$output."&callFunction=".$callFunction."&code=".rawurlencode($code));
+                curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+                curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+                curl_setopt($curlHandle, CURLOPT_POST, 1);
+                $response = curl_exec($curlHandle);
+                curl_close($curlHandle);
+
+                $output = json_decode($response, true);
+
+                if (!empty($output)) {
+                    if (strpos($output->output, "error")) {
+                        echo "ERROR! :</br>-->" .$output->output;
+                    } else {
+                        echo "JSON data: \n".$response."</br>";
+                        echo "output:<br>".$output->output;
+                    }
+                }
             } elseif ($request['tipe_soal'] == 3){
                 echo "3";
             }
 
+//            echo $submittedans;
             return redirect()->route('siswa.course',[
                 'id_unit'=>$id_unit,
                 'id_course'=>$id_course
-            ]);
+            ])->with('messageSubmitExercise','Your answer has been submitted!');
         }
     }
 

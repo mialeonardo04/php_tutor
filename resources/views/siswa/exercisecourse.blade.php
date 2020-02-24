@@ -10,7 +10,6 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-{{--    {{$lastidcoursebyunit}}--}}
     <div>
         @if($id_course == $lastidcoursebyunit)
             <a href="{{route('siswa.units')}}" class="btn btn-success pull-right">Finish
@@ -22,10 +21,10 @@
             ])}}" class="btn btn-success pull-right">Next Course
             </a>
         @endif
-
     </div>
-
 @endif
+{{--{{$lastidcoursebyunit}}--}}
+
 @if($coursebyid->tipe_soal == 1)
     <div class="min-height-200px">
         <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
@@ -68,13 +67,24 @@
             </div>
         </div>
         <p class="font-14 ml-0">{{$coursebyid->question}}</p>
-        {{--<form method="post" action="{{route('submitexercise')}}">--}}
-            {{--@csrf--}}
-            {{--<input type="hidden" name="tipe_soal" value="{{$coursebyid->tipe_soal}}">--}}
-            {{--<input type="hidden" name="answer" value="{{base64_encode($coursebyid->answer)}}">--}}
+        <form id="form" method="post" action="{{route('submitexercise')}}">
+            @csrf
+            <div>
+                <textarea name="answerrequest" required></textarea>
+            </div>
+            <br>
+            <input type="hidden" name="tipe_soal" value="{{$coursebyid->tipe_soal}}">
+            <input type="hidden" name="answer" value="{{base64_encode($coursebyid->answer)}}">
+            <input type="hidden" name="expectedOutput" id="" value="hello">
+            <input type="hidden" name="input" id="" value="">
             {{--<input class="form-control" type="text" placeholder="your answer" name="answerrequest" required><br>--}}
-            {{--<button type="submit" class="btn btn-primary pull-right" data-dismiss="modal">Submit Answer</button>--}}
-        {{--</form>--}}
+            <button type="submit" class="btn btn-primary pull-left" name="submit" data-dismiss="modal">Submit Answer</button>
+            {{--<div>--}}
+                {{--<input type="submit" class="btn btn-primary pull-left" name="submit" value="Submit Answer">--}}
+            {{--</div>--}}
+        </form>
+        <div id="output"></div>
+        <div id=log></div>
     </div>
 @else
     teori bruh
