@@ -12,6 +12,7 @@ use App\StudentPretestAnswer;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
 
 class StudentController extends Controller
 {
@@ -847,124 +848,170 @@ class StudentController extends Controller
             $this->validate($request,[
                 'answer' => 'required',
             ]);
-
             $point = 0;
+            $answer = strtolower(base64_decode($request['answer']));
+            $submittedans = strtolower($request['answerrequest']);
+            $count_correct = strtolower(base64_decode($request['count_corr']));
+            $id_student = $request['id_std'];
+            $id_course = $request['id_crs'];
+            $id_unit = $request['id_unt'];
 
-            if ($request['tipe_soal'] == 1){
-                $answer = strtolower(base64_decode($request['answer']));
-                $submittedans = strtolower($request['answerrequest']);
-                $count_correct = strtolower(base64_decode($request['count_corr']));
-                $id_student = $request['id_std'];
-                $id_course = $request['id_crs'];
-                $id_unit = $request['id_unt'];
-
-                //menentukan point yg didapat
-                if (strpos($answer,'-') !== false){
-                    $arrAns = explode('-',$answer);
-                    if (strpos($submittedans,'-')){
-                        $arrAnsReq = explode('-',$submittedans);
-                        for ($i = 0; $i<count($arrAnsReq); $i++){
-                            if (in_array($arrAnsReq[$i],$arrAns)){
-                                $point+=1;
-                            }
-                        }
-                    } else {
-                        if (in_array($submittedans,$arrAns)){
+            //menentukan point yg didapat
+            if (strpos($answer,'-') !== false){
+                $arrAns = explode('-',$answer);
+                if (strpos($submittedans,'-')){
+                    $arrAnsReq = explode('-',$submittedans);
+                    for ($i = 0; $i<count($arrAnsReq); $i++){
+                        if (in_array($arrAnsReq[$i],$arrAns)){
                             $point+=1;
                         }
                     }
                 } else {
-                    if (strpos($submittedans,'-')){
-                        $arrAnsReq = explode('-',$submittedans);
-                        for ($j=0;$j<count($arrAnsReq);$j++){
-                            if ($answer == $arrAnsReq[$j]){
-                                $point+=1;
-                            }
-                        }
-                    } else {
-                        if ($answer == $submittedans){
+                    if (in_array($submittedans,$arrAns)){
+                        $point+=1;
+                    }
+                }
+            } else {
+                if (strpos($submittedans,'-')){
+                    $arrAnsReq = explode('-',$submittedans);
+                    for ($j=0;$j<count($arrAnsReq);$j++){
+                        if ($answer == $arrAnsReq[$j]){
                             $point+=1;
                         }
                     }
-
-                }
-
-                $nilai = ($point/$count_correct)*100;
-
-                $checkDBReport = Report::where([
-                    'id_student'=>$id_student,
-                    'id_course'=>$id_course,
-                    'id_unit'=>$id_unit])->orderBy('try_count','desc')->first();
-
-
-                if ($checkDBReport === null){
-                    $report = new Report();
-                    $report->id_student = $id_student;
-                    $report->id_unit = $id_unit;
-                    $report->id_course = $id_course;
-                    $report->score = $nilai;
-                    $report->jawaban_siswa = $submittedans;
-                    $report->save();
                 } else {
-                    $report = new Report();
-                    $report->id_student = $id_student;
-                    $report->id_unit = $id_unit;
-                    $report->id_course = $id_course;
-                    $report->score = $nilai;
-                    $report->jawaban_siswa = $submittedans;
-                    $report->try_count = $checkDBReport->try_count+1;
-                    $report->save();
-                }
-                $avgcourses = Report::where([
-                    'id_student'=>$id_student,
-                ])->avg('score');
-
-                Student::where([
-                    'id' => $id_student,
-                ])->limit(1)->update([
-                    'avg_exercise' => $avgcourses,
-                ]);
-
-            } elseif ($request['tipe_soal'] == 2){
-                $code = $request['answerrequest'];
-                $output = $request['expectedOutput'];
-                $input  = $request['input'];
-//                $errorType = $request['errorType'];
-                $callFunction = $request['callFunction'];
-                $apiUser = "rosihanari";
-                $apiAuth = "123456";
-                $url = "http://rosihanari.net/api/php-api.php";
-
-                $curlHandle = curl_init();
-                curl_setopt($curlHandle, CURLOPT_URL, $url);
-                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, "apiuser=".$apiUser."&apiauth=".$apiAuth."&input=".$input."&output=".$output."&callFunction=".$callFunction."&code=".rawurlencode($code));
-                curl_setopt($curlHandle, CURLOPT_HEADER, 0);
-                curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
-                curl_setopt($curlHandle, CURLOPT_POST, 1);
-                $response = curl_exec($curlHandle);
-                curl_close($curlHandle);
-
-                $output = json_decode($response, true);
-
-                if (!empty($output)) {
-                    if (strpos($output->output, "error")) {
-                        echo "ERROR! :</br>-->" .$output->output;
-                    } else {
-                        echo "JSON data: \n".$response."</br>";
-                        echo "output:<br>".$output->output;
+                    if ($answer == $submittedans){
+                        $point+=1;
                     }
                 }
-            } elseif ($request['tipe_soal'] == 3){
-                echo "3";
+
             }
 
-//            echo $submittedans;
+            $nilai = ($point/$count_correct)*100;
+
+            $checkDBReport = Report::where([
+                'id_student'=>$id_student,
+                'id_course'=>$id_course,
+                'id_unit'=>$id_unit])->orderBy('try_count','desc')->first();
+
+
+            if ($checkDBReport === null){
+                $report = new Report();
+                $report->id_student = $id_student;
+                $report->id_unit = $id_unit;
+                $report->id_course = $id_course;
+                $report->score = $nilai;
+                $report->jawaban_siswa = $submittedans;
+                $report->save();
+            } else {
+                $report = new Report();
+                $report->id_student = $id_student;
+                $report->id_unit = $id_unit;
+                $report->id_course = $id_course;
+                $report->score = $nilai;
+                $report->jawaban_siswa = $submittedans;
+                $report->try_count = $checkDBReport->try_count+1;
+                $report->save();
+            }
+            $avgcourses = Report::where([
+                'id_student'=>$id_student,
+            ])->avg('score');
+
+            Student::where([
+                'id' => $id_student,
+            ])->limit(1)->update([
+                'avg_exercise' => $avgcourses,
+            ]);
+
             return redirect()->route('siswa.course',[
                 'id_unit'=>$id_unit,
                 'id_course'=>$id_course
             ])->with('messageSubmitExercise','Your answer has been submitted!');
         }
+    }
+
+    public function submitExerciseCode(Request $request){
+        $input = $request['input'];
+        $output = $request['output'];
+        $code = rawurlencode($request['code']);
+        $callFunction = $request['callFunction'];
+        $apiUser = "rosihanari";
+        $apiAuth = "123456";
+        $url = "http://rosihanari.net/api/php-api.php";
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('POST',$url,[
+            'form_params'=>[
+                'apiuser' => $apiUser,
+                'apiauth' => $apiAuth,
+                'input' => $input,
+                'output' => $output,
+                'callFunction' => $callFunction,
+                'code' => $code,
+            ]
+        ]);
+
+        $response = $response->getBody();
+
+        $output = json_decode($response);
+
+        if (!empty($output)){
+            if (strpos($output->output,"error")){
+                return "JSON data: \n".$response."<br>ERROR! :</br>" .$output->output;
+            } else {
+                return "JSON data: \n".$response."<br>OK! output:<br>".$output->output;
+            }
+        }
+//        return $output->output;
+
+
+//        return ''.print_r($response);
+
+//        echo "hehe";
+        //            if ($request['tipe_soal'] == 1){
+//
+//            }
+//            elseif ($request['tipe_soal'] == 2){
+//                $input = $request['input'];
+//                $output = $request['output'];
+//                $code = rawurlencode($request['code']);
+//                $callFunction = $request['callFunction'];
+//                $apiUser = "rosihanari";
+//                $apiAuth = "123456";
+//                $url = "http://rosihanari.net/api/php-api.php";
+//
+//                if(substr_count($output, "<next line>") > 0){
+//                    if(substr_count($output, "\r\n") > 0){
+//                        $output = str_replace("\r\n", "", $output);
+//                    }else {
+//                        $output = str_replace("<next line>", "\n", $output);
+//                    }
+//                }
+//                $curlHandle = curl_init();
+//                curl_setopt($curlHandle, CURLOPT_URL, $url);
+//                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, "apiuser=".$apiUser."&apiauth=".$apiAuth."&input=".$input."&output=".$output."&callFunction=".$callFunction."&code=".rawurlencode($code));
+//                curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+//                curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+//                curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+//                curl_setopt($curlHandle, CURLOPT_POST, 1);
+//                $response = curl_exec($curlHandle);
+//                curl_close($curlHandle);
+//
+//                $output = json_decode($response, true);
+//                if (!empty($output)) {
+//                    if (strpos($output->output, "error")) {
+//                        echo "ERROR! :</br>-->" .$output->output;
+//                    } else {
+//                        echo "JSON data: \n".$response."</br>";
+//                        echo "output:<br>".$output->output;
+//                    }
+//                }
+//                return "ini 2";
+//            }
+//            elseif ($request['tipe_soal'] == 3){
+//                echo "3";
+//            }
+
+//            echo $submittedans;
     }
 
 

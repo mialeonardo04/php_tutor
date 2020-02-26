@@ -101,6 +101,11 @@ Route::group(['middleware' => ['web']],function(){
                 'uses' => 'StudentController@submitExerciseCourse',
                 'as' => 'submitexercise'
             ]);
+
+            Route::post('/submitExCode',[
+                'uses' => 'StudentController@submitExerciseCode',
+                'as' => 'submitExCode',
+            ]);
         });
 
 

@@ -177,5 +177,5 @@
                 textarea.value = editor.getValue();
             }, true)
         }
-        createEditor("answerrequest")
+        createEditor("code")
     </script>

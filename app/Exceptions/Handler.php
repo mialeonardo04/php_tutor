@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -62,6 +63,10 @@ class Handler extends ExceptionHandler
         }
         if ($exception instanceof FileException){
             return redirect()->back()->with('messageErrorFile','You have reach our maximum image size');
+        }
+        if ($exception instanceof MethodNotAllowedHttpException) {
+            // …
+            return response()->view('errors.' . '403', [], 403);
         }
         return parent::render($request, $exception);
     }

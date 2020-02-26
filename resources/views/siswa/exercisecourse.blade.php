@@ -24,7 +24,7 @@
     </div>
 @endif
 {{--{{$lastidcoursebyunit}}--}}
-
+{{--{{$coursebyid->tipe_soal}}--}}
 @if($coursebyid->tipe_soal == 1)
     <div class="min-height-200px">
         <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
@@ -53,7 +53,7 @@
                 <input type="hidden" name="id_unt" value="{{$coursebyid->id_unit}}">
                 <input type="hidden" name="answer" value="{{base64_encode($coursebyid->answer)}}">
                 <input type="hidden" name="count_corr" value="{{base64_encode($coursebyid->correct_count)}}">
-                <input class="form-control" type="text" placeholder="your answer (separate it with dash if you have more than one answers)" name="answerrequest" required><br>
+                <input class="form-control" type="text" placeholder="your answer (separate it with dash(-) if you have more than one answers)" name="answerrequest" required><br>
                 <button type="submit" class="btn btn-primary pull-left" data-dismiss="modal">Submit Answer</button>
             </form>
         </div>
@@ -67,24 +67,17 @@
             </div>
         </div>
         <p class="font-14 ml-0">{{$coursebyid->question}}</p>
-        <form id="form" method="post" action="{{route('submitexercise')}}">
+        <form action="{{route('submitExCode')}}" method="POST">
             @csrf
-            <div>
-                <textarea name="answerrequest" required></textarea>
+            <div class="form-group">
+                <label>Your Coding Ground</label>
+                <textarea name="code" class="form-control">@php echo htmlentities('<?php') @endphp &#13;&#10;@php echo htmlentities('   /*write your code here*/') @endphp&#13;&#10;@php echo htmlentities('?>') @endphp</textarea>
             </div>
-            <br>
+
             <input type="hidden" name="tipe_soal" value="{{$coursebyid->tipe_soal}}">
-            <input type="hidden" name="answer" value="{{base64_encode($coursebyid->answer)}}">
-            <input type="hidden" name="expectedOutput" id="" value="hello">
-            <input type="hidden" name="input" id="" value="">
-            {{--<input class="form-control" type="text" placeholder="your answer" name="answerrequest" required><br>--}}
-            <button type="submit" class="btn btn-primary pull-left" name="submit" data-dismiss="modal">Submit Answer</button>
-            {{--<div>--}}
-                {{--<input type="submit" class="btn btn-primary pull-left" name="submit" value="Submit Answer">--}}
-            {{--</div>--}}
+            {{--<button type="submit" class="btn btn-primary pull-left">Submit Answer</button>--}}
+            <input type="submit" class="btn btn-primary pull-left" value="Submit Answer"/>
         </form>
-        <div id="output"></div>
-        <div id=log></div>
     </div>
 @else
     teori bruh
