@@ -20,6 +20,7 @@ class CreateReportsTable extends Migration
             $table->integer('id_course')->nullable();
             $table->integer('score')->nullable();
             $table->string('error_type', '100')->nullable();
+            $table->text('error_desc')->nullable();
             $table->text('jawaban_siswa')->nullable();
             $table->tinyInteger('try_count')->default(1);
             $table->timestamps();

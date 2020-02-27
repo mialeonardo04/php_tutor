@@ -46,7 +46,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>1,
                 'description'=>'Introduction Part 3 (Mencetak Hello World)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Buatlah program PHP pertama anda dan cetaklah "Hello World" menggunakan fungsi php echo',
+                'answer'=>'Hello World',
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ], [
@@ -67,7 +68,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>2,
                 'description'=>'Variable & Comment Part 3 (Membuat dan Mencetak Variable)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Buatlah program untuk mencetak "Hello PHP Intelligent Tutor" kedalam sebuah VARIABEL STRING',
+                'answer' => "Hello PHP Intelligent Tutor",
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ], [

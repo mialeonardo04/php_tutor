@@ -26,6 +26,9 @@
 @if(Session::has('messageSubmitExercise'))
     <script type="text/javascript"> sweetAlert("Succeed", "{{ Session::get('messageSubmitExercise') }}", "success"); </script>
 @endif
+@if(Session::has('messageCaution'))
+    <script type="text/javascript"> sweetAlert("Failed", "{{ Session::get('messageCaution') }}", "error"); </script>
+@endif
 @if(Auth::user()->roles[0]['name']=="siswa")
     <script>
         var aaa = document.getElementById("aaa").value;

@@ -798,22 +798,22 @@ class StudentController extends Controller
         if (session()->getId() != Auth::user()->last_session){
             Auth::logout();
             return redirect('/login');
-        } else{
+        } else {
 //            echo $_GET['total_course'];
             $siswa = Student::all();
             $status_progress = 0;
             $id_student = 0;
 
-            foreach ($siswa as $murid){
-                if ($murid->id_user == Auth::user()->id){
+            foreach ($siswa as $murid) {
+                if ($murid->id_user == Auth::user()->id) {
                     $status_progress = $murid->progress;
                     $id_student = $murid->id;
                 }
             }
 
-            $coursesByIdCourse = Course::select('*')->where('id_course','=',$id_course)->first();
-            $courses = Course::where('id_unit',$id_unit)->get();
-            $unit_name = Unit::select('name')->where('id','=',$id_unit)->first();
+            $coursesByIdCourse = Course::select('*')->where('id_course', '=', $id_course)->first();
+            $courses = Course::where('id_unit', $id_unit)->get();
+            $unit_name = Unit::select('name')->where('id', '=', $id_unit)->first();
 
 
             $checkhavedone = Report::where([
@@ -821,6 +821,18 @@ class StudentController extends Controller
                 'id_course' => $id_course,
                 'id_unit' => $id_unit,
             ])->count();
+            if ($checkhavedone > 0) {
+                $lastScoreInCourse = DB::table('reports')
+                    ->where([
+                        'id_student' => $id_student,
+                        'id_course' => $id_course,
+                        'id_unit' => $id_unit,
+                    ])
+                    ->orderBy('try_count', 'desc')->get()
+                    ->first()->score;
+            } else {
+                $lastScoreInCourse = 0;
+            }
 
             $lastCourseIDUnit = DB::table('courses')
                 ->where('id_unit','=',$id_unit)
@@ -836,6 +848,7 @@ class StudentController extends Controller
                 'coursebyid' => $coursesByIdCourse,
                 'id_unit' => $id_unit,
                 'id_course' => $id_course,
+                'lastscoreincourse' => $lastScoreInCourse,
             ])->with(compact('checkhavedone'));
         }
     }
@@ -931,87 +944,131 @@ class StudentController extends Controller
     }
 
     public function submitExerciseCode(Request $request){
-        $input = $request['input'];
-        $output = $request['output'];
-        $code = rawurlencode($request['code']);
-        $callFunction = $request['callFunction'];
-        $apiUser = "rosihanari";
-        $apiAuth = "123456";
-        $url = "http://rosihanari.net/api/php-api.php";
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST',$url,[
-            'form_params'=>[
-                'apiuser' => $apiUser,
-                'apiauth' => $apiAuth,
-                'input' => $input,
-                'output' => $output,
-                'callFunction' => $callFunction,
-                'code' => $code,
-            ]
-        ]);
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $id_student = $request['id_std'];
+            $id_course = $request['id_crs'];
+            $id_unit = $request['id_unt'];
 
-        $response = $response->getBody();
+            $code = rawurlencode($request['code']);
+            $callFunction = $request['callFunction'];
+            $answer = base64_decode($request['answer']);
+            $apiUser = "rosihanari";
+            $apiAuth = "123456";
+            $url = "http://rosihanari.net/api/php-api.php";
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request('POST',$url,[
+                'form_params'=>[
+                    'apiuser' => $apiUser,
+                    'apiauth' => $apiAuth,
+                    'input' => "",
+                    'output' => $answer,
+                    'callFunction' => $callFunction,
+                    'code' => $code,
+                ]
+            ]);
 
-        $output = json_decode($response);
+            $response = $response->getBody();
 
-        if (!empty($output)){
-            if (strpos($output->output,"error")){
-                return "JSON data: \n".$response."<br>ERROR! :</br>" .$output->output;
+            $output = json_decode($response);
+
+            $score =0;
+
+            if (!empty($output)&& $output->output != ""){
+                if (strpos($output->output,"error")){
+                    $resOutputERROR = $output->output;
+                    $resOutputStatus = $output->errorDetail;
+
+                    $checkDBReport = Report::where([
+                        'id_student'=>$id_student,
+                        'id_course'=>$id_course,
+                        'id_unit'=>$id_unit])->orderBy('try_count','desc')->first();
+
+                    if ($checkDBReport === null){
+                        $report = new Report();
+                        $report->id_student = $id_student;
+                        $report->id_unit = $id_unit;
+                        $report->id_course = $id_course;
+                        $report->score = $score;
+                        $report->error_type = "Syntax Error";
+                        $report->error_desc = $resOutputERROR;
+                        $report->jawaban_siswa = $request['code'];
+                        $report->try_count = 1;
+                        $report->save();
+                    } else {
+                        $report = new Report();
+                        $report->id_student = $id_student;
+                        $report->id_unit = $id_unit;
+                        $report->id_course = $id_course;
+                        $report->score = $score;
+                        $report->error_type = "Syntax Error";
+                        $report->error_desc = $resOutputStatus;
+                        $report->jawaban_siswa = $request['code'];
+                        $report->try_count = $checkDBReport->try_count+1;
+                        $report->save();
+                    }
+
+                } else {
+                    $resOutputOK = $output->output;
+                    $resOutputStatus = $output->outputStatus;
+
+                    $checkDBReport = Report::where([
+                        'id_student'=>$id_student,
+                        'id_course'=>$id_course,
+                        'id_unit'=>$id_unit])->orderBy('try_count','desc')->first();
+
+                    if ($checkDBReport === null){
+                        $report = new Report();
+                        $report->id_student = $id_student;
+                        $report->id_unit = $id_unit;
+                        $report->id_course = $id_course;
+
+                        if ($resOutputStatus == 0){
+                            $report->error_type = "Algorithm Error";
+                            $report->error_desc = "Missmatch Answer: ".$answer." -> ".$resOutputOK;
+                            $report->score = 75;
+                        } else {
+                            $report->error_type = "Correct!";
+                            $report->error_desc = "Good Answer: (".$resOutputOK.")";
+                            $report->score = 100;
+                        }
+                        $report->jawaban_siswa = $request['code'];
+                        $report->try_count = 1;
+                        $report->save();
+                    } else {
+                        $report = new Report();
+                        $report->id_student = $id_student;
+                        $report->id_unit = $id_unit;
+                        $report->id_course = $id_course;
+
+                        if ($resOutputStatus == 0){
+                            $report->error_type = "Algorithm Error";
+                            $report->error_desc = "Missmatch Answer: ".$answer." -> ".$resOutputOK;
+                            $report->score = 75;
+                        } else {
+                            $report->error_type = "Correct!";
+                            $report->error_desc = "Good Answer: (".$resOutputOK.")";
+                            $report->score = 100;
+                        }
+                        $report->jawaban_siswa = $request['code'];
+                        $report->try_count = $checkDBReport->try_count+1;
+                        $report->save();
+                    }
+                }
             } else {
-                return "JSON data: \n".$response."<br>OK! output:<br>".$output->output;
+                return redirect()->route('siswa.course',[
+                    'id_unit'=>$id_unit,
+                    'id_course'=>$id_course
+                ])->with('messageCaution','Your must write your code before submitting');
             }
         }
-//        return $output->output;
 
-
-//        return ''.print_r($response);
-
-//        echo "hehe";
-        //            if ($request['tipe_soal'] == 1){
-//
-//            }
-//            elseif ($request['tipe_soal'] == 2){
-//                $input = $request['input'];
-//                $output = $request['output'];
-//                $code = rawurlencode($request['code']);
-//                $callFunction = $request['callFunction'];
-//                $apiUser = "rosihanari";
-//                $apiAuth = "123456";
-//                $url = "http://rosihanari.net/api/php-api.php";
-//
-//                if(substr_count($output, "<next line>") > 0){
-//                    if(substr_count($output, "\r\n") > 0){
-//                        $output = str_replace("\r\n", "", $output);
-//                    }else {
-//                        $output = str_replace("<next line>", "\n", $output);
-//                    }
-//                }
-//                $curlHandle = curl_init();
-//                curl_setopt($curlHandle, CURLOPT_URL, $url);
-//                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, "apiuser=".$apiUser."&apiauth=".$apiAuth."&input=".$input."&output=".$output."&callFunction=".$callFunction."&code=".rawurlencode($code));
-//                curl_setopt($curlHandle, CURLOPT_HEADER, 0);
-//                curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
-//                curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
-//                curl_setopt($curlHandle, CURLOPT_POST, 1);
-//                $response = curl_exec($curlHandle);
-//                curl_close($curlHandle);
-//
-//                $output = json_decode($response, true);
-//                if (!empty($output)) {
-//                    if (strpos($output->output, "error")) {
-//                        echo "ERROR! :</br>-->" .$output->output;
-//                    } else {
-//                        echo "JSON data: \n".$response."</br>";
-//                        echo "output:<br>".$output->output;
-//                    }
-//                }
-//                return "ini 2";
-//            }
-//            elseif ($request['tipe_soal'] == 3){
-//                echo "3";
-//            }
-
-//            echo $submittedans;
+        return redirect()->route('siswa.course',[
+            'id_unit'=>$id_unit,
+            'id_course'=>$id_course
+        ])->with('messageSubmitExercise','Your answer has been submitted!');
     }
 
 
