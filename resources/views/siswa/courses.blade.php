@@ -4,7 +4,8 @@
         <div class="clearfix mb-20">
             <div class="pull-left">
                 <h5 class="text-blue">Course Units</h5>
-                <h6 class="text-black-50">You need to finish <strong class="text-danger">{{$unit_taken}}</strong> course chapter. Progress:
+                @if($unit_taken >0)
+                <h6 class="text-black-50">You need to finish <strong class="text-danger">{{$unit_taken}}</strong> course chapter to open <strong>The Final Exam</strong> chapter. Progress:
                     @php
                         $r1 = [];
                         $r2 = [];
@@ -149,8 +150,11 @@
                         if (count($r8)/$course8 == 1){
                             $hastaken+=1;
                         }
-
+                        if($unit_taken>0){
+                            $checkToExam = $hastaken/$unit_taken;
+                        }
                     @endphp
+
                     @if($hastaken != $unit_taken)
                         @if($hastaken == 0)
                             <strong class="text-danger">{{$hastaken}}/{{$unit_taken}}</strong>
@@ -160,6 +164,30 @@
                     @else
                         <strong class="text-success">{{$hastaken}}/{{$unit_taken}}</strong>
                     @endif
+                    @endif
+                    @if($unit_taken > 0)
+                        @if($checkToExam == 1)
+                            <form method="post" action="{{route('siswa.getexam')}}">
+                                @csrf
+                                You can take the exam now
+                                <button type="submit" name="submit" class="btn btn-sm btn-primary">Take Final Exam</button>
+                            </form>
+                        @else
+                            <form method="post" action="{{route('siswa.getexam')}}">
+                                @csrf
+                                <button type="submit" name="submit" class="btn btn-sm btn-outline-secondary" disabled>Take Final Exam</button>
+                            </form>
+                        @endif
+                    @else
+
+                        <form method="post" action="{{route('siswa.getexam')}}">
+                            @csrf
+                            You can take the exam now
+                            <button type="submit" name="submit" class="btn btn-sm btn-primary">Take Final Exam</button>
+                        </form>
+                    @endif
+
+
                 </h6>
             </div>
         </div>

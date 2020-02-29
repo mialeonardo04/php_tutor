@@ -106,6 +106,11 @@ Route::group(['middleware' => ['web']],function(){
                 'uses' => 'StudentController@submitExerciseCode',
                 'as' => 'submitExCode',
             ]);
+
+            Route::post('/siswa/getExam',[
+                'uses' => 'StudentController@getExamTest',
+                'as' => 'siswa.getexam'
+            ]);
         });
 
 
