@@ -68,7 +68,7 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>2,
                 'description'=>'Variable & Comment Part 3 (Membuat dan Mencetak Variable)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program untuk mencetak "Hello PHP Intelligent Tutor" kedalam sebuah VARIABEL STRING',
+                'question'=>'Buatlah program untuk mencetak "Hello PHP Intelligent Tutor" kedalam sebuah VARIABEL bertipe data STRING, kemudian cetak variabelnya!',
                 'answer' => "Hello PHP Intelligent Tutor",
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
@@ -83,7 +83,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>3,
                 'description'=>'Data Types Part 2 (Mencetak Variable String)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Buatlah 2 variable $a dan $b yang berisi berturut-turut : "Pendidikan Teknik", dan "Informatika dan Komputer". Setelah itu cetak keduanya menjadi "Pendidikan Teknik Informatika dan Komputer"',
+                'answer'=>'Pendidikan Teknik Informatika dan Komputer',
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
@@ -98,7 +99,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>3,
                 'description'=>'Data Types Part 4 (Mencetak Variable Numbering)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Buatlah program dengan ketentuan sebagai berikut: Diketahui jari-jari lingkaran dalam variabel $r adalah 25 dan phi dalam variabel $phi adalah 3.14. Hitung luas lingkarannya, dan cetak luas lingkarannya',
+                'answer' => '1962.5',
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
@@ -112,7 +114,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>3,
                 'description'=>'Data Types Part 6 (Operasi method Math pada PHP)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Buatlah program dengan ketentuan sebagai berikut: Diketahui jari-jari lingkaran dalam variabel $r adalah 18 dan phi dalam variabel $phi adalah 3.14. Hitung dan cetak luas lingkaran serta lakukan pembulatan dengan fungsi Math ROUND pada php!',
+                'answer'=>1017,
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
@@ -133,21 +136,23 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>3,
                 'description'=>'Data Types Part 9 (Operasi method String pada PHP)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Buatlah sebuah variabel String $sample yang berisi "Happy learning with PHP Intelligent Tutor". Kemudian hitung dan cetak berapakah jumlah karakter pada variabel $sample menggunakan fungsi method String PHP!',
+                'answer'=>41,
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
                 'id_unit'=>4,
                 'description'=>'Operators Part 1',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, operator yang digunakan untuk increment bertambah suatu variable adalah...',
+                'question'=>'Berdasarkan video yang diputar, operator matematika yang digunakan untuk increment (bertambah satu) suatu variable adalah...',
                 'answer'=>'++',
                 'embed_url'=>'ljz90HYEPyM'
             ], [
                 'id_unit'=>4,
                 'description'=>'Operators Part 2 (Operasi Variable pada PHP)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Diketahui variabel $a memiliki nilai samadengan 4 dan variabel $b memiliki nilai 8. HITUNG dan CETAK variabel $a yang ditambah dengan variabel (nilai TETAP DALAM VARIABEL $a, ikuti cara dalam video "Operator Part 1")',
+                'answer' => '',
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
@@ -168,7 +173,7 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>5,
                 'description'=>'Arrays Part 3(Asssociative Array)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, perbedaan array dan associative array adalah dengan menggunakan ... sebgai pengganti nomor index pada array',
+                'question'=>'Berdasarkan video yang diputar, perbedaan array dan associative array adalah dengan menggunakan ... sebagai pengganti nomor index pada array',
                 'answer'=>'key',
                 'embed_url'=>'6RxYyPl3z-A'
             ],[
