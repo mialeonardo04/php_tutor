@@ -69,11 +69,15 @@
                 </div>
             </div>
             <p class="font-14 ml-0"><strong>{{$coursebyid->question}}</strong></p>
+            @if($coursebyid->id_course == 32)
+                <textarea class="form-control" disabled>{{str_replace("<br>","\n",$coursebyid->answer)}}</textarea>
+            @endif
             <form action="{{route('submitExCode')}}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label>Your Coding Ground</label>
                     <textarea name="code" class="form-control">@php echo htmlentities('<?php') @endphp&#13;&#10;@php echo htmlentities('   /*write your code here*/') @endphp&#13;&#10;@php echo htmlentities('?>') @endphp</textarea>
+
                 </div>
 
                 <input type="hidden" name="answer" value="{{base64_encode($coursebyid->answer)}}">

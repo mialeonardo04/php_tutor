@@ -164,21 +164,21 @@ class CourseTableSeeder extends Seeder
                 'embed_url'=>'vWsO7QbgcOA'
             ],[
                 'id_unit'=>5,
-                'description'=>'Arrays Part 2(Metode Array)',
+                'description'=>'Arrays Part 2 (Metode Array)',
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, metode array yang digunakan untuk mengurutkan nilai element array dari yang terkecil hingga terbesar adalah...',
                 'answer'=>'sort',
                 'embed_url'=>'leog-wPnyZU'
             ],[
                 'id_unit'=>5,
-                'description'=>'Arrays Part 3(Asssociative Array)',
+                'description'=>'Arrays Part 3 (Asssociative Array)',
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, perbedaan array dan associative array adalah dengan menggunakan ... sebagai pengganti nomor index pada array',
                 'answer'=>'key',
                 'embed_url'=>'6RxYyPl3z-A'
             ],[
                 'id_unit'=>5,
-                'description'=>'Arrays Part 4(Multidimensional Array)',
+                'description'=>'Arrays Part 4 (Multidimensional Array)',
                 'tipe_soal'=>1,
                 'question'=>'Berdasarkan video yang diputar, Pembuatan bentuk matriks bisa menggunakan konsep seperti pada ... array',
                 'answer'=>'multidimensional',
@@ -187,7 +187,7 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>5,
                 'description'=>'Arrays Part 5 (Implementasi Array)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'(Lihat kembali course part 3 pada unit ini) Seekor ikan memiliki kelas pisces, dan berhabitat di air, selain itu seekor ikan memiliki alat gerak berupa sirip. Buatlah array assosiative dari ikan, yang memiliki kelas, habitat, dan alat_gerak sebagai KEY, serta isikan value sesuai dengan penjelasan sebelumnya. Setelah itu cetaklah nilai(value) habitat dari array ikan!',
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
@@ -215,7 +215,7 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>6,
                 'description'=>'Conditionals Part 4 (If Bercabang)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, untuk membuat suatu logika dengan if yang bercabang, dapat ditempatkan di dalam .... (if/else if/else/semua benar) yang memenuhi syarat sebelumnya',
+                'question'=>'Berdasarkan video yang diputar, untuk membuat suatu logika dengan if yang bercabang, dapat ditempatkan di dalam .... (if/else if/else/semua benar) yang memenuhi syarat sebelumnya(pilih jawaban)',
                 'answer'=>'semua benar',
                 'embed_url'=>'X_DcaCIs4-s'
             ],[
@@ -229,7 +229,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>6,
                 'description'=>'Conditionals Part 6 (Latihan Soal)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Nilai ujian Matematika ditentukan dengan aturan berikut: Jika nilai kurang dari 50 bernilai E, untuk mendapat nilai A harus menempuh angka minimal 90, dibawah itu mendapat nilai B sampai pada angka 75, sedangkan nilai C diperoleh dari angka 70 sampai 74, Dan nilai D berada diantara jarak nilai C dan E. Jika Tony mendapat nilai 64 dalam ujian (dinyatakan sebagai variabel $score). Berapakah nilai Tony? Buatlah program untuk mencetak nilai Tony!',
+                'answer' => 'D',
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
@@ -250,14 +251,17 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>7,
                 'description'=>'Looping Part 3 (while..do.. dan do..while..)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar,dapat dirangkum sebagai berikut 1) do..while, 2) while..do.. diantara keduanya, yang memungkinkan pengeksekusian minimal 1x sebelum pengecekan syarat adalah....(1/2)',
+                'question'=>'Berdasarkan video yang diputar,dapat dirangkum sebagai berikut 1) do..while, 2) while..do.. diantara keduanya, yang memungkinkan pengeksekusian minimal 1x sebelum pengecekan syarat adalah....(1/2)(pilih jawaban)',
                 'answer'=>'1',
                 'embed_url'=>'ewSN2S-jnaM'
             ],[
                 'id_unit'=>7,
                 'description'=>'Looping Part 4 (Latihan Soal)',
                 'tipe_soal'=>2,
-                'question'=>'Buatlah program sesuai dengan instruksi',
+                'question'=>'Diberikan array sebagai berikut :
+$arr = array(\'biru\',\'kuning\',\'merah\',\'hijau\',\'ungu\');
+Tuliskan kode program untuk menampilkan output seperti dibawah ini:',
+                'answer'=>'biru<br>kuning<br>merah<br>hijau<br>ungu<br>',
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
