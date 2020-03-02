@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CourseDetail;
 use Illuminate\Http\Request;
 
 use App\Student;
@@ -83,14 +84,24 @@ class StudentController extends Controller
                         }
                     }
 
-                    Student::where('id_user','=',$uid)
-                        ->limit(1)
-                        ->update([
-                            'progress' => $progress,
-                            'avg_pretest' => $avg_pretest*20,
-                            'unit_start' => $unit_start,
-                        ]);
-
+                    if ($unit_start > 0){
+                        Student::where('id_user','=',$uid)
+                            ->limit(1)
+                            ->update([
+                                'progress' => $progress,
+                                'avg_pretest' => $avg_pretest*20,
+                                'unit_start' => $unit_start,
+                            ]);
+                    } else {
+                        Student::where('id_user','=',$uid)
+                            ->limit(1)
+                            ->update([
+                                'progress' => $progress,
+                                'avg_pretest' => $avg_pretest*20,
+                                'avg_exercise' => $avg_pretest*20,
+                                'unit_start' => $unit_start,
+                            ]);
+                    }
                 }
             }
             return redirect()->route('siswa.pretest');
@@ -176,17 +187,29 @@ class StudentController extends Controller
             $siswa = Student::all();
             $status_progress = 0;
             $id_student = 0;
+            $unittaken = 0;
+            $avg_pretest = 0;
+            $avg_course = 0;
+            $nilaifinal =0;
 
             foreach ($siswa as $murid){
                 if ($murid->id_user == Auth::user()->id){
                     $status_progress = $murid->progress;
                     $id_student = $murid->id;
+                    $unittaken = $murid->unit_start;
+                    $avg_pretest = $murid->avg_pretest;
+                    $avg_course = $murid->avg_exercise;
+                    $nilaifinal = $murid->nilai_final;
                 }
             }
 
             return view('siswa.achievements',[
                 'statusprogress'=>$status_progress,
-                'idstudent' => $id_student
+                'idstudent' => $id_student,
+                'unittaken'=> $unittaken,
+                'pretest' => $avg_pretest,
+                'course' => $avg_course,
+                'nilaifinal' => $nilaifinal,
             ]);
         }
     }
@@ -833,7 +856,12 @@ class StudentController extends Controller
             } else {
                 $lastScoreInCourse = 0;
             }
+            if($id_course>= 33){
+                $coursedetail = CourseDetail::where('id_course','=',$id_course)->first();
 
+            } else {
+                $coursedetail = [];
+            }
             $lastCourseIDUnit = DB::table('courses')
                 ->where('id_unit','=',$id_unit)
                 ->orderBy('id_course','desc')->get()
@@ -846,6 +874,7 @@ class StudentController extends Controller
                 'unit' => $unit_name,
                 'lastidcoursebyunit' => $lastCourseIDUnit,
                 'coursebyid' => $coursesByIdCourse,
+                'coursedetail' => $coursedetail,
                 'id_unit' => $id_unit,
                 'id_course' => $id_course,
                 'lastscoreincourse' => $lastScoreInCourse,
@@ -1057,18 +1086,114 @@ class StudentController extends Controller
                         $report->save();
                     }
                 }
+                $avgcourses = Report::where([
+                    'id_student'=>$id_student,
+                ])->avg('score');
+
+                Student::where([
+                    'id' => $id_student,
+                ])->limit(1)->update([
+                    'avg_exercise' => $avgcourses,
+                ]);
             } else {
                 return redirect()->route('siswa.course',[
                     'id_unit'=>$id_unit,
                     'id_course'=>$id_course
                 ])->with('messageCaution','Your must write your code before submitting');
             }
-        }
 
-        return redirect()->route('siswa.course',[
-            'id_unit'=>$id_unit,
-            'id_course'=>$id_course
-        ])->with('messageSubmitExercise','Your answer has been submitted!');
+            return redirect()->route('siswa.course',[
+                'id_unit'=>$id_unit,
+                'id_course'=>$id_course
+            ])->with('messageSubmitExercise','Your answer has been submitted!');
+        }
+    }
+
+    public function submitExerciseTeori(Request $request){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $id_student = $request['id_std'];
+            $id_course = $request['id_crs'];
+            $id_unit = $request['id_unt'];
+            $submittedans = $request['answerrequest'];
+            $answer = base64_decode($request['answer']);
+            $count_correct = strtolower(base64_decode($request['count_corr']));
+
+            $point = 0;
+            if (strpos($answer,'-') !== false){
+                $arrAns = explode('-',$answer);
+                if (strpos($submittedans,'-')){
+                    $arrAnsReq = explode('-',$submittedans);
+                    for ($i = 0; $i<count($arrAnsReq); $i++){
+                        if (in_array($arrAnsReq[$i],$arrAns)){
+                            $point+=1;
+                        }
+                    }
+                } else {
+                    if (in_array($submittedans,$arrAns)){
+                        $point+=1;
+                    }
+                }
+            } else {
+                if (strpos($submittedans,'-')){
+                    $arrAnsReq = explode('-',$submittedans);
+                    for ($j=0;$j<count($arrAnsReq);$j++){
+                        if ($answer == $arrAnsReq[$j]){
+                            $point+=1;
+                        }
+                    }
+                } else {
+                    if ($answer == $submittedans){
+                        $point+=1;
+                    }
+                }
+
+            }
+
+            $nilai = ($point/$count_correct)*100;
+            $checkDBReport = Report::where([
+                'id_student'=>$id_student,
+                'id_course'=>$id_course,
+                'id_unit'=>$id_unit])->orderBy('try_count','desc')->first();
+
+
+            if ($checkDBReport === null){
+                $report = new Report();
+                $report->id_student = $id_student;
+                $report->id_course = $id_course;
+                $report->id_unit = $id_unit;
+                $report->score = $nilai;
+                $report->jawaban_siswa = $submittedans;
+                $report->try_count = 1;
+                $report->save();
+            } else {
+                $report = new Report();
+                $report->id_student = $id_student;
+                $report->id_course = $id_course;
+                $report->id_unit = $id_unit;
+                $report->score = $nilai;
+                $report->jawaban_siswa = $submittedans;
+                $report->try_count = $checkDBReport->try_count+1;
+                $report->save();
+            }
+
+            $avgcourses = Report::where([
+                'id_student'=>$id_student,
+            ])->avg('score');
+
+            Student::where([
+                'id' => $id_student,
+            ])->limit(1)->update([
+                'avg_exercise' => $avgcourses,
+            ]);
+
+            return redirect()->route('siswa.course',[
+                'id_unit'=>$id_unit,
+                'id_course'=>$id_course
+            ])->with('messageSubmitExercise','Your answer has been submitted!');
+        }
     }
 
 

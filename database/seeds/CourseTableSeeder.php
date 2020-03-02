@@ -268,18 +268,31 @@ Tuliskan kode program untuk menampilkan output seperti dibawah ini:',
                 'id_unit'=>8,
                 'description'=>'Superglobals Part 1 ($GLOBALS)',
                 'tipe_soal'=>3,
+                'question'=>'Output kode yang diberikan adalah..',
+                'answer'=>35,
+                'embed_url'=>'33_soal.png',
+
             ],[
                 'id_unit'=>8,
                 'description'=>'Superglobals Part 2 ($_SERVER)',
                 'tipe_soal'=>3,
+                'question'=>'index "X" yang tepat dengan output yang diinginkan adalah...',
+                'answer'=>'HTTP_USER_AGENT',
+                'embed_url'=>'34_soal.png',
             ],[
                 'id_unit'=>8,
-                'description'=>'Superglobals Part 1 ($_REQUEST)',
+                'description'=>'Superglobals Part 3 ($_REQUEST)',
                 'tipe_soal'=>3,
+                'question'=>'Disedikan kode  <?php echo $_REQUEST["x"] ?> namun yang terjadi adalah ERROR. Untuk mengambil  nilai dari tag input agar tidak error, "x" harus diganti dengan..',
+                'answer'=>'warna',
+                'embed_url'=>'35_soal.png',
             ],[
                 'id_unit'=>8,
-                'description'=>'Superglobals Part 1 ($_POST dan $_GET)',
+                'description'=>'Superglobals Part 4 ($_POST&$_GET)',
                 'tipe_soal'=>3,
+                'question'=>'Apakah Kode diatas error> pilih:(ya/tidak)',
+                'answer'=>'ya',
+                'embed_url'=>'36_soal.png',
             ]
         ];
 
@@ -292,27 +305,30 @@ Tuliskan kode program untuk menampilkan output seperti dibawah ini:',
         $coursedetail = [
             [
                 'id_course' =>33,
-                'materi' =>'$GLOBALS adalah..',
-                'question' =>'Bagaimanakah blablablabla?',
-                'answer' => 'blablabla',
+                'materi' =>'$GLOBALS adalah superglobal variabel PHP yang digunakan untuk mengakses variabel global dari mana saja pada script PHP (dari dalam maupun luar fungsi pula)',
+                'question' =>'PHP menyimpan semua variabel global kedalam sebuah array yang disebut $GLOBALS[index] dimana "index" ini adalah nama variabel itu sendiri.
+
+Contoh di bawah menunjukkan cara menggunakan variabel superglobal $GLOBALS:',
+                'answer' => '33.png',
             ],
             [
                 'id_course' =>34,
-                'materi' =>'$_SERVER adalah..',
-                'question' =>'Bagaimanakah blablablabla?',
-                'answer' => 'blablabla',
+                'materi' =>'$_SERVER adalah variabel super global PHP yang menyimpan informasi tentang header, path, dan lokasi script PHP.',
+                'question' =>'Contoh di bawah ini menunjukkan cara menggunakan beberapa elemen di $_SERVER:',
+                'answer' => '34.png',
             ],
             [
                 'id_course' =>35,
-                'materi' =>'$_REQUEST adalah..',
-                'question' =>'Bagaimanakah blablablabla?',
-                'answer' => 'blablabla',
+                'materi' =>'PHP $_REQUEST adalah variabel super global PHP yang digunakan untuk mengumpulkan data setelah mengirimkan form HTML. Contoh di bawah ini menunjukkan form dengan input dan tombol submit. Saat pengguna mengirimkan data dengan mengklik "Kirim", data formulir dikirim ke file yang ditentukan dalam atribut action dari tag form',
+                'question' =>'Dalam contoh ini, kami arahkan ke file ini sendiri untuk memproses data formulir. Jika Anda ingin menggunakan file PHP lain untuk memproses data formulir, gantilah dengan nama file pilihan Anda. Lalu, kita bisa menggunakan variabel super global $_REQUEST untuk mengumpulkan nilai dari tag input:
+',
+                'answer' => '35.png',
             ],
             [
                 'id_course' =>36,
-                'materi' =>'$_GET adalah.. dan $_POST adalah',
-                'question' =>'Bagaimanakah blablablabla?',
-                'answer' => 'blablabla',
+                'materi' =>'PHP $_POST adalah variabel super global PHP yang digunakan untuk mengumpulkan data formulir setelah mengirimkan formulir HTML dengan metode = "post". $_POST juga banyak digunakan untuk mengirimkan variabel.',
+                'question' =>'PHP $_GET adalah variabel super global PHP yang digunakan untuk mengumpulkan data formulir setelah mengirimkan formulir HTML dengan metode = "get". $ _GET juga dapat mengumpulkan data yang dikirim dalam URL',
+                'answer' => '36.png',
             ],
         ];
         foreach ($coursedetail as $cd){

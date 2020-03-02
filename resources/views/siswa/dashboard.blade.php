@@ -55,7 +55,7 @@
                             @else
                                 <input id="ccc" type="text" class="knob dial3" value="0" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#f56767" readonly>
                                 <h5 class="text-light-orange padding-top-10 weight-500">My Average Courses Score</h5>
-                                <span class="font-14">0% (haven't taken a course)<i class="fa fa-line-chart"></i></span>
+                                <span class="font-14">0% (haven't taken a course / exercise)<i class="fa fa-line-chart"></i></span>
                             @endif
                         </div>
                     </div>
