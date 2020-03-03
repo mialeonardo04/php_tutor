@@ -152,7 +152,7 @@ class CourseTableSeeder extends Seeder
                 'description'=>'Operators Part 2 (Operasi Variable pada PHP)',
                 'tipe_soal'=>2,
                 'question'=>'Diketahui variabel $a memiliki nilai samadengan 4 dan variabel $b memiliki nilai 8. HITUNG dan CETAK variabel $a yang ditambah dengan variabel (nilai TETAP DALAM VARIABEL $a, ikuti cara dalam video "Operator Part 1")',
-                'answer' => '',
+                'answer' => 12,
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[

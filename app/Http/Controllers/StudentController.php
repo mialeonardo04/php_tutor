@@ -1198,6 +1198,25 @@ class StudentController extends Controller
 
 
     public function getExamTest(){
-        echo "ini exam";
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else{
+            $siswa = Student::all();
+
+            $status_progress = 0;
+            $status_pretest = 0;
+            foreach ($siswa as $murid) {
+                if ($murid->id_user == Auth::user()->id) {
+                    $status_progress = $murid->progress;
+                    $status_pretest = $murid->progress_pretest_unit;
+                }
+            }
+            return view('siswa.pretest',[
+                'uid'=> Auth::user()->id,
+                'statuspretest'=>$status_pretest,
+                'statusprogress'=>$status_progress
+            ]);
+        }
     }
 }
