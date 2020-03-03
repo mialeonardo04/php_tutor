@@ -44,7 +44,12 @@
                     <h4 class="text-blue">Exercise</h4>
                 </div>
             </div>
-            <p>{{$coursebyid->question}}</p>
+            @if($coursebyid->id_course==23 || $coursebyid->id_course==25 || $coursebyid->id_course==26
+            || $coursebyid->id_course==29 || $coursebyid->id_course==30 ||$coursebyid->id_course==31)
+                <img id="image" src="{{ asset('theme/src/images')}}/{{$coursebyid->question}}" alt="Picture">
+            @else
+                <p>{{$coursebyid->question}}</p>
+            @endif
             <form method="post" action="{{route('submitexercise')}}">
                 @csrf
                 <input type="hidden" name="tipe_soal" value="{{$coursebyid->tipe_soal}}">

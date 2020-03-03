@@ -129,8 +129,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>3,
                 'description'=>'Data Types Part 8 (Boolean)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, dalam menuliskan nilai variable boolean tidak boleh munggunakan tanda baca ...',
-                'answer'=>'kutip',
+                'question'=>'Berdasarkan video yang diputar, tipe data boolean hanya berisikan dua nilai, yaitu true dan ...',
+                'answer'=>'false',
                 'embed_url'=>'nIbRLSiNRnk'
             ], [
                 'id_unit'=>3,
@@ -195,8 +195,8 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>6,
                 'description'=>'Conditionals Part 1 (if dan else)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, Contoh masalah apakah yang digunakan dalam mengimplementasikan if dan else?',
-                'answer'=>'login',
+                'question'=>'23_soal.png',
+                'answer'=>'false',
                 'embed_url'=>'lD7Jw3uppH8'
             ],[
                 'id_unit'=>6,
@@ -209,15 +209,15 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>6,
                 'description'=>'Conditionals Part 3 (Multiple kondisi)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, untuk menulis suatu kondisi bisa menggunakan kondisi dengan if, else, dan ...',
-                'answer'=>'else if',
+                'question'=>'25_soal.png',
+                'answer'=>'B',
                 'embed_url'=>'mbZalZ9clzk'
             ],[
                 'id_unit'=>6,
                 'description'=>'Conditionals Part 4 (If Bercabang)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, untuk membuat suatu logika dengan if yang bercabang, dapat ditempatkan di dalam .... (if/else if/else/semua benar) yang memenuhi syarat sebelumnya(pilih jawaban)',
-                'answer'=>'semua benar',
+                'question'=>'26_soal.png',
+                'answer'=>'Bilangan genap bukan kelipatan 5',
                 'embed_url'=>'X_DcaCIs4-s'
             ],[
                 'id_unit'=>6,
@@ -238,22 +238,22 @@ class CourseTableSeeder extends Seeder
                 'id_unit'=>7,
                 'description'=>'Looping Part 1 (for Loop)',
                 'tipe_soal'=>1,
-                'question'=>'diberikan kode sebagai berikut for(x ; y; z). Berdasarkan video yang diputar, yang merupakan tempat sebuah variabel melakukan increment(perubahan) ada dibagian ....',
-                'answer'=>'z',
+                'question'=>'29_soal.png',
+                'answer'=>'$i+=3',
                 'embed_url'=>'0dlEeOfSOJQ'
             ],[
                 'id_unit'=>7,
                 'description'=>'Looping Part 2 (foreach Loop)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar, di dalam foreach tidak membutuhkan insiasi variable, batasan perulangan, dan increment, tetapi hanya menggunakan 1 kata kunci, yaitu ....',
-                'answer'=>'as',
+                'question'=>'30_soal.png',
+                'answer'=>'$a',
                 'embed_url'=>'pmn7OGy4xao'
             ],[
                 'id_unit'=>7,
                 'description'=>'Looping Part 3 (while..do.. dan do..while..)',
                 'tipe_soal'=>1,
-                'question'=>'Berdasarkan video yang diputar,dapat dirangkum sebagai berikut 1) do..while, 2) while..do.. diantara keduanya, yang memungkinkan pengeksekusian minimal 1x sebelum pengecekan syarat adalah....(1/2)(pilih jawaban)',
-                'answer'=>'1',
+                'question'=>'31_soal.png',
+                'answer'=>'7',
                 'embed_url'=>'ewSN2S-jnaM'
             ],[
                 'id_unit'=>7,
