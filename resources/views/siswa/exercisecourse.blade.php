@@ -4,12 +4,28 @@
 {{--    {{$coursebyid}}--}}
 {{--{{ $checkhavedone }}--}}
 @if($checkhavedone>0)
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong> You have finished this course. Your latest score: {{$lastscoreincourse}}%</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    @if($lastscoreincourse==100)
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong> You have finished this course. Your latest score: {{$lastscoreincourse}}%</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @elseif($lastscoreincourse==75)
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong> You have finished this course. Your latest score: {{$lastscoreincourse}}%</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @else
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong> You have finished this course. Your latest score: {{$lastscoreincourse}}%</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div>
         @if($id_course == $lastidcoursebyunit)
             <a href="{{route('siswa.units')}}" class="btn btn-success pull-right">Finish
