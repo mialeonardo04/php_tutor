@@ -188,6 +188,7 @@ class CourseTableSeeder extends Seeder
                 'description'=>'Arrays Part 5 (Implementasi Array)',
                 'tipe_soal'=>2,
                 'question'=>'(Lihat kembali course part 3 pada unit ini) Seekor ikan memiliki kelas pisces, dan berhabitat di air, selain itu seekor ikan memiliki alat gerak berupa sirip. Buatlah array assosiative dari ikan, yang memiliki kelas, habitat, dan alat_gerak sebagai KEY, serta isikan value sesuai dengan penjelasan sebelumnya. Setelah itu cetaklah nilai(value) habitat dari array ikan!',
+                'answer'=>'air',
                 'answer_errorstatus'=>'0',
                 'answer_outputstatus'=>'1'
             ],[
