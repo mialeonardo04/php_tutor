@@ -45,6 +45,7 @@ class UserController extends Controller
             $nilaifinal = 0;
             $id_student = 0;
             $nilairata2pretest = 0;
+            $avgcourses = 0;
             foreach ($siswa as $murid){
                 if ($murid->id_user == Auth::user()->id){
                     $status_progress = $murid->progress;
@@ -52,15 +53,12 @@ class UserController extends Controller
                     $nilaifinal = $murid->nilai_final;
                     $id_student = $murid->id;
                     $nilairata2pretest = $murid->avg_pretest;
+                    $avgcourses = $murid->avg_exercise;
                 }
             }
 
             $nilaitertinggipretest = StudentPretestAnswer::where('id_student',$id_student)->max('jumlah_benar');
-
-            $avgcourses = Report::where([
-                'id_student'=>$id_student,
-            ])->avg('score');
-
+            
             $unit_siswa = Student::select('unit_start')->where('id_user',Auth::user()->id)->first()->unit_start;
             $updateReportSiswa = Report::where('id_student', $id_student)->get()->last();
 

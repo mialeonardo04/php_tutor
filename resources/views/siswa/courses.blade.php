@@ -167,24 +167,28 @@
                     @endif
                     @if($unit_taken > 0)
                         @if($checkToExam == 1)
-                            <form method="post" action="{{route('siswa.getexam')}}">
-                                @csrf
-                                You can take the exam now
-                                <button type="submit" name="submit" class="btn btn-sm btn-primary">Take Final Exam</button>
-                            </form>
+                            You can take the exam now
+                            <a href="{{route('siswa.getexam')}}" class="btn btn-sm btn-primary">Take Final Exam</a>
+                            {{--<form method="post" action="{{route('siswa.getexam')}}">--}}
+                                {{--@csrf--}}
+                                {{--You can take the exam now--}}
+                                {{--<a href="{{route('siswa.getexam')}}" class="btn btn-sm btn-primary">Take Final Exam</a>--}}
+                                {{--<button type="submit" name="submit" class="btn btn-sm btn-primary">Take Final Exam</button>--}}
+                            {{--</form>--}}
                         @else
-                            <form method="post" action="{{route('siswa.getexam')}}">
+                            <form method="" action="">
                                 @csrf
                                 <button type="submit" name="submit" class="btn btn-sm btn-outline-secondary" disabled>Take Final Exam</button>
                             </form>
                         @endif
                     @else
-
-                        <form method="post" action="{{route('siswa.getexam')}}">
-                            @csrf
-                            You can take the exam now
-                            <button type="submit" name="submit" class="btn btn-sm btn-primary">Take Final Exam</button>
-                        </form>
+                        You can take the exam now
+                        <a href="{{route('siswa.getexam')}}" class="btn btn-sm btn-primary">Take Final Exam</a>
+                        {{--<form method="post" action="{{route('siswa.getexam')}}">--}}
+                            {{--@csrf--}}
+                            {{--You can take the exam now--}}
+                            {{--<button type="submit" name="submit" class="btn btn-sm btn-primary">Take Final Exam</button>--}}
+                        {{--</form>--}}
                     @endif
 
 
@@ -247,8 +251,9 @@
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course1}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
-                                            <form>
-                                                <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
+                                            <form method="post" action="/siswa/units/{{$unit->id}}/{{$course1}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
                                         @endif
                                     @endif
@@ -292,8 +297,9 @@
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course2}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
-                                            <form>
-                                                <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
+                                            <form method="post" action="/siswa/units/{{$unit->id}}/{{$course2}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
                                         @endif
                                     @endif
@@ -327,9 +333,13 @@
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course3}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
-                                            <form>
-                                                <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
+                                            <form method="post" action="/siswa/units/{{$unit->id}}/{{$course3}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
+                                            {{--<form>--}}
+                                                {{--<button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>--}}
+                                            {{--</form>--}}
                                         @endif
                                     @endif
                                 @endforeach
@@ -362,8 +372,9 @@
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course4}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
-                                            <form>
-                                                <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
+                                            <form method="post" action="/siswa/units/{{$unit->id}}/{{$course4}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
                                         @endif
                                     @endif
@@ -397,8 +408,9 @@
                                             </form>
                                             {{--<a href="/siswa/units/{{$unit->id}}/{{$course5}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
-                                            <form>
-                                                <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
+                                            <form method="post" action="/siswa/units/{{$unit->id}}/{{$course5}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
                                         @endif
                                     @endif
@@ -433,8 +445,9 @@
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r6) == $course6) Retake @else Take Course @endif</button>
                                             </form>
                                         @else
-                                            <form>
-                                                <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
+                                            <form method="post" action="/siswa/units/{{$unit->id}}/{{$course6}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
                                         @endif
                                     @endif
@@ -468,8 +481,9 @@
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r7) == $course7) Retake @else Take Course @endif</button>
                                             </form>
                                         @else
-                                            <form>
-                                                <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
+                                            <form method="post" action="/siswa/units/{{$unit->id}}/{{$course7}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
                                         @endif
                                     @endif
@@ -504,8 +518,9 @@
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r8) == $course8) Retake @else Take Course @endif</button>
                                             </form>
                                         @else
-                                            <form>
-                                                <button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>
+                                            <form method="post" action="/siswa/units/{{$unit->id}}/{{$course8}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
                                         @endif
                                     @endif

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CourseDetail;
+use App\StudentFinalExamRecord;
 use Illuminate\Http\Request;
 
 use App\Student;
@@ -1206,17 +1207,97 @@ class StudentController extends Controller
 
             $status_progress = 0;
             $status_pretest = 0;
+            $id_student = 0;
+            $nilai_final = 0;
+            $progres_fintes=0;
+
+            foreach ($siswa as $murid) {
+                if ($murid->id_user == Auth::user()->id) {
+                    $id_student = $murid->id;
+                    $status_progress = $murid->progress;
+                    $status_pretest = $murid->progress_pretest_unit;
+                    $nilai_final = $murid->nilai_final;
+                    $progres_fintes = $murid->chapter_done_count;
+                }
+            }
+
+            return view('siswa.finalTest',[
+                'uid'=> Auth::user()->id,
+                'idstudent'=>$id_student,
+                'statuspretest'=>$status_pretest,
+                'statusprogress'=>$status_progress,
+                'nilaifinal' => $nilai_final,
+                'progresfinaltest' => $progres_fintes,
+            ]);
+        }
+    }
+
+    public function submitTestSecOne(Request $request){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+//            echo base64_decode($request['scorefinaltest'])/20;
+            $nilai = base64_decode(request('scorefinaltest'));
+            $uid = base64_decode(request('uid'));
+            $submit = request('submit');
+            $id_tipe = request('progress');
+            $id_student = Student::where('id_user',$uid)->first()->id;
+
+
+//            echo $nilaipretest;
+            if (isset($submit)){
+                if (StudentFinalExamRecord::where(['id_student' => $id_student, 'id_tipe' =>$id_tipe])->count() > 0){
+                    StudentFinalExamRecord::where(['id_student' => $id_student, 'id_unit' =>$id_tipe])->delete();
+                }
+
+                $student_exam = new StudentFinalExamRecord();
+                $student_exam->id_student = $id_student;
+                $student_exam->id_tipe = $id_tipe;
+                $student_exam->jumlah_benar = $nilai;
+                $student_exam->save();
+
+                Student::where('id_user', '=',$uid)
+                    ->limit(1)
+                    ->update([
+                        'chapter_done_count' => $id_tipe,
+                    ]);
+
+            }
+
+            return redirect()->route('siswa.getexam');
+        }
+    }
+
+    public function goToSectionTwo(){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+//            echo $_GET['total_course'];
+            $siswa = Student::all();
+            $status_progress = 0;
+            $id_student = 0;
+
             foreach ($siswa as $murid) {
                 if ($murid->id_user == Auth::user()->id) {
                     $status_progress = $murid->progress;
-                    $status_pretest = $murid->progress_pretest_unit;
+                    $id_student = $murid->id;
                 }
             }
-            return view('siswa.pretest',[
-                'uid'=> Auth::user()->id,
-                'statuspretest'=>$status_pretest,
-                'statusprogress'=>$status_progress
+
+            return view('siswa.finaltestsec2',[
+                'statusprogress'=>$status_progress,
             ]);
+        }
+    }
+
+    public function submitSectionTwo(Request $request){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+            echo base64_decode($request['answer']);
         }
     }
 }

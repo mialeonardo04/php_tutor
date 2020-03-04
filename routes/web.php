@@ -111,10 +111,26 @@ Route::group(['middleware' => ['web']],function(){
                 'uses' => 'StudentController@submitExerciseTeori',
                 'as'=> 'submitTx',
             ]);
-            Route::post('/siswa/getExam',[
+            Route::get('/siswa/getExam',[
                 'uses' => 'StudentController@getExamTest',
                 'as' => 'siswa.getexam'
             ]);
+
+            Route::post('/submitposttestsecone',[
+                'uses' => 'StudentController@submitTestSecOne',
+                'as' => 'submitposttestsecone',
+            ]);
+
+            Route::post('/siswa/getExam',[
+                'uses' => 'StudentController@goToSectionTwo',
+                'as' => 'examch2',
+            ]);
+
+            Route::post('/siswa/postExam',[
+                'uses' => 'StudentController@submitSectionTwo',
+                'as' => 'postExam2',
+            ]);
+
         });
 
 
