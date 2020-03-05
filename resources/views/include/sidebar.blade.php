@@ -18,15 +18,15 @@
                                 <span class="fa fa-calendar-o"></span><span class="mtext">Student Data </span>
                             </a>
                         </li>
-					    <li class="dropdown">
-						    <a href="javascript:;" class="dropdown-toggle">
-							    <span class="fa fa-pie-chart"></span><span class="mtext">Report</span>
-						    </a>
-						    <ul class="submenu">
-							    <li><a href="#">Course Unit</a></li>
-							    <li><a href="#">Course Exercise</a></li>
-						    </ul>
-					    </li>
+					    {{--<li class="dropdown">--}}
+						    {{--<a href="javascript:;" class="dropdown-toggle">--}}
+							    {{--<span class="fa fa-pie-chart"></span><span class="mtext">Report</span>--}}
+						    {{--</a>--}}
+						    {{--<ul class="submenu">--}}
+							    {{--<li><a href="#">Course Unit</a></li>--}}
+							    {{--<li><a href="#">Course Exercise</a></li>--}}
+						    {{--</ul>--}}
+					    {{--</li>--}}
                     @else
                         @if($statusprogress == 1)
                             <li>

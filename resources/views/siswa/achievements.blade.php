@@ -114,7 +114,7 @@
                                         <div class="invoice-sub">Courses</div>
                                         <div class="invoice-rate">{{$unittaken}}</div>
                                         <div class="invoice-hours"></div>
-                                        <div class="invoice-subtotal"><span class="weight-600">{{$course}}</span></div>
+                                        <div class="invoice-subtotal"><span class="weight-600">@if($course !== null){{$course}} @else - <a href="{{route('siswa.units')}}" class="text-primary">Take Now</a> @endif</span></div>
                                     </li>
                                     <li class="clearfix">
                                         <div class="invoice-sub">Final Test</div>

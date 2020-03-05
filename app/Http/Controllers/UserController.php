@@ -313,8 +313,7 @@ class UserController extends Controller
         } else {
 
             $students = DB::table('students')
-                ->join('users','students.id_user','=','users.id')
-                ->select('students.*','users.*')
+                ->select('*')
                 ->get();
 
             return view('pengajar.datasiswa',[

@@ -17,13 +17,12 @@
                     <th>Exercise (avg)</th>
                     <th>Final Score</th>
                     <th>Unit Taken</th>
-                    <th>IP Address</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach($students as $student)
                         <tr data-href="{{route('pengajar.detail.datasiswa',['id_user'=> $student->id_user,'id_student'=>$student->id])}}">
-                            <td>{{$student->name}}</td>
+                            <td>{{$student->name}}-{{$student->id_user}}-{{$student->id}}</td>
                             @if($student->avg_pretest === NULL)
                                 <td><p class="text-danger">NO DATA</p></td>
                             @else
@@ -44,7 +43,6 @@
                             @else
                                 <td>{{$student->unit_start}} chapter(s)</td>
                             @endif
-                            <td>{{$student->last_login_ip}}</td>
                         </tr>
                     @endforeach
                 </tbody>
