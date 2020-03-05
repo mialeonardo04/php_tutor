@@ -1,7 +1,13 @@
 @extends('layout.masterdashboard')
 @section('content')
+    <style>
+        #formaction2{
+            display: none;
+            text-align: center;
+        }
+    </style>
     {{--live coding--}}
-    <div id="notiftime" class="pull-right text-danger font-18"><strong>This task will end in <span id="time">25:00</span></strong></div>
+    <div id="notiftime" class="pull-right text-danger font-18"><strong>This task will end in <span id="time">20:00</span></strong></div>
     <div id="hehe">
         <div class="min-height-200px">
             <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
@@ -27,11 +33,17 @@
                     <input type="hidden" name="answer" value="{{base64_encode($strings)}}">
                     <input type="hidden" name="progress" value="2">
                     <input type="hidden" name="id_std" value="{{$idstudent}}">
-                    {{--<input type="hidden" name="id_unt" value="{{$coursebyid->id_unit}}">--}}
-                    {{--<button type="submit" class="btn btn-primary pull-left">Submit Answer</button>--}}
-                    <input type="submit" class="btn btn-primary pull-right" value="Submit Answer"/>
+
+                    <input type="submit" class="btn btn-primary pull-right" name="submit" value="Submit Answer"/>
                 </form>
             </div>
         </div>
     </div>
+    <div id="formaction2" class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+        <p><strong>YOU ARE OUT OF TIME! </strong></p>
+        <div class="btn-list">
+            <a href="{{route('siswa.getexam')}}" class="btn-danger btn-lg btn-block">Retake Your Exam</a>
+        </div>
+    </div>
+
 @endsection

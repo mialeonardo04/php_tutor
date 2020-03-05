@@ -200,6 +200,8 @@
                 if (--timer < 0) {
                     document.getElementById('notiftime').style.display = "none";
                     document.getElementById('hehe').style.display = "none";
+                    document.getElementById('formaction2').style.display = "block";
+
                 }
                 // if ((--timer < 10) && (--timer >=0)) {
                 //     document.getElementById('notiftime').style.color = "red";
@@ -208,7 +210,7 @@
         }
 
         jQuery(function ($) {
-            var fiveMinutes = 60 * 25,
+            var fiveMinutes = 60 * 20,
                 display = $('#time');
             startTimer(fiveMinutes, display);
         });

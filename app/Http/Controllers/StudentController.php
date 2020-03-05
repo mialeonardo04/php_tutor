@@ -1299,6 +1299,12 @@ class StudentController extends Controller
             return redirect('/login');
         } else {
 //            echo base64_decode($request['answer']);
+            $submit = $request['submit'];
+            if (isset($submit)){
+
+            } else {
+
+            }
             $id_tipe = request('progress');
             $id_student = $request['id_std'];
             $answer = base64_decode($request['answer']);
@@ -1374,7 +1380,7 @@ class StudentController extends Controller
             }
 
             return redirect()->route('siswa.getexam')
-                ->with('messageSubmitTestCode','Your answer has been submitted!');
+                ->with('messageSubmitTestCode','Your have finished the course. Congratulatin! You can see your achievement, now.');
         }
     }
 
