@@ -1248,13 +1248,13 @@ class StudentController extends Controller
 //            echo $nilaipretest;
             if (isset($submit)){
                 if (StudentFinalExamRecord::where(['id_student' => $id_student, 'id_tipe' =>$id_tipe])->count() > 0){
-                    StudentFinalExamRecord::where(['id_student' => $id_student, 'id_unit' =>$id_tipe])->delete();
+                    StudentFinalExamRecord::where(['id_student' => $id_student, 'id_tipe' =>$id_tipe])->delete();
                 }
 
                 $student_exam = new StudentFinalExamRecord();
                 $student_exam->id_student = $id_student;
                 $student_exam->id_tipe = $id_tipe;
-                $student_exam->jumlah_benar = $nilai;
+                $student_exam->jumlah_benar = $nilai*5;
                 $student_exam->save();
 
                 Student::where('id_user', '=',$uid)
@@ -1288,6 +1288,7 @@ class StudentController extends Controller
 
             return view('siswa.finaltestsec2',[
                 'statusprogress'=>$status_progress,
+                'idstudent' => $id_student,
             ]);
         }
     }
@@ -1297,7 +1298,104 @@ class StudentController extends Controller
             Auth::logout();
             return redirect('/login');
         } else {
-            echo base64_decode($request['answer']);
+//            echo base64_decode($request['answer']);
+            $id_tipe = request('progress');
+            $id_student = $request['id_std'];
+            $answer = base64_decode($request['answer']);
+
+            $code = rawurlencode($request['code']);
+            $apiUser = "rosihanari";
+            $apiAuth = "123456";
+            $url = "http://rosihanari.net/api/php-api.php";
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->request('POST',$url,[
+                'form_params'=>[
+                    'apiuser' => $apiUser,
+                    'apiauth' => $apiAuth,
+                    'input' => "",
+                    'output' => $answer,
+                    'callFunction' => "",
+                    'code' => $code,
+                ]
+            ]);
+
+            $response = $response->getBody();
+
+            $output = json_decode($response);
+
+            if (StudentFinalExamRecord::where(['id_student' => $id_student, 'id_tipe' => $id_tipe])->count() > 0) {
+                StudentFinalExamRecord::where(['id_student' => $id_student, 'id_tipe' => $id_tipe])->delete();
+            }
+
+            $reportexam = new StudentFinalExamRecord();
+
+            if (!empty($output)&& $output->output != ""){
+                if (strpos($output->output,"error")){
+
+                    $reportexam->id_student = $id_student;
+                    $reportexam->id_tipe = $id_tipe;
+                    $reportexam->jumlah_benar = 0;
+                    $reportexam->save();
+                } else {
+                    $reportexam->id_student = $id_student;
+                    $reportexam->id_tipe = $id_tipe;
+                    if ($output->outputStatus == 0){
+                        if (strpos($request['code'],"for") !==  false){
+                            $score = 75;
+                        } else {
+                            $score = 50;
+                        }
+                    } else {
+                        if (strpos($request['code'],"for") !==  false){
+                            $score = 100;
+                        } else {
+                            $score = 50;
+                        }
+                    }
+
+                    $reportexam->jumlah_benar = $score;
+                    $reportexam->save();
+                }
+                $avgFinalTest = StudentFinalExamRecord::where([
+                    'id_student' => $id_student,
+                ])->avg('jumlah_benar');
+
+                Student::where([
+                    'id' => $id_student,
+                ])->limit(1)->update([
+                    'nilai_final' => round($avgFinalTest),
+                    'chapter_done_count' => 2,
+                ]);
+
+            } else {
+                return redirect()->route('siswa.getexam')
+                    ->with('messageCaution','Your must write your code before submitting');
+            }
+
+            return redirect()->route('siswa.getexam')
+                ->with('messageSubmitTestCode','Your answer has been submitted!');
+        }
+    }
+
+    public function resetExam(Request $request){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+            $id_student = base64_decode($request['id_std']);
+            Student::where([
+                'id' => $id_student,
+            ])->limit(1)->update([
+                'chapter_done_count' => 0,
+                'nilai_final' => null,
+            ]);
+            StudentFinalExamRecord::where([
+                'id_student' => $id_student,
+                ])->delete();
+
+            return redirect()->route('siswa.getexam')
+                ->with('messageSubmitTestCode','Your Exam Record has been destroyed!');
         }
     }
 }

@@ -64,7 +64,18 @@
         </div>
     </div>
 @else
-    Selesai
+    <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+        <p>You have finished the Final Exam, <span class="text-primary">Congratulation! Your latest score is <strong class="@if($nilaifinal>= 80) text-success @elseif($nilaifinal<60) text-danger @else text-primary @endif">{{$nilaifinal}}</strong>.</span><br> Click the 'Reset Test' button below if you want to retake your exam.</p>
+        <p>Good Luck!</p>
+        <div class="btn-list">
+            <form method="post" action="{{route('resetExam')}}">
+                @csrf
+                <input type="hidden" name="id_std" value="{{base64_encode($idstudent)}}">
+                <button type="submit" name="submit" class="btn-info btn-lg btn-block" style="text-align: center">Reset Test</button>
+            </form>
+            {{--<a href="{{route('siswa.getexam')}}" class="btn-info btn-lg btn-block" style="text-align: center">Start</a>--}}
+        </div>
+    </div>
 @endif
 
 @endsection

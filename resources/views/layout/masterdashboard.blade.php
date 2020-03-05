@@ -23,6 +23,12 @@
     </div>
 </div>
 @include('include.script')
+@if(Session::has('messageSubmitTestCode'))
+    <script type="text/javascript"> sweetAlert("Succeed", "{{ Session::get('messageSubmitTestCode') }}", "success"); </script>
+@endif
+@if(Session::has('messageCaution'))
+    <script type="text/javascript"> sweetAlert("Failed", "{{ Session::get('messageCaution') }}", "error"); </script>
+@endif
 @if(Auth::user()->roles[0]['name']=="siswa")
     <script>
         var aaa = document.getElementById("aaa").value;

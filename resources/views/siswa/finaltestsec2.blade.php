@@ -1,7 +1,7 @@
 @extends('layout.masterdashboard')
 @section('content')
     {{--live coding--}}
-    <div id="notiftime" class="pull-right text-success">This task will end in <span id="time">20:00</span></div>
+    <div id="notiftime" class="pull-right text-danger font-18"><strong>This task will end in <span id="time">25:00</span></strong></div>
     <div id="hehe">
         <div class="min-height-200px">
             <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
@@ -25,12 +25,11 @@
                     </div>
 
                     <input type="hidden" name="answer" value="{{base64_encode($strings)}}">
-                    <input type="hidden" name="progress" value="1">
-                    {{--<input type="hidden" name="id_std" value="{{$idstudent}}">--}}
-                    {{--<input type="hidden" name="id_crs" value="{{$coursebyid->id_course}}">--}}
+                    <input type="hidden" name="progress" value="2">
+                    <input type="hidden" name="id_std" value="{{$idstudent}}">
                     {{--<input type="hidden" name="id_unt" value="{{$coursebyid->id_unit}}">--}}
                     {{--<button type="submit" class="btn btn-primary pull-left">Submit Answer</button>--}}
-                    <input type="submit" class="btn btn-primary pull-left" value="Submit Answer"/>
+                    <input type="submit" class="btn btn-primary pull-right" value="Submit Answer"/>
                 </form>
             </div>
         </div>

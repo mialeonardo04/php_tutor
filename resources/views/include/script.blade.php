@@ -157,8 +157,8 @@
 
             // create ace editor
             var editor = ace.edit()
-            editor.container.style.height = "200px";
-            editor.container.style.width = "500px";
+            editor.container.style.height = "400px";
+            editor.container.style.width = "1000px";
             editor.setTheme("ace/theme/monokai");
             editor.session.setMode("ace/mode/php");
             editor.session.setValue(textarea.value);
@@ -201,11 +201,14 @@
                     document.getElementById('notiftime').style.display = "none";
                     document.getElementById('hehe').style.display = "none";
                 }
+                // if ((--timer < 10) && (--timer >=0)) {
+                //     document.getElementById('notiftime').style.color = "red";
+                // }
             }, 1000);
         }
 
         jQuery(function ($) {
-            var fiveMinutes = 60 * 20,
+            var fiveMinutes = 60 * 25,
                 display = $('#time');
             startTimer(fiveMinutes, display);
         });

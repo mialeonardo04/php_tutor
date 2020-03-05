@@ -131,6 +131,11 @@ Route::group(['middleware' => ['web']],function(){
                 'as' => 'postExam2',
             ]);
 
+            Route::post('/siswa/resetExam',[
+                'uses' => 'StudentController@resetExam',
+                'as' => 'resetExam',
+            ]);
+
         });
 
 
