@@ -329,7 +329,7 @@ class UserController extends Controller
             return redirect('/login');
         } else {
             $whereClause = [
-                'students.id' => $id_student,
+                'students.id_user' => $id_user,
             ];
             $studentById = DB::table('students')
                 ->join('users','students.id_user','=','users.id')
