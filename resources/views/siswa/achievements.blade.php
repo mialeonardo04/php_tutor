@@ -62,7 +62,6 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </div>
             <div class="col-xl-9 col-lg-8 col-md-8 col-sm-12 mb-30">
@@ -137,7 +136,19 @@
                                                 <img src="{{ asset('theme/vendors/images/phpitutor_logo.png') }}" alt="">
                                             </div>
                                             <div class="invoice-rate font-16 weight-600">{{date('d M Y')}}</div>
-                                            <div class="invoice-subtotal">@if(($nilaifinal>=60)&&($course>=60))<span class="weight-600 font-24 text-success">PASSED</span> @else <span class="weight-600 font-24 text-danger">FAILED</span> @endif</div>
+
+                                            @if(($nilaifinal>=70)&&($course>=75))
+                                                <div class="invoice-subtotal">
+                                                    <span class="weight-600 font-24 text-success">PASSED</span>
+                                                </div>
+                                            @else
+                                                <div class="invoice-subtotal">
+                                                    <span class="weight-600 font-24 text-danger">FAILED</span>
+                                                    <p class="@if($course>=75) text-success @else text-danger @endif font-12">Course minimum score: 75 @if($course>=75)<i class="icon-copy ion-checkmark-round"></i> @else <i class="icon-copy ion-close-round"></i> @endif </p>
+                                                    <p class="@if($nilaifinal>=70) text-success @else text-danger @endif font-12">Final Test minimum score: 70 @if($nilaifinal>=70)<i class="icon-copy ion-checkmark-round"></i> @else <i class="icon-copy ion-close-round"></i> @endif </p>
+                                                </div>
+                                            @endif
+
                                         </li>
                                     </ul>
                                 </div>
