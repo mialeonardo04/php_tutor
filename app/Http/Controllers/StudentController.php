@@ -772,6 +772,7 @@ class StudentController extends Controller
                 'statusprogress'=>$status_progress,
                 'idstudent' => $id_student,
                 'courses' => $courses,
+                'id_unit' => $id_unit,
                 'unit' => $unit_name,
                 'reports' => $report,
                 'reportsC1' => $reportC1,

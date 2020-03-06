@@ -1,6 +1,34 @@
 @extends('layout.mastercourse')
 @section('content')
     <div class="row clearfix progress-box">
+        <div class="col-sm-12 col-md-12 col-lg-12 mb-30">
+            <div class="card box-shadow">
+                <div class="card-body">
+                    <h5 class="card-title weight-500">Learning Outcome</h5>
+
+                    @if($id_unit ==  1)
+                        <p class="card-text">Peserta didik mampu mengenal struktur folder, dan sintaks dasar dari bahasa PHP <i>script</i> beserta cara menginstal PHP di komputer</p>
+                    @elseif($id_unit ==  2)
+                        <p class="card-text">Peserta didik mampu membuat dan mengoperasikan variabel pada bahasa PHP <i>script</i></p>
+                    @elseif($id_unit ==  3)
+                        <p class="card-text">Peserta didik mampu memahami, mengoperasikan berbagai macam tipe data dengan bahasa PHP <i>script</i></p>
+                    @elseif($id_unit ==  4)
+                        <p class="card-text">Peserta didik mampu memahami berbagai macam operator aritmatika serta mampu membuat operasi aritmatika dengan bahasa PHP <i>script</i></p>
+                    @elseif($id_unit ==  5)
+                        <p class="card-text">Peserta didik mampu mengenal dan memahami serta dapat mengoperasikan bermacam - macam tipe array pada bahasa PHP <i>script</i></p>
+                    @elseif($id_unit ==  6)
+                        <p class="card-text">Peserta didik mampu memahami bermacam - macam jenis percabangan dan mampu membuat operasi kondisional dengan bahasa PHP <i>script</i></p>
+                    @elseif($id_unit ==  7)
+                        <p class="card-text">Peserta didik mampu memahami fungsi dari looping dan membuat operasi perulangan(looping) dengan bahasa PHP <i>script</i></p>
+                    @else
+                        <p class="card-text">Peserta didik mampu membuat, mengoperasikan serta memahami variabel super global pada bahasa PHP <i>script</i></p>
+                    @endif
+                    <p class="card-text"><small class="text-muted pull-right">Good Luck:)</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix progress-box">
         <div class="col-lg-6 col-md-6 col-sm-12 mb-30">
             <div class="bg-white pd-20 box-shadow border-radius-5 height-100-p">
                 <div class="project-info clearfix">
@@ -139,6 +167,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="col-lg-6 col-md-6 col-sm-12 mb-30">
             <div class="bg-white pd-20 box-shadow border-radius-5 height-100-p">
