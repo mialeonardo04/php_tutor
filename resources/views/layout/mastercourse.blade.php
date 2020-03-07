@@ -23,6 +23,39 @@
     </div>
 </div>
 @include('include.script')
+@if(Session::has('messageSubmitExerciseAlgError'))
+    <script type="text/javascript"> sweetAlert("Caution", "{{ Session::get('messageSubmitExerciseAlgError') }}", "info"); </script>
+@endif
+
+@if(Session::has('messageSubmitExerciseSynError'))
+    <script>
+        sweetAlert("<strong class = 'text-danger'>{{Session::get('messageSubmitExerciseSynError')}}!</strong>",'You need to get <b>more parctice</b>, please follow <b><a href= "@if($id_course == 3){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>2])}}@elseif($id_course == 6){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>5])}}@elseif($id_course == 8){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>7])}}@elseif($id_course == 10){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>9])}}@elseif($id_course == 12){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>11])}}@elseif($id_course == 15){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>13])}}@elseif($id_course == 17){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>16])}}@elseif($id_course == 22){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>20])}}@elseif($id_course == 28){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>26])}}@elseif($id_course == 32){{route("siswa.course",["id_unit"=>$id_unit,"id_course"=>30])}}@endif" class = \'text-danger\'>this link</a></b> to get your course.',"info");
+    </script>
+@endif
+@if(Session::has('messageSubmitExerciseSynError'))
+    <script>
+        SweetAlert({
+            title: '<strong class = \'text-danger\'>{{Session::get('messageSubmitExerciseSynError')}}!</strong>',
+            icon: 'info',
+            html:
+                'You need to get <b>more parctice</b>, please follow ' +
+                '<b><a href= "@if($id_course == 3){{route('siswa.course',['id_unit'=>$id_unit,'id_course'=>2])}}
+
+
+
+
+
+
+
+
+                    @endif
+                    " class = \'text-danger\'>this link</a></b> to get your course.' +
+                'Good Luck',
+            showCancelButton: false, // There won't be any cancel button
+            showConfirmButton: false // There won't be any confirm button
+        })
+    </script>
+@endif
 @if(Session::has('messageSubmitExercise'))
     <script type="text/javascript"> sweetAlert("Succeed", "{{ Session::get('messageSubmitExercise') }}", "success"); </script>
 @endif

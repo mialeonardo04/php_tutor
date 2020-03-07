@@ -1009,6 +1009,7 @@ class StudentController extends Controller
 
             if (!empty($output)&& $output->output != ""){
                 if (strpos($output->output,"error")){
+                    $status = 1;
                     $resOutputERROR = $output->output;
                     $resOutputStatus = $output->errorDetail;
 
@@ -1057,10 +1058,12 @@ class StudentController extends Controller
                         $report->id_course = $id_course;
 
                         if ($resOutputStatus == 0){
+                            $status = 2;
                             $report->error_type = "Algorithm Error";
                             $report->error_desc = "Missmatch Answer: ".$answer." -> ".$resOutputOK;
                             $report->score = 75;
                         } else {
+                            $status = 0;
                             $report->error_type = "Correct!";
                             $report->error_desc = "Good Answer: (".$resOutputOK.")";
                             $report->score = 100;
@@ -1075,10 +1078,12 @@ class StudentController extends Controller
                         $report->id_course = $id_course;
 
                         if ($resOutputStatus == 0){
+                            $status = 2;
                             $report->error_type = "Algorithm Error";
                             $report->error_desc = "Missmatch Answer: ".$answer." -> ".$resOutputOK;
                             $report->score = 75;
                         } else {
+                            $status = 0;
                             $report->error_type = "Correct!";
                             $report->error_desc = "Good Answer: (".$resOutputOK.")";
                             $report->score = 100;
@@ -1104,10 +1109,22 @@ class StudentController extends Controller
                 ])->with('messageCaution','Your must write your code before submitting');
             }
 
+            if ($status == 1){
+                return redirect()->route('siswa.course',[
+                    'id_unit'=>$id_unit,
+                    'id_course'=>$id_course
+                ])->with('messageSubmitExerciseSynError','Syntax Error in your answer!');
+            } elseif ($status == 2){
+                return redirect()->route('siswa.course',[
+                    'id_unit'=>$id_unit,
+                    'id_course'=>$id_course
+                ])->with('messageSubmitExerciseAlgError','An error occur with your algorthm!');
+            }
+
             return redirect()->route('siswa.course',[
                 'id_unit'=>$id_unit,
                 'id_course'=>$id_course
-            ])->with('messageSubmitExercise','Your answer has been submitted!');
+            ])->with('messageSubmitExercise','Correct Answer!');
         }
     }
 

@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach($students as $student)
                         <tr data-href="{{route('pengajar.detail.datasiswa',['id_user'=> $student->id_user,'id_student'=>$student->id])}}">
-                            <td>{{$student->name}}-{{$student->id_user}}-{{$student->id}}</td>
+                            <td>{{$student->name}}</td>
                             @if($student->avg_pretest === NULL)
                                 <td><p class="text-danger">NO DATA</p></td>
                             @else

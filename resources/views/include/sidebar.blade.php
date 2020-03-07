@@ -15,18 +15,14 @@
                     @if(Auth::user()->roles[0]['name'] == "pengajar")
                         <li>
                             <a href="{{route('pengajar.datasiswa')}}" class="dropdown-toggle no-arrow">
-                                <span class="fa fa-calendar-o"></span><span class="mtext">Student Data </span>
+                                <span class="fa fa-mortar-board"></span><span class="mtext">Student Data </span>
                             </a>
                         </li>
-					    {{--<li class="dropdown">--}}
-						    {{--<a href="javascript:;" class="dropdown-toggle">--}}
-							    {{--<span class="fa fa-pie-chart"></span><span class="mtext">Report</span>--}}
-						    {{--</a>--}}
-						    {{--<ul class="submenu">--}}
-							    {{--<li><a href="#">Course Unit</a></li>--}}
-							    {{--<li><a href="#">Course Exercise</a></li>--}}
-						    {{--</ul>--}}
-					    {{--</li>--}}
+                        <li>
+                            <a href="#" class="dropdown-toggle no-arrow">
+                                <span class="fa fa-info-circle"></span><span class="mtext">Unit Courses Record </span>
+                            </a>
+                        </li>
                     @else
                         @if($statusprogress == 1)
                             <li>
