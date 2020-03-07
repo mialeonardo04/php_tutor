@@ -19,7 +19,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-toggle no-arrow">
+                            <a href="{{route('pengajar.unitrecords')}}" class="dropdown-toggle no-arrow">
                                 <span class="fa fa-info-circle"></span><span class="mtext">Unit Courses Record </span>
                             </a>
                         </li>

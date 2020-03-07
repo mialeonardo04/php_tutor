@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Unit;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
@@ -354,6 +355,58 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function getUnitView(){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+            $units = Unit::all();
+
+            return view('pengajar.unitcourserecord',[
+                'units' => $units,
+            ]);
+        }
+    }
+
+    public function getDetailUnitRecord($id_unit){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+            $reports = DB::table('reports')
+                ->join('units','reports.id_unit','=','units.id')
+                ->join('courses','reports.id_course','=','courses.id_course')
+                ->join('students','reports.id_student','=','students.id')
+                ->select('reports.*','students.name as name','courses.description','units.id as unit_id','courses.tipe_soal')
+                ->where('reports.id_unit','=',$id_unit)
+                ->get();
+
+
+            return view('pengajar.reportByUnit',[
+                'reports' => $reports,
+            ]);
+        }
+    }
+
+    public function getDetailReportSelect($id_report){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+            $detailReport = DB::table('reports')
+                ->join('units','reports.id_unit','=','units.id')
+                ->join('courses','reports.id_course','=','courses.id_course')
+                ->join('students','reports.id_student','=','students.id')
+                ->where('reports.id','=',$id_report)
+                ->first();
+
+            return view('pengajar.getDetailReportSelect',[
+                'detailreport' => $detailReport,
+            ]);
+        }
+    }
+
     public function logout(){
         User::where('id','=',Auth::user()->id)
             ->update([

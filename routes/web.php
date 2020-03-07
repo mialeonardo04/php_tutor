@@ -156,6 +156,18 @@ Route::group(['middleware' => ['web']],function(){
                 'uses' => 'UserController@getDetailDataSiswa',
                 'as' => 'pengajar.detail.datasiswa'
             ]);
+            Route::get('/pengajar/unitrecords',[
+                'uses' => 'UserController@getUnitView',
+                'as'=> 'pengajar.unitrecords'
+            ]);
+            Route::get('/pengajar/unitrecords/{id_unit}',[
+                'uses' => 'UserController@getDetailUnitRecord',
+                'as' => 'pengajar.unitrecords.detail'
+            ]);
+            Route::get('/pengajar/detailreport/{id_report}',[
+                'uses' => 'UserController@getDetailReportSelect',
+                'as' => 'pengajar.detail.report.select'
+            ]);
         });
     });
 });
