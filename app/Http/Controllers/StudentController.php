@@ -80,7 +80,7 @@ class StudentController extends Controller
                     $avg_pretest = $student_answer::where('id_student',$id_student)->avg('jumlah_benar');
                     $std_ptest = StudentPretestAnswer::where('id_student',$id_student)->get();
                     foreach ($std_ptest as $pt){
-                        if ($pt->jumlah_benar<3){
+                        if ($pt->jumlah_benar<=3){
                             $unit_start ++;
                         }
                     }

@@ -169,14 +169,8 @@
                         @if($checkToExam == 1)
                             You can take the exam now
                             <a href="{{route('siswa.getexam')}}" class="btn btn-sm btn-primary">Take Final Exam</a>
-                            {{--<form method="post" action="{{route('siswa.getexam')}}">--}}
-                                {{--@csrf--}}
-                                {{--You can take the exam now--}}
-                                {{--<a href="{{route('siswa.getexam')}}" class="btn btn-sm btn-primary">Take Final Exam</a>--}}
-                                {{--<button type="submit" name="submit" class="btn btn-sm btn-primary">Take Final Exam</button>--}}
-                            {{--</form>--}}
                         @else
-                            <form method="" action="">
+                            <form>
                                 @csrf
                                 <button type="submit" name="submit" class="btn btn-sm btn-outline-secondary" disabled>Take Final Exam</button>
                             </form>
@@ -184,11 +178,6 @@
                     @else
                         You can take the exam now
                         <a href="{{route('siswa.getexam')}}" class="btn btn-sm btn-primary">Take Final Exam</a>
-                        {{--<form method="post" action="{{route('siswa.getexam')}}">--}}
-                            {{--@csrf--}}
-                            {{--You can take the exam now--}}
-                            {{--<button type="submit" name="submit" class="btn btn-sm btn-primary">Take Final Exam</button>--}}
-                        {{--</form>--}}
                     @endif
 
 
@@ -216,8 +205,8 @@
                             <td>{{$course1}}</td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                        @if($score->jumlah_benar*20 < 70)
+                                            <td><p class="@if($score->jumlah_benar*20 == 60) text-warning @else text-danger @endif">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
                                             <td>
                                                 @if(count($r1) == $course1)
                                                     <p class="text-success">Finished</p>
@@ -244,12 +233,11 @@
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
+                                        @if($score->jumlah_benar*20 < 70)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course1}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r1) == $course1) Retake @else Take Course @endif</button>
                                             </form>
-                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course1}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course1}}">
                                                 @csrf
@@ -263,8 +251,8 @@
                             <td>{{$course2}}</td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                        @if($score->jumlah_benar*20 < 70)
+                                            <td><p class="@if($score->jumlah_benar*20 == 60) text-warning @else text-danger @endif">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
                                             <td>
                                                 @if(count($r2) == $course2)
                                                     <p class="text-success">Finished</p>
@@ -290,12 +278,11 @@
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
+                                        @if($score->jumlah_benar*20 < 70)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course2}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r2) == $course2) Retake @else Take Course @endif</button>
                                             </form>
-                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course2}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course2}}">
                                                 @csrf
@@ -309,8 +296,8 @@
                             <td>{{$course3}}</td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                        @if($score->jumlah_benar*20 < 70)
+                                            <td><p class="@if($score->jumlah_benar*20 == 60) text-warning @else text-danger @endif">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
                                             <td>@if(count($r3) == $course3)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
@@ -326,20 +313,16 @@
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
+                                        @if($score->jumlah_benar*20 < 70)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course3}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r3) == $course3) Retake @else Take Course @endif</button>
                                             </form>
-                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course3}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course3}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-primary btn-block">Learn Again</button>
                                             </form>
-                                            {{--<form>--}}
-                                                {{--<button type="submit" class="btn btn-outline-secondary btn-block" disabled>Not Available</button>--}}
-                                            {{--</form>--}}
                                         @endif
                                     @endif
                                 @endforeach
@@ -348,8 +331,8 @@
                             <td>{{$course4}}</td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                        @if($score->jumlah_benar*20 < 70)
+                                            <td><p class="@if($score->jumlah_benar*20 == 60) text-warning @else text-danger @endif">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
                                             <td>@if(count($r4) == $course4)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
@@ -365,12 +348,11 @@
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
+                                        @if($score->jumlah_benar*20 < 70)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course4}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r4) == $course4) Retake @else Take Course @endif</button>
                                             </form>
-                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course4}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course4}}">
                                                 @csrf
@@ -384,8 +366,8 @@
                             <td>{{$course5}}</td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                        @if($score->jumlah_benar*20 < 70)
+                                            <td><p class="@if($score->jumlah_benar*20 == 60) text-warning @else text-danger @endif">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
                                             <td>@if(count($r5) == $course5)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
@@ -401,12 +383,11 @@
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
+                                        @if($score->jumlah_benar*20 < 70)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course5}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r5) == $course5) Retake @else Take Course @endif</button>
                                             </form>
-                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course5}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
                                         @else
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course5}}">
                                                 @csrf
@@ -421,8 +402,8 @@
 
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                        @if($score->jumlah_benar*20 < 70)
+                                            <td><p class="@if($score->jumlah_benar*20 == 60) text-warning @else text-danger @endif">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
                                             <td>@if(count($r6) == $course6)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
@@ -438,8 +419,7 @@
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course6}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
+                                        @if($score->jumlah_benar*20 < 70)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course6}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r6) == $course6) Retake @else Take Course @endif</button>
@@ -457,8 +437,8 @@
                             <td>{{$course7}}</td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                        @if($score->jumlah_benar*20 < 70)
+                                            <td><p class="@if($score->jumlah_benar*20 == 60) text-warning @else text-danger @endif">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
                                             <td>@if(count($r7) == $course7)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
@@ -474,8 +454,7 @@
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            {{--<a href="/siswa/units/{{$unit->id}}/{{$course7}}" class="btn btn-outline-success btn-block">Take Course</a>--}}
+                                        @if($score->jumlah_benar*20 < 70)
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course7}}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-success btn-block">@if(count($r7) == $course7) Retake @else Take Course @endif</button>
@@ -494,8 +473,8 @@
 
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
-                                            <td><p class="text-danger">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
+                                        @if($score->jumlah_benar*20 < 70)
+                                            <td><p class="@if($score->jumlah_benar*20 == 60) text-warning @else text-danger @endif">{{$score->jumlah_benar*20}}% - <strong>Needs Improvement</strong></p></td>
                                             <td>@if(count($r8) == $course8)<p class="text-success">Finished</p>@else <p class="text-danger">Not Finished</p> @endif</td>
                                         @else
                                             @if($score->jumlah_benar*20 == 100)
@@ -511,7 +490,7 @@
                             <td>
                                 @foreach($nilaiPretest as $score)
                                     @if($score->id_unit == $unit->id)
-                                        @if($score->jumlah_benar*20 < 60)
+                                        @if($score->jumlah_benar*20 < 70)
 
                                             <form method="post" action="/siswa/units/{{$unit->id}}/{{$course8}}">
                                                 @csrf
