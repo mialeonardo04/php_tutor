@@ -80,6 +80,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Record Course</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#setting" role="tab">Record Final Test</a>
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <!-- Timeline Tab start -->
@@ -124,6 +127,12 @@
                                 <!-- Tasks Tab start -->
                                 <div class="tab-pane fade" id="tasks" role="tabpanel">
                                     <div class="pd-20 profile-task-wrap">
+                                        <div class="clearfix mb-20">
+                                            <div class="pull-left">
+                                                <h5 class="text-blue">Course Info</h5>
+                                                {{--<p class="font-14 text-danger">*caution: select row for detail!</p>--}}
+                                            </div>
+                                        </div>
                                         <div class="container pd-0">
                                             <div class="row">
                                                 <table class="stripe hover multiple-select-row data-table-export nowrap">
@@ -165,7 +174,44 @@
                                 </div>
                                 <!-- Tasks Tab End -->
                                 <!-- Setting Tab start -->
-                                <!--gaada-->
+                                <div class="tab-pane fade height-100-p" id="setting" role="tabpanel">
+                                    <div class="pd-20 profile-task-wrap">
+                                        <div class="clearfix mb-20">
+                                            <div class="pull-left">
+                                                <h5 class="text-blue">Final Test Report</h5>
+                                                {{--<p class="font-14 text-danger">*caution: select row for detail!</p>--}}
+                                            </div>
+                                        </div>
+                                        <div class="container pd-0">
+                                            <div class="row">
+                                                <table class="stripe hover multiple-select-row data-table-export nowrap">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Section</th>
+                                                        <th>Nilai</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    @foreach($finaltestrecord as $s)
+                                                        {{--<tr data-href="{{route('home')}}">--}}
+                                                        <tr>
+
+                                                            <td>{{$s->id_tipe}}</td>
+                                                            <td>{{$s->jumlah_benar}}</td>
+                                                        </tr>
+                                                    @endforeach
+
+                                                    </tbody>
+                                                    <tr>
+                                                        <td><strong>Total:</strong></td>
+                                                        <td><strong>{{$student->nilai_final}}%</strong></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Setting Tab End -->
                             </div>
                         </div>

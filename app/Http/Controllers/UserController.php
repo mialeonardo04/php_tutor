@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\StudentFinalExamRecord;
 use App\Unit;
 use Illuminate\Http\Request;
 use App\User;
@@ -348,10 +349,13 @@ class UserController extends Controller
                 ->where('student_pretest_answers.id_student','=',$id_student)
                 ->get();
 
+            $reportFinalTest = StudentFinalExamRecord::where('id_student','=',$id_student)->get();
+
             return view('pengajar.siswaById',[
                 'student' =>$studentById,
                 'courserecord' => $recordExercise,
                 'pretestrecord' => $pretestbyID,
+                'finaltestrecord' => $reportFinalTest,
             ]);
         }
     }

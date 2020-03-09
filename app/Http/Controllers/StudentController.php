@@ -1368,13 +1368,13 @@ class StudentController extends Controller
                         if (strpos($request['code'],"for") !==  false){
                             $score = 75;
                         } else {
-                            $score = 50;
+                            $score = 25;
                         }
                     } else {
                         if (strpos($request['code'],"for") !==  false){
                             $score = 100;
                         } else {
-                            $score = 50;
+                            $score = 25;
                         }
                     }
 
@@ -1397,7 +1397,7 @@ class StudentController extends Controller
                     ->with('messageCaution','Your must write your code before submitting');
             }
 
-            return redirect()->route('siswa.getexam')
+            return redirect()->route('siswa.achievements')
                 ->with('messageSubmitTestCode','Your have finished the course. Congratulatin! You can see your achievement, now.');
         }
     }
