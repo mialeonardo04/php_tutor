@@ -47,7 +47,11 @@
                                 </a>
                             </li>
                         @endif
-
+                        <li>
+                            <a href="{{route('siswa.getting.started')}}" class="dropdown-toggle no-arrow">
+                                <span class="fa fi-page-multiple"></span><span class="mtext">Documentation </span>
+                            </a>
+                        </li>
                     @endif
 				</ul>
 			</div>

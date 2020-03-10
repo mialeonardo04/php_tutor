@@ -64,6 +64,10 @@ Route::group(['middleware' => ['web']],function(){
         ]);
 
         Route::group(['middleware' => ['roles'],'roles' => ['siswa']],function (){
+            Route::get('/siswa/getting_started',[
+                'uses' =>'StudentController@getDocumentation',
+                'as' => 'siswa.getting.started',
+            ]);
             Route::get('/siswa/dashboard',[
                 'uses' => 'UserController@getDashboardSiswa',
                 'as' => 'siswa.dashboard'

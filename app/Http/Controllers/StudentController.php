@@ -1422,4 +1422,26 @@ class StudentController extends Controller
                 ->with('messageSubmitTestCode','Your Exam Record has been destroyed!');
         }
     }
+
+    public function getDocumentation(){
+        if (session()->getId() != Auth::user()->last_session){
+            Auth::logout();
+            return redirect('/login');
+        } else {
+            $siswa = Student::all();
+            $status_progress = 0;
+            $id_student = 0;
+
+            foreach ($siswa as $murid) {
+                if ($murid->id_user == Auth::user()->id) {
+                    $status_progress = $murid->progress;
+                    $id_student = $murid->id;
+                }
+            }
+            return view('siswa.docs',[
+                'statusprogress'=>$status_progress,
+                'idstudent' => $id_student,
+            ]);
+        }
+    }
 }
