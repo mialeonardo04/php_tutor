@@ -55,6 +55,10 @@ php artisan serve or php artisan serve --host=[yourlocaladdress]
 
 See also the list of [contributors](https://github.com/leonard04/WFSolo-Mopay/graphs/contributors) who participated in this project.
 
+## Template 
+* Dashboard template by [bootstrap](https://getbootstrap.com/)
+* Admin template [Ankit Hingarajiya](https://github.com/dropways)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
