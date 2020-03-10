@@ -17,6 +17,14 @@
         </div>
     @endif
     <div class="pd-ltr-20 customscroll customscroll-10-p height-100-p xs-pd-20-10">
+        @if(Auth::user()->roles[0]['name'] == "siswa")
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            You should check in on <strong><a href="{{route('siswa.getting.started')}}" class="alert-link">this documentation</a></strong> if you don't know anything about this apps.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         @yield('content')
         @include('include.footer')
         @if((Auth::user()->last_login_ip !== NULL) || (Auth::user()->last_logout_at !== NULL)) Your address now: {{Auth::user()->last_login_ip}} || Last logout: {{Auth::user()->last_logout_at}}@endif<br>
