@@ -10,6 +10,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="google-site-verification" content="SxivWguc60pSM7KaW4EPl91ODrpGl0Ia6Xsxae7Fa4Q" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">

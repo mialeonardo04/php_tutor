@@ -1,7 +1,7 @@
 	<!-- Basic Page Info -->
 	<meta charset="utf-8">
 	<title>PHP Intelligent Tutor</title>
-
+    <meta name="google-site-verification" content="SxivWguc60pSM7KaW4EPl91ODrpGl0Ia6Xsxae7Fa4Q" />
 	<!-- Site favicon -->
 	<!-- <link rel="shortcut icon" href="images/favicon.ico"> -->
 
