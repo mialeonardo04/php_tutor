@@ -411,6 +411,9 @@ class UserController extends Controller
         }
     }
 
+    public function getDocumentation(){
+        return view('docs');
+    }
     public function logout(){
         User::where('id','=',Auth::user()->id)
             ->update([

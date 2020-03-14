@@ -13,6 +13,10 @@
 
 
 Route::group(['middleware' => ['web']],function(){
+    Route::get('/getting_started',[
+        'uses' =>'UserController@getDocumentation',
+        'as' => 'getting.started',
+    ]);
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
