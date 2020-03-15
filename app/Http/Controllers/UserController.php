@@ -173,6 +173,9 @@ class UserController extends Controller
             return redirect('/login');
         } else{
             if (isset($request['submit'])){
+                $this->validate($request,[
+                    'fileku' => 'image|max:2048',
+                ]);
                 $name = $request['name'];
 
                 $file = $request->file('fileku');
