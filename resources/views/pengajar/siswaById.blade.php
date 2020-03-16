@@ -152,9 +152,11 @@
                                                             <td>{{$s->description}}</td>
                                                             <td>
                                                                 @if($s->tipe_soal ==1)
-                                                                    Short Answer
-                                                                @else
+                                                                    Short Answer (Video)
+                                                                @elseif($s->tipe_soal ==2)
                                                                     Live Code
+                                                                @else
+                                                                    Short Answer (Theory)
                                                                 @endif
                                                             </td>
                                                             <td>{{$s->score}}%</td>
