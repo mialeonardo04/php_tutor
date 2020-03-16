@@ -423,7 +423,7 @@ class UserController extends Controller
                 'last_logout_at' => date("Y-m-d H:i:s"),
             ]);
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 
 }
