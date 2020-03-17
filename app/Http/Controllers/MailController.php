@@ -45,7 +45,7 @@ class MailController extends Controller
         $user_id = 0;
         $username ="";
 
-        $email_sender   = 'phpitutor@gmail.com';
+        $email_sender   = 'phptutori@gmail.com';
         $email_pass     = 'AdminPhpITutor';
         $email_to       = $request['email'];
         $user = User::where('email','=',$email_to)->first();
