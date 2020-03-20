@@ -40,7 +40,7 @@
                     <div class="bg-white pd-30 box-shadow border-radius-5 height-100-p">
                         <div class="progress-box text-center">
                             <input id="bbb" type="text" class="knob dial2" value="{{round($nilaipretestmax)}}" data-width="120" data-height="120" data-thickness="0.05" data-fgColor="#41ccba" readonly>
-                            <h5 class="text-light-green padding-top-10 weight-500">My Pre-Test High Score (bys unit)</h5>
+                            <h5 class="text-light-green padding-top-10 weight-500">My Pre-Test High Score (by unit)</h5>
                             <span class="font-14">{{round($nilaipretestmax)}}% <i class="fa fa-line-chart"></i></span>
                         </div>
                     </div>
